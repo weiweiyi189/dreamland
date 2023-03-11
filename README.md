@@ -9,7 +9,10 @@
 ## api 后台
 待开发
  
- 
+## 克隆仓库代码步骤
+
+1. 配置ssh，若有则跳过https://blog.csdn.net/weixin_42310154/article/details/118340458
+2. 在电脑找到一个合适的文件夹，执行 `git clone git@github.com:weiweiyi189/dreamland.git`
  ## 开发步骤
 
 项目地址 https://github.com/weiweiyi189/dreamland
