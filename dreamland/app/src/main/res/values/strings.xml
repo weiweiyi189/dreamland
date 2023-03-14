@@ -9,4 +9,7 @@
     <string name="invalid_username">Not a valid username</string>
     <string name="invalid_password">Password must be >5 characters</string>
     <string name="login_failed">"Login failed"</string>
+    <string name="world">世界</string>
+    <string name="writeDream">写梦</string>
+    <string name="me">我</string>
 </resources>

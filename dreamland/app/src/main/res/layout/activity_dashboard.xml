@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 首页 -->
+<androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ui.dashboard.DashboardActivity">
+    <!--   顶部标签栏   -->
+    <com.google.android.material.appbar.AppBarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            android:background= "?attr/colorPrimary">
+
+        <com.google.android.material.appbar.MaterialToolbar
+                android:id="@+id/topAppBar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:title="世界"
+                app:titleTextColor="@color/white"
+                app:titleCentered="true"
+                android:background= "?attr/colorPrimary"
+                app:menu="@menu/dashboard_top_app_bar"/>
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <!--  底部导航栏 -->
+    <com.example.dreamland.ui.layout.NavigationBar
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent">
+    </com.example.dreamland.ui.layout.NavigationBar>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
