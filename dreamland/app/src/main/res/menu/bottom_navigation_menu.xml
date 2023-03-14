@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 底部导航栏 -->
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+            android:id="@+id/item_1"
+            android:enabled="true"
+            android:icon="@drawable/flutter_dash"
+            android:title="@string/world"/>
+    <item
+            android:id="@+id/item_2"
+            android:enabled="true"
+            android:icon="@drawable/write"
+            android:title="@string/writeDream"/>
+    <item
+            android:id="@+id/item_3"
+            android:enabled="true"
+            android:icon="@drawable/user_circle"
+            android:title="@string/me"/>
+</menu>
