@@ -5,6 +5,7 @@
 ## dreamland 前台
 
 环境: jdk11
+UI组件库: https://m3.material.io/components
 
 ## api 后台
 待开发
