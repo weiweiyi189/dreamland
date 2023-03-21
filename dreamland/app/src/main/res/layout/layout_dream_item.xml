@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        app:cardBackgroundColor="@color/white"
+        app:layout_constraintTop_toTopOf="parent"
+        app:strokeColor="@color/white"
+        app:strokeWidth="1dp"
+        android:layout_margin="2dp">
+
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_margin="8dp">
+
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:orientation="horizontal">
+            <!-- Media -->
+            <de.hdodenhof.circleimageview.CircleImageView
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="match_parent"
+                    android:src="@mipmap/dream_round">
+            </de.hdodenhof.circleimageview.CircleImageView>
+
+            <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="5"
+                    android:orientation="vertical">
+
+                <TextView
+                        android:id="@+id/dream_user"
+                        android:layout_width="wrap_content"
+                        android:text="用户15654526"
+                        android:enabled="false"
+                        android:layout_height="wrap_content">
+                </TextView>
+
+                <TextView
+                        android:id="@+id/dream_time"
+                        android:layout_width="wrap_content"
+                        android:text="6分钟前"
+                        android:textSize="12dp"
+                        android:textColor="@color/purple_700"
+                        android:layout_height="wrap_content">
+                </TextView>
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="10dp">
+
+
+            <TextView
+                    android:id="@+id/dream_content"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:text="梦到世界大危机，反派与正派对峙，正派死伤惨重，
+                        几个主角都被抓。而我被委托以重要使命，跳井穿越时空拿到重要宝物压制反派.结果时间乱流寄了。"
+                    android:textAppearance="?attr/textAppearanceBodyMedium"
+                    android:textColor="?android:attr/textColorPrimary"
+                    />
+
+            <com.google.android.material.divider.MaterialDivider
+                    android:layout_width="match_parent"
+                    app:dividerColor="@color/grey"
+                    android:layout_marginTop="8dp"
+                    android:layout_height="wrap_content"/>
+
+        </LinearLayout>
+        <!-- Buttons -->
+        <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_gravity="right"
+                android:layout_height="wrap_content"
+                android:gravity="right"
+                tools:ignore="RtlHardcoded">
+
+            <Button
+                    style="?attr/materialIconButtonStyle"
+                    android:id="@+id/textButton"
+                    app:icon="@drawable/comment"
+                    android:layout_width="wrap_content"
+                    android:layout_height="25dp"
+                    />
+
+            <Button
+                    style="?attr/materialIconButtonStyle"
+                    app:icon="@drawable/favorite"
+                    android:layout_width="wrap_content"
+                    android:layout_height="25dp"
+                    />
+
+            <Button
+                    style="?attr/materialIconButtonStyle"
+                    app:icon="@drawable/ic_share"
+                    android:layout_width="wrap_content"
+                    android:layout_height="25dp"
+                    />
+
+            <Button
+                    style="?attr/materialIconButtonStyle"
+                    app:icon="@drawable/ic_more_vert"
+                    android:layout_width="wrap_content"
+                    android:layout_height="25dp"
+                    />
+        </LinearLayout>
+
+    </LinearLayout>
+
+</com.google.android.material.card.MaterialCardView>
