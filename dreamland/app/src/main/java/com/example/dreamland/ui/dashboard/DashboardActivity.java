@@ -15,6 +15,7 @@ import com.example.dreamland.entity.Dream;
 import com.example.dreamland.entity.User;
 import com.example.dreamland.ui.adapter.DreamAdapter;
 import com.google.android.material.color.DynamicColors;
+import com.google.android.material.navigation.NavigationBarView;
 
 import java.sql.Timestamp;
 import java.util.LinkedList;
@@ -56,7 +57,6 @@ public class DashboardActivity extends AppCompatActivity {
                 drawerLayout.openDrawer(GravityCompat.START);
             }
         });
-
         this.initList();
     }
 
