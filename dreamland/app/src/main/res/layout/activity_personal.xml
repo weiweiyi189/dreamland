@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 首页 -->
+
+<androidx.drawerlayout.widget.DrawerLayout
+        android:id="@id/drawerLayout"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ui.dashboard.DashboardActivity"
+        tools:openDrawer="start">
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fitsSystemWindows="true">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/grey"
+                tools:context=".ui.dashboard.DashboardActivity">
+            <!--   顶部标签栏   -->
+            <com.google.android.material.appbar.AppBarLayout
+                    android:id="@id/AppBarLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                <com.google.android.material.appbar.MaterialToolbar
+                        android:id="@id/topAppBar"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:title="@string/personal"
+                        app:titleTextColor="@color/white"
+                        app:titleCentered="true"
+                        app:navigationIcon="@drawable/menu"
+                        android:background="?attr/colorPrimary"
+                        android:theme="@style/Widget.AppCompat.ActionBar"
+                        app:menu="@menu/dashboard_top_app_bar"/>
+
+            </com.google.android.material.appbar.AppBarLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recycler_view"
+                    android:layout_width="match_parent"
+                    app:layout_constraintTop_toBottomOf="@+id/AppBarLayout"
+                    app:layout_constraintBottom_toTopOf="@+id/NavigationBar"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    android:layout_height="0dp">
+            </androidx.recyclerview.widget.RecyclerView>
+
+
+            <!--  底部导航栏 -->
+            <com.example.dreamland.ui.layout.NavigationBar
+                    android:id="@id/NavigationBar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintBottom_toBottomOf="parent">
+            </com.example.dreamland.ui.layout.NavigationBar>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+    <!--  侧边栏-->
+    <com.google.android.material.navigation.NavigationView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            app:menu="@menu/navigation_drawer"
+            app:headerLayout="@layout/header_navigation_drawer"
+            android:layout_gravity="start"/>
+
+</androidx.drawerlayout.widget.DrawerLayout>

@@ -1,4 +1,81 @@
 package com.example.dreamland.ui.personal;
 
-public class PersonalActivity {
-}
+import android.os.Bundle;
+import android.view.View;
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import com.example.dreamland.R;
+import com.example.dreamland.databinding.ActivityDashboardBinding;
+import com.example.dreamland.databinding.ActivityPersonalBinding;
+import com.example.dreamland.entity.Dream;
+import com.example.dreamland.entity.User;
+import com.example.dreamland.ui.adapter.DreamAdapter;
+import com.google.android.material.color.DynamicColors;
+
+import java.sql.Timestamp;
+import java.util.LinkedList;
+import java.util.List;
+
+public class PersonalActivity extends AppCompatActivity {
+
+        private DrawerLayout drawerLayout;
+
+        private DreamAdapter dreamAdapter;
+
+        private ActivityPersonalBinding binding;
+
+        private List<Dream> dreams = new LinkedList<>();
+
+        @Override
+        protected void onCreate(Bundle savedInstanceState) {
+            DynamicColors.applyToActivityIfAvailable(this);
+            super.onCreate(savedInstanceState);
+            // 绑定v层
+            binding = ActivityPersonalBinding.inflate(getLayoutInflater());
+            setContentView(binding.getRoot());
+            // 隐藏系统自带的标题栏
+            ActionBar actionBar = getSupportActionBar();
+            if (actionBar != null) {
+                actionBar.hide();
+            }
+
+            // 设置侧边栏
+            binding.topAppBar.setNavigationIcon(R.drawable.menu);
+            // 设置navigation button 点击事件
+            binding.topAppBar.setNavigationOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    drawerLayout = (DrawerLayout) findViewById(R.id.drawerLayout);
+                    drawerLayout.openDrawer(GravityCompat.START);
+                }
+            });
+            this.initList();
+        }
+
+        public void initList() {
+            User user = new User();
+            user.setUsername("用户12345985");
+
+            Dream dream = new Dream();
+            dream.setContent("梦到世界大危机，反派与正派对峙，正派死伤惨重，\n" +
+                    "几个主角都被抓。而我被委托以重要使命，跳井穿越时空拿到重要宝物压制反派.结果时间乱流寄了。");
+            dream.setCreateTime(new Timestamp(1679383693000L));
+            dream.setId(1L);
+            dream.setCreateUser(user);
+
+            for (int i = 0; i < 10; i++) {
+                this.dreams.add(dream);
+            }
+
+            RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
+            LinearLayoutManager layout = new LinearLayoutManager(this);
+            this.dreamAdapter = new DreamAdapter(this.dreams);
+            recyclerView.setLayoutManager(layout);
+            recyclerView.setAdapter(this.dreamAdapter);
+        }
+
+    }
