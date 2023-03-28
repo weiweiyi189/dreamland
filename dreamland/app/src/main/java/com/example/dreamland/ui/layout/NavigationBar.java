@@ -13,6 +13,7 @@ import com.example.dreamland.MainApplication;
 import com.example.dreamland.R;
 import com.example.dreamland.databinding.LayoutNavigationBarBinding;
 import com.example.dreamland.ui.auth.LoginActivity;
+import com.example.dreamland.ui.chat.ChatActivity;
 import com.example.dreamland.ui.dashboard.DashboardActivity;
 import com.google.android.material.navigation.NavigationBarView;
 import com.google.android.material.navigation.NavigationView;
@@ -36,12 +37,10 @@ public class NavigationBar extends ConstraintLayout {
             @Override
             public boolean onNavigationItemSelected(@NonNull @NotNull MenuItem item) {
                 int id = item.getItemId();
-                System.out.println(id);
                 switch(id){
                     case R.id.item_3:
-                        // 启动首页
-                        Intent intent = new Intent(MainApplication.getContext(), DashboardActivity.class);
-                        startActivity(MainApplication.getContext(),intent, null);
+                        Intent intent = new Intent(context, ChatActivity.class);
+                        startActivity(context,intent, null);
                 }
                 return true;
             }
