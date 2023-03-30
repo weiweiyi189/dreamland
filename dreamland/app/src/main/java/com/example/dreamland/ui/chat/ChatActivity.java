@@ -99,7 +99,7 @@ public class ChatActivity extends AppCompatActivity {
                 public Map<String, String> getHeaders() throws AuthFailureError {
                     Map<String, String> params = new HashMap<String, String>();
                     params.put("Content-Type", "application/json");
-                    params.put("Authorization", "Bearer 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");
+                    params.put("Authorization", "Bearer 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");
                     return params;
                 }
 

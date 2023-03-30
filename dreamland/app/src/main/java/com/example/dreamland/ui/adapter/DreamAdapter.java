@@ -76,4 +76,5 @@ public class DreamAdapter  extends RecyclerView.Adapter<DreamAdapter.ViewHolder>
     public int getItemCount() {
         return dreams.size();
     }
+
 }
