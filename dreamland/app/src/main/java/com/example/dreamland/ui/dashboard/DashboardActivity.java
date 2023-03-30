@@ -19,6 +19,7 @@ import com.example.dreamland.entity.User;
 import com.example.dreamland.ui.adapter.DreamAdapter;
 import com.example.dreamland.ui.chat.ChatActivity;
 import com.example.dreamland.ui.dreams.DreamsActivity;
+import com.example.dreamland.ui.floater.FloaterActivity;
 import com.google.android.material.color.DynamicColors;
 import com.google.android.material.navigation.NavigationBarView;
 import com.google.android.material.navigation.NavigationView;
@@ -83,6 +84,11 @@ public class DashboardActivity extends AppCompatActivity {
                         drawerLayout.close();
                         Intent intent2 = new Intent(DashboardActivity.this, DreamsActivity.class);
                         startActivity(intent2, null);
+                        break;
+                    case R.id.floater:
+                        drawerLayout.close();
+                        Intent intent3=new Intent(DashboardActivity.this, FloaterActivity.class);
+                        startActivity(intent3,null);
                         break;
                 }
                 return true;
