@@ -18,6 +18,7 @@ import com.example.dreamland.entity.Dream;
 import com.example.dreamland.entity.User;
 import com.example.dreamland.ui.adapter.DreamAdapter;
 import com.example.dreamland.ui.chat.ChatActivity;
+import com.example.dreamland.ui.dreams.DreamsActivity;
 import com.google.android.material.color.DynamicColors;
 import com.google.android.material.navigation.NavigationBarView;
 import com.google.android.material.navigation.NavigationView;
@@ -75,8 +76,14 @@ public class DashboardActivity extends AppCompatActivity {
                 switch(id){
                     case R.id.interpret_dream:
                         drawerLayout.close();
-                        Intent intent = new Intent(DashboardActivity.this, ChatActivity.class);
-                        startActivity(intent, null);
+                        Intent intent1 = new Intent(DashboardActivity.this, ChatActivity.class);
+                        startActivity(intent1, null);
+                        break;
+                    case R.id.dreams:
+                        drawerLayout.close();
+                        Intent intent2 = new Intent(DashboardActivity.this, DreamsActivity.class);
+                        startActivity(intent2, null);
+                        break;
                 }
                 return true;
             }

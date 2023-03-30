@@ -15,6 +15,8 @@ import com.example.dreamland.databinding.LayoutNavigationBarBinding;
 import com.example.dreamland.ui.auth.LoginActivity;
 import com.example.dreamland.ui.chat.ChatActivity;
 import com.example.dreamland.ui.dashboard.DashboardActivity;
+import com.example.dreamland.ui.dreams.DreamsActivity;
+import com.example.dreamland.ui.personal.PersonalActivity;
 import com.google.android.material.navigation.NavigationBarView;
 import com.google.android.material.navigation.NavigationView;
 import org.jetbrains.annotations.NotNull;
@@ -38,9 +40,16 @@ public class NavigationBar extends ConstraintLayout {
             public boolean onNavigationItemSelected(@NonNull @NotNull MenuItem item) {
                 int id = item.getItemId();
                 switch(id){
+                    case R.id.item_1:
+                        Intent intent1 = new Intent(context, DashboardActivity.class);
+                        intent1.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
+                        startActivity(context,intent1, null);
+                        break;
                     case R.id.item_3:
-                        Intent intent = new Intent(context, ChatActivity.class);
-                        startActivity(context,intent, null);
+                        Intent intent3 = new Intent(context, PersonalActivity.class);
+                        intent3.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
+                        startActivity(context,intent3, null);
+                        break;
                 }
                 return true;
             }

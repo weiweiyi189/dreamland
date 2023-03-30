@@ -15,10 +15,20 @@
                     android:title="解梦"
                     android:checkable="true"/>
             <item
+                    android:id="@+id/dreams"
+                    android:icon="@drawable/dreams"
+                    android:title="托梦"
+                    android:checkable="true"/>
+            <item
                     android:id="@+id/dream_test"
                     android:icon="@drawable/rabbit"
                     android:title="梦境测试"
                     android:checkable="true"/>
+            <item
+                android:id="@+id/dream_drifting_bottle"
+                android:icon="@drawable/drifting_bottle"
+                android:title="梦境漂流瓶"
+                android:checkable="true"/>
             <item
                     android:id="@+id/setting"
                     android:icon="@drawable/setting"

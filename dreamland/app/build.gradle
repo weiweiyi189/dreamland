@@ -35,12 +35,16 @@ android {
     }
 }
 
+
 dependencies {
+    //添加自定义对话框依赖
+    implementation 'com.github.f0ris.sweetalert:library:1.5.1'
+    //添加自动判断邮箱格式依赖
+    implementation 'com.blankj:utilcode:1.23.2'
     //加入email依赖！
     implementation 'com.sun.mail:android-mail:1.6.0'
     implementation 'com.sun.mail:android-activation:1.6.0'
     implementation 'com.teprinciple:mailsender:1.2.0'
-
     implementation 'androidx.appcompat:appcompat:1.3.0'
     implementation 'com.google.android.material:material:1.7.0'
     implementation 'androidx.annotation:annotation:1.2.0'

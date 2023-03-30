@@ -17,7 +17,7 @@ public class ProxiedHurlStack extends HurlStack {
         System.out.println("代理");
         // Start the connection by specifying a proxy server
         Proxy proxy = new Proxy(Type.HTTP,
-                InetSocketAddress.createUnresolved("192.168.2.197", 7890));//the proxy server(Can be your laptop ip or company proxy)
+                InetSocketAddress.createUnresolved("192.168.43.215", 7890));//the proxy server(Can be your laptop ip or company proxy)
         HttpURLConnection returnThis = (HttpURLConnection) url
                 .openConnection(proxy);
 
