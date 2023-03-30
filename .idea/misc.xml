@@ -1,6 +1,57 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/meng/dreamland/dreamland/app/src/main/res/drawable/circle_notification.xml" value="0.1815" />
+        <entry key="..\:/meng/dreamland/dreamland/app/src/main/res/drawable/comment.xml" value="0.187" />
+        <entry key="..\:/meng/dreamland/dreamland/app/src/main/res/drawable/dark_green_background.xml" value="0.1815" />
+        <entry key="..\:/meng/dreamland/dreamland/app/src/main/res/drawable/dreams.xml" value="0.1815" />
+        <entry key="..\:/meng/dreamland/dreamland/app/src/main/res/drawable/drifting_bottle.xml" value="0.1145" />
+        <entry key="..\:/meng/dreamland/dreamland/app/src/main/res/drawable/edittext_green.xml" value="0.1815" />
+        <entry key="..\:/meng/dreamland/dreamland/app/src/main/res/drawable/favorite.xml" value="0.187" />
+        <entry key="..\:/meng/dreamland/dreamland/app/src/main/res/drawable/flutter_dash.xml" value="0.1205" />
+        <entry key="..\:/meng/dreamland/dreamland/app/src/main/res/drawable/grey_background.xml" value="0.1815" />
+        <entry key="..\:/meng/dreamland/dreamland/app/src/main/res/drawable/ic_____.xml" value="0.1815" />
+        <entry key="..\:/meng/dreamland/dreamland/app/src/main/res/drawable/ic_______.xml" value="0.1815" />
+        <entry key="..\:/meng/dreamland/dreamland/app/src/main/res/drawable/ic_launcher_background.xml" value="0.132" />
+        <entry key="..\:/meng/dreamland/dreamland/app/src/main/res/drawable/ic_more_vert.xml" value="0.1815" />
+        <entry key="..\:/meng/dreamland/dreamland/app/src/main/res/drawable/ic_share.xml" value="0.1815" />
+        <entry key="..\:/meng/dreamland/dreamland/app/src/main/res/drawable/interpret_dream.xml" value="0.132" />
+        <entry key="..\:/meng/dreamland/dreamland/app/src/main/res/drawable/menu.xml" value="0.181" />
+        <entry key="..\:/meng/dreamland/dreamland/app/src/main/res/drawable/rabbit.xml" value="0.1815" />
+        <entry key="..\:/meng/dreamland/dreamland/app/src/main/res/drawable/send_dreams_button.xml" value="0.1815" />
+        <entry key="..\:/meng/dreamland/dreamland/app/src/main/res/drawable/setting.xml" value="0.1815" />
+        <entry key="..\:/meng/dreamland/dreamland/app/src/main/res/drawable/user_circle.xml" value="0.1205" />
+        <entry key="..\:/meng/dreamland/dreamland/app/src/main/res/drawable/write.xml" value="0.1205" />
+        <entry key="..\:/meng/dreamland/dreamland/app/src/main/res/layout/activity_chat.xml" value="0.196875" />
+        <entry key="..\:/meng/dreamland/dreamland/app/src/main/res/layout/activity_dashboard.xml" value="0.1453125" />
+        <entry key="..\:/meng/dreamland/dreamland/app/src/main/res/layout/activity_dreams.xml" value="0.3333333333333333" />
+        <entry key="..\:/meng/dreamland/dreamland/app/src/main/res/layout/activity_login.xml" value="0.1453125" />
+        <entry key="..\:/meng/dreamland/dreamland/app/src/main/res/layout/activity_personal.xml" value="0.10847457627118644" />
+        <entry key="..\:/meng/dreamland/dreamland/app/src/main/res/layout/dialog_view.xml" value="0.22" />
+        <entry key="..\:/meng/dreamland/dreamland/app/src/main/res/layout/dreams.xml" value="0.17135416666666667" />
+        <entry key="..\:/meng/dreamland/dreamland/app/src/main/res/layout/header_navigation_drawer.xml" value="0.1453125" />
+        <entry key="..\:/meng/dreamland/dreamland/app/src/main/res/layout/layout_dream_item.xml" value="0.1453125" />
+        <entry key="..\:/meng/dreamland/dreamland/app/src/main/res/layout/layout_navigation_bar.xml" value="0.3333333333333333" />
+        <entry key="..\:/meng/dreamland/dreamland/app/src/main/res/layout/my dream.xml" value="0.14427083333333332" />
+        <entry key="..\:/meng/dreamland/dreamland/app/src/main/res/layout/my_place.xml" value="0.3333333333333333" />
+        <entry key="..\:/meng/dreamland/dreamland/app/src/main/res/layout/slide_menu.xml" value="0.30480072463768115" />
+        <entry key="..\:/meng/dreamland/dreamland/app/src/main/res/layout/test.xml" value="0.30480072463768115" />
+        <entry key="..\:/meng/dreamland/dreamland/app/src/main/res/menu/bottom_navigation_menu.xml" value="0.325" />
+        <entry key="..\:/meng/dreamland/dreamland/app/src/main/res/menu/dashboard_top_app_bar.xml" value="0.325" />
+        <entry key="..\:/meng/dreamland/dreamland/app/src/main/res/menu/navigation_drawer.xml" value="0.325" />
+        <entry key="..\:/meng/dreamland/dreamland/app/src/main/res/mipmap-anydpi-v26/dream.xml" value="0.1815" />
+        <entry key="..\:/meng/dreamland/dreamland/app/src/main/res/xml/end.xml" value="0.12652068126520682" />
+        <entry key="..\:/meng/dreamland/dreamland/app/src/main/res/xml/start.xml" value="0.109375" />
+      </map>
+    </option>
+  </component>
   <component name="ExternalStorageConfigurationManager" enabled="true" />
+  <component name="FrameworkDetectionExcludesConfiguration">
+    <file type="web" url="file://$PROJECT_DIR$/dreamland" />
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_18" project-jdk-name="corretto-11" project-jdk-type="JavaSDK" />
   <component name="ProjectType">
     <option name="id" value="jpab" />
   </component>
