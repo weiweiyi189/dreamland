@@ -22,4 +22,7 @@
         <item name="android:windowBackground"> @android:color/transparent </item>
 
     </style>
+    <style name="contextsizes">
+        <item name="android:textSize">111px</item>
+    </style>
 </resources>
