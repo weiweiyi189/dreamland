@@ -5,20 +5,15 @@ import android.content.Intent;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
-import android.widget.LinearLayout;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.constraintlayout.widget.ConstraintLayout;
-import com.example.dreamland.MainApplication;
 import com.example.dreamland.R;
 import com.example.dreamland.databinding.LayoutNavigationBarBinding;
-import com.example.dreamland.ui.auth.LoginActivity;
-import com.example.dreamland.ui.chat.ChatActivity;
 import com.example.dreamland.ui.dashboard.DashboardActivity;
-import com.example.dreamland.ui.dreams.DreamsActivity;
 import com.example.dreamland.ui.personal.PersonalActivity;
+
 import com.google.android.material.navigation.NavigationBarView;
-import com.google.android.material.navigation.NavigationView;
 import org.jetbrains.annotations.NotNull;
 
 import static androidx.core.content.ContextCompat.startActivity;

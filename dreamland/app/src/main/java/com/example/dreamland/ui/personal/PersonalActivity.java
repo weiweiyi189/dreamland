@@ -12,20 +12,15 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.dreamland.R;
-import com.example.dreamland.databinding.ActivityDashboardBinding;
+
 import com.example.dreamland.databinding.ActivityPersonalBinding;
 import com.example.dreamland.entity.Dream;
 import com.example.dreamland.entity.User;
 import com.example.dreamland.ui.adapter.DreamAdapter;
-import com.example.dreamland.ui.chat.ChatActivity;
-import com.example.dreamland.ui.dashboard.DashboardActivity;
-import com.example.dreamland.ui.dreams.DreamsActivity;
-import com.example.dreamland.ui.layout.NavigationBar;
+
 import com.google.android.material.color.DynamicColors;
-import com.google.android.material.navigation.NavigationBarView;
 import com.google.android.material.tabs.TabLayout;
-import lombok.val;
-import org.jetbrains.annotations.NotNull;
+
 
 import java.sql.Timestamp;
 import java.util.LinkedList;
