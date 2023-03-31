@@ -10,6 +10,18 @@ public class dateUtil {
     public static String getTimeBeforeAccurate(Date date) {
         Date now = new Date();
         long l = now.getTime() - date.getTime();
+
+
+        long minuteBefore = l / (60 * 1000);
+
+        if (minuteBefore < 1) {
+            return "刚刚";
+        }
+
+        if (minuteBefore < 60) {
+            return minuteBefore + "分钟前";
+        }
+
         long hourBefore = l / (60 * 60 * 1000);
         if (hourBefore < 24) {
             return hourBefore + "小时前";
