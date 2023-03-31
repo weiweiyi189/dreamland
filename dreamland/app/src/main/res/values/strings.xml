@@ -15,4 +15,7 @@
     <string name="personal">我的天地</string>
     <string name="yuanchuang">原创</string>
     <string name="shoucang">收藏</string>
+    <string name="change">切换</string>
+    <string name="send">发布</string>
+    <string name="dream">您的梦境...</string>
 </resources>

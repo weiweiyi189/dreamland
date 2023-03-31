@@ -1,9 +1,14 @@
 package com.example.dreamland.ui.personal;
 
+import android.annotation.SuppressLint;
+import android.content.ClipData;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
+import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
@@ -21,6 +26,7 @@ import com.example.dreamland.ui.chat.ChatActivity;
 import com.example.dreamland.ui.dashboard.DashboardActivity;
 import com.example.dreamland.ui.dreams.DreamsActivity;
 import com.example.dreamland.ui.layout.NavigationBar;
+import com.google.android.material.bottomnavigation.BottomNavigationItemView;
 import com.google.android.material.color.DynamicColors;
 import com.google.android.material.navigation.NavigationBarView;
 import com.google.android.material.tabs.TabLayout;
@@ -43,6 +49,27 @@ public class PersonalActivity extends AppCompatActivity {
 
     private List<Dream> dreams = new LinkedList<>();
 
+    private long exitTime = 0;
+    //两次返回，返回到home界面（System.exit决定是否退出当前界面，重新加载程序）
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if(keyCode == android.view.KeyEvent.KEYCODE_BACK && event.getAction() == android.view.KeyEvent.ACTION_DOWN){
+
+            if((System.currentTimeMillis()-exitTime) > 2000){
+                Toast.makeText(getApplicationContext(), "再按一次退出程序", Toast.LENGTH_SHORT).show();
+                exitTime = System.currentTimeMillis();
+            } else {
+                Intent home = new Intent(Intent.ACTION_MAIN);
+                home.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                home.addCategory(Intent.CATEGORY_HOME);
+                startActivity(home);
+                //退出系统，不保存之前页面
+                System.exit(0);
+            }
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
+    }
+    @SuppressLint("RestrictedApi")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -52,6 +79,14 @@ public class PersonalActivity extends AppCompatActivity {
         binding = ActivityPersonalBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
+        //设置下部图标跟随选中
+        BottomNavigationItemView menuItem = findViewById(R.id.item_3);
+        menuItem.setChecked(true);
+        BottomNavigationItemView menuItem1 = findViewById(R.id.item_1);
+        menuItem1.setChecked(false);
+
+        //设置不可再次点击
+        menuItem.setClickable(false);
 
         // 隐藏系统自带的标题栏
         ActionBar actionBar = getSupportActionBar();
