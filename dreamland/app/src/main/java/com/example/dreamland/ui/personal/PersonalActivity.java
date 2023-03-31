@@ -22,15 +22,11 @@ import com.example.dreamland.databinding.ActivityPersonalBinding;
 import com.example.dreamland.entity.Dream;
 import com.example.dreamland.entity.User;
 import com.example.dreamland.ui.adapter.DreamAdapter;
-<<<<<<< HEAD
-import com.example.dreamland.ui.chat.ChatActivity;
+import com.example.dreamland.ui.chat.MessageListActivity;
 import com.example.dreamland.ui.dashboard.DashboardActivity;
 import com.example.dreamland.ui.dreams.DreamsActivity;
 import com.example.dreamland.ui.layout.NavigationBar;
 import com.google.android.material.bottomnavigation.BottomNavigationItemView;
-=======
-
->>>>>>> origin/main
 import com.google.android.material.color.DynamicColors;
 import com.google.android.material.tabs.TabLayout;
 

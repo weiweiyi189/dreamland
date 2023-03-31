@@ -10,7 +10,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import com.example.dreamland.R;
 import com.example.dreamland.databinding.ActivityWritedreamBinding;
-import com.example.dreamland.ui.chat.ChatActivity;
+import com.example.dreamland.ui.chat.MessageListActivity;
 import com.example.dreamland.ui.dashboard.DashboardActivity;
 import com.example.dreamland.ui.dreams.DreamsActivity;
 import com.google.android.material.appbar.MaterialToolbar;
