@@ -21,6 +21,7 @@ import com.example.dreamland.ui.adapter.MessageListAdapter;
 import com.example.dreamland.ui.util.ProxiedHurlStack;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 import org.json.JSONArray;
@@ -72,6 +73,14 @@ public class MessageListActivity extends AppCompatActivity {
                 if (bottom < oldBottom) {
                     scrollToBottom();
                 }
+            }
+        });
+
+        MaterialToolbar topAppBar = findViewById(R.id.topAppBar);
+        topAppBar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
             }
         });
     }

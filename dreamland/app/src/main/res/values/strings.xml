@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">dreamland</string>
-    <!-- Strings related to login -->
+    <!-- Strings related to log in -->
     <string name="prompt_email">Email</string>
     <string name="prompt_password">Password</string>
     <string name="action_sign_in">Sign in or register</string>
@@ -12,4 +12,7 @@
     <string name="world">世界</string>
     <string name="writeDream">写梦</string>
     <string name="me">我</string>
+    <string name="personal">我的天地</string>
+    <string name="yuanchuang">原创</string>
+    <string name="shoucang">收藏</string>
 </resources>

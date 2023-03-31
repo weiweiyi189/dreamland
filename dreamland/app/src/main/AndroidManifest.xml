@@ -2,8 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
           xmlns:tools="http://schemas.android.com/tools"
           package="com.example.dreamland">
-    <!--    网络权限-->
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
     <application
             android:name=".MainApplication"
             android:allowBackup="true"
@@ -14,22 +13,30 @@
             android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
             android:theme="@style/AppTheme"
+            tools:replace="android:icon,android:theme,android:allowBackup"
             tools:targetApi="31">
-        <activity
-                android:name=".ui.auth.LoginActivity"
-                android:exported="true">
-        </activity>
         <activity
                 android:name=".ui.dashboard.DashboardActivity"
                 android:label="首页" android:exported="true">
         </activity>
+        <activity
+                android:name=".ui.personal.PersonalActivity"
+                android:exported="true"/>
+        <activity
+                android:name=".ui.auth.LoginActivity"
+                android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+        </activity>
+
         <activity android:name=".ui.chat.MessageListActivity"
                   android:windowSoftInputMode="adjustResize"
                   android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
-                <category android:name="android.intent.category.LAUNCHER"/>
-            </intent-filter>
+        </activity>
+        <activity android:name=".ui.dreams.DreamsActivity">
         </activity>
     </application>
 </manifest>
