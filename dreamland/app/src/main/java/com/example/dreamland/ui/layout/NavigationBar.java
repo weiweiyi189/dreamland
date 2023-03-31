@@ -5,18 +5,13 @@ import android.content.Intent;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
-import android.widget.LinearLayout;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.constraintlayout.widget.ConstraintLayout;
-import com.example.dreamland.MainApplication;
 import com.example.dreamland.R;
 import com.example.dreamland.databinding.LayoutNavigationBarBinding;
-import com.example.dreamland.ui.auth.LoginActivity;
-import com.example.dreamland.ui.chat.ChatActivity;
-import com.example.dreamland.ui.dashboard.DashboardActivity;
+import com.example.dreamland.ui.chat.MessageListActivity;
 import com.google.android.material.navigation.NavigationBarView;
-import com.google.android.material.navigation.NavigationView;
 import org.jetbrains.annotations.NotNull;
 
 import static androidx.core.content.ContextCompat.startActivity;
@@ -39,7 +34,7 @@ public class NavigationBar extends ConstraintLayout {
                 int id = item.getItemId();
                 switch(id){
                     case R.id.item_3:
-                        Intent intent = new Intent(context, ChatActivity.class);
+                        Intent intent = new Intent(context, MessageListActivity.class);
                         startActivity(context,intent, null);
                 }
                 return true;

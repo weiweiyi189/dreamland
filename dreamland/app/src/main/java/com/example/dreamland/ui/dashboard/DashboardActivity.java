@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.LinearLayout;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
@@ -17,17 +16,14 @@ import com.example.dreamland.databinding.ActivityDashboardBinding;
 import com.example.dreamland.entity.Dream;
 import com.example.dreamland.entity.User;
 import com.example.dreamland.ui.adapter.DreamAdapter;
-import com.example.dreamland.ui.chat.ChatActivity;
+import com.example.dreamland.ui.chat.MessageListActivity;
 import com.google.android.material.color.DynamicColors;
-import com.google.android.material.navigation.NavigationBarView;
 import com.google.android.material.navigation.NavigationView;
 import org.jetbrains.annotations.NotNull;
 
 import java.sql.Timestamp;
 import java.util.LinkedList;
 import java.util.List;
-
-import static androidx.core.content.ContextCompat.startActivity;
 
 /**
  * 首页
@@ -75,7 +71,7 @@ public class DashboardActivity extends AppCompatActivity {
                 switch(id){
                     case R.id.interpret_dream:
                         drawerLayout.close();
-                        Intent intent = new Intent(DashboardActivity.this, ChatActivity.class);
+                        Intent intent = new Intent(DashboardActivity.this, MessageListActivity.class);
                         startActivity(intent, null);
                 }
                 return true;
