@@ -2,14 +2,14 @@
 安卓梦境app
 
 
-## dreamland 前台
+## dreamland 
 
 环境: jdk11
+
 UI组件库: https://m3.material.io/components
 
-## api 后台
-待开发
- 
+数据库框架： https://github.com/guolindev/LitePal
+
 ## 克隆仓库代码步骤
 
 1. 配置ssh，若有则跳过https://blog.csdn.net/weixin_42310154/article/details/118340458
