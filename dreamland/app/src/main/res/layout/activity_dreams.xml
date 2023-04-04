@@ -12,8 +12,7 @@
             android:layout_height="wrap_content"
             android:fitsSystemWindows="true"
             android:orientation="vertical"
-            android:background="#FF018786">
-
+            android:background="?attr/colorPrimary">
         <com.google.android.material.appbar.MaterialToolbar
                 android:id="@+id/topAppBar"
                 android:layout_width="match_parent"
@@ -29,10 +28,10 @@
 
     <ImageView
             android:layout_width="0dp"
-            android:layout_height="258dp" app:srcCompat="@drawable/dreams_up_background"
+            android:layout_height="268dp" app:srcCompat="@drawable/fly"
             android:id="@+id/imageView"
             app:layout_constraintBottom_toBottomOf="@+id/layout_group_chat"
-            android:layout_marginTop="64dp" android:layout_marginBottom="33dp"
+            android:layout_marginTop="28dp" android:layout_marginBottom="33dp"
             app:layout_constraintEnd_toEndOf="parent" app:layout_constraintBottom_toTopOf="@+id/textView4"
             app:layout_constraintTop_toTopOf="parent" app:layout_constraintStart_toStartOf="parent"
             app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
@@ -43,7 +42,7 @@
             android:id="@+id/textView4"
             android:textSize="18sp"
             android:textStyle="bold"
-            android:textColor="#FF018786"
+            android:textColor="?attr/colorPrimary"
             app:layout_constraintTop_toBottomOf="@+id/imageView" app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toTopOf="@+id/mail" app:layout_constraintStart_toStartOf="parent"
             android:layout_marginStart="32dp" android:layout_marginEnd="32dp"
@@ -70,7 +69,7 @@
             android:id="@+id/textView5"
             android:textSize="18sp"
             android:textStyle="bold"
-            android:textColor="#FF018786"
+            android:textColor="?attr/colorPrimary"
             app:layout_constraintTop_toBottomOf="@+id/mail" app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toTopOf="@+id/context" app:layout_constraintStart_toStartOf="parent"
             android:layout_marginStart="32dp" android:layout_marginEnd="32dp"
@@ -102,7 +101,7 @@
             android:padding="4dp"
             android:paddingStart="64dp"
             android:background="@drawable/dark_green_background"
-            android:drawableEnd="@drawable/user_circle"
+            android:drawableRight="@drawable/flysbutton"
             app:layout_constraintTop_toBottomOf="@+id/context" android:layout_marginBottom="54dp"
             app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"/>

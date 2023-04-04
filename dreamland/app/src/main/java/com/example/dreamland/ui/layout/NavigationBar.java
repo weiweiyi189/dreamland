@@ -10,7 +10,7 @@ import androidx.annotation.Nullable;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import com.example.dreamland.R;
 import com.example.dreamland.databinding.LayoutNavigationBarBinding;
-import com.example.dreamland.ui.writedream.WriteDreamActivity;
+import com.example.dreamland.ui.writeDream.WriteDreamActivity;
 import com.example.dreamland.ui.dashboard.DashboardActivity;
 import com.example.dreamland.ui.personal.PersonalActivity;
 

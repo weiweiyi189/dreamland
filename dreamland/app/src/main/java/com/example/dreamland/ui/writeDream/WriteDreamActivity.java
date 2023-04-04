@@ -1,4 +1,4 @@
-package com.example.dreamland.ui.writedream;
+package com.example.dreamland.ui.writeDream;
 
 
 import android.annotation.SuppressLint;
@@ -15,7 +15,6 @@ import com.example.dreamland.db.initDataBase;
 import com.example.dreamland.entity.Dream;
 import com.example.dreamland.ui.dashboard.DashboardActivity;
 import com.google.android.material.appbar.MaterialToolbar;
-import com.google.android.material.bottomnavigation.BottomNavigationItemView;
 
 import java.sql.Timestamp;
 import java.util.Date;
