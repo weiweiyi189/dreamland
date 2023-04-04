@@ -16,11 +16,12 @@ import com.example.dreamland.entity.Dream;
 import com.example.dreamland.ui.dashboard.DashboardActivity;
 import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.navigation.NavigationBarView;
+
 import java.sql.Timestamp;
 import java.util.Date;
 
 
-public class WriteDreamActivity extends AppCompatActivity{
+public class WriteDreamActivity extends AppCompatActivity {
 
     private ActivityWritedreamBinding binding;
 
@@ -45,7 +46,7 @@ public class WriteDreamActivity extends AppCompatActivity{
         setContentView(binding.getRoot());
 
         //绑定返回监听按钮
-        MaterialToolbar topAppBar=findViewById(R.id.topAppBar);
+        MaterialToolbar topAppBar = findViewById(R.id.topAppBar);
         topAppBar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -55,9 +56,8 @@ public class WriteDreamActivity extends AppCompatActivity{
         });
 
 
-
         //导航栏发布和匿名的图片按钮监听
-        topAppBar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener(){
+        topAppBar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
                 int id = item.getItemId();
@@ -74,9 +74,6 @@ public class WriteDreamActivity extends AppCompatActivity{
                         dream.save();
                         Toast.makeText(WriteDreamActivity.this, "发布成功", Toast.LENGTH_SHORT).show();
                         finish();
-                        //自动跳转，否则还需要刷新才可以看到
-                        Intent intent = new Intent(WriteDreamActivity.this, DashboardActivity.class);
-                        startActivity(intent, null);
                         break;
                 }
                 return true;
@@ -84,4 +81,4 @@ public class WriteDreamActivity extends AppCompatActivity{
         });
     }
 
-    }
+}
