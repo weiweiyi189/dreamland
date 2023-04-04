@@ -1,6 +1,7 @@
 package com.example.dreamland.ui.dashboard;
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.MenuItem;
@@ -16,17 +17,18 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.dreamland.R;
 import com.example.dreamland.databinding.ActivityDashboardBinding;
 import com.example.dreamland.entity.Dream;
-import com.example.dreamland.entity.User;
 import com.example.dreamland.ui.adapter.DreamAdapter;
 import com.example.dreamland.ui.chat.MessageListActivity;
 import com.example.dreamland.ui.dreams.DreamsActivity;
-
 import com.example.dreamland.ui.setting.SettingActivity;
+import com.example.dreamland.ui.floater.FloaterActivity;
 import com.google.android.material.color.DynamicColors;
 import com.google.android.material.navigation.NavigationView;
 import org.jetbrains.annotations.NotNull;
+import org.litepal.LitePal;
 
-import java.sql.Timestamp;
+import java.util.Comparator;
+import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -117,6 +119,11 @@ public class DashboardActivity extends AppCompatActivity {
                         startActivity(intent3, null);
                         overridePendingTransition(0,0);
                         break;
+                    case R.id.floater:
+                        drawerLayout.close();
+                        Intent intent4 = new Intent(DashboardActivity.this, FloaterActivity.class);
+                        startActivity(intent4, null);
+                        break;
                 }
                 return true;
             }
@@ -124,21 +131,14 @@ public class DashboardActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        this.dreams = this.initDataAndSort();
+    }
+
     public void initList() {
-        User user = new User();
-        user.setUsername("用户12345985");
-
-        Dream dream = new Dream();
-        dream.setContent("梦到世界大危机，反派与正派对峙，正派死伤惨重，\n" +
-                "几个主角都被抓。而我被委托以重要使命，跳井穿越时空拿到重要宝物压制反派.结果时间乱流寄了。");
-        dream.setCreateTime(new Timestamp(1679383693000L));
-        dream.setId(1L);
-        dream.setCreateUser(user);
-
-        for (int i = 0; i < 10; i++) {
-            this.dreams.add(dream);
-        }
-
+        this.dreams = this.initDataAndSort();
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
         LinearLayoutManager layout = new LinearLayoutManager(this);
         this.dreamAdapter = new DreamAdapter(this.dreams);
@@ -146,11 +146,21 @@ public class DashboardActivity extends AppCompatActivity {
         recyclerView.setAdapter(this.dreamAdapter);
     }
 
-    @Override
-    public void finish() {
-        super.finish();
-        overridePendingTransition(0, 0);
-    }
 
+    private List<Dream> initDataAndSort() {
+        List<Dream> dreamList = LitePal.findAll(Dream.class,true);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            dreamList.sort(Comparator.comparing(Dream::getCreateTime, new Comparator<Date>() {
+                @Override
+                public int compare(Date date, Date t1) {
+                    if(date.getTime() < t1.getTime()) {
+                        return 1;
+                    }
+                    return -1;
+                }
+            }));
+        }
+        return dreamList;
+    }
 
 }

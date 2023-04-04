@@ -2,15 +2,29 @@ package com.example.dreamland.ui.writedream;
 
 
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.*;
+import android.widget.EditText;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import com.example.dreamland.R;
 import com.example.dreamland.databinding.ActivityWritedreamBinding;
+import com.example.dreamland.db.initDataBase;
+import com.example.dreamland.entity.Dream;
+import com.example.dreamland.entity.User;
+import com.example.dreamland.ui.auth.LoginActivity;
+import com.example.dreamland.ui.chat.MessageListActivity;
 import com.example.dreamland.ui.dashboard.DashboardActivity;
 import com.google.android.material.appbar.MaterialToolbar;
+import com.google.android.material.navigation.NavigationView;
+import org.jetbrains.annotations.NotNull;
+import org.litepal.LitePal;
+
+import java.sql.Timestamp;
+import java.util.Date;
+import java.util.List;
 
 
 public class WriteDreamActivity extends AppCompatActivity{
@@ -47,13 +61,19 @@ public class WriteDreamActivity extends AppCompatActivity{
                         System.out.println("点击了哆啦A梦");
                         break;
                     case R.id.send:
-                        System.out.println("点击了发送");
+                        final EditText context = binding.context;
+                        Dream dream = new Dream();
+                        dream.setContent(context.getText().toString());
+                        dream.setCreateTime(new Timestamp(new Date().getTime()));
+                        dream.setCreateUser(initDataBase.currentLoginUser);
+                        dream.save();
+                        Toast.makeText(WriteDreamActivity.this, "发布成功", Toast.LENGTH_SHORT).show();
+                        finish();
                         break;
                 }
                 return true;
             }
         });
-
     }
 
 
