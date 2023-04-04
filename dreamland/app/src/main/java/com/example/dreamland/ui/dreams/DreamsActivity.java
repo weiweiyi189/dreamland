@@ -4,15 +4,17 @@ package com.example.dreamland.ui.dreams;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.StrictMode;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import androidx.appcompat.app.AlertDialog;
+import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import cn.pedant.SweetAlert.SweetAlertDialog;
 import com.example.dreamland.R;
 import com.example.dreamland.ui.dashboard.DashboardActivity;
 import com.example.dreamland.ui.util.SendmailUtil;
+import com.google.android.material.appbar.MaterialToolbar;
 
 import static com.blankj.utilcode.util.RegexUtils.isEmail;
 
@@ -21,11 +23,40 @@ public class DreamsActivity extends AppCompatActivity  implements View.OnClickLi
     private EditText mail;
     private EditText context;
 
+//    private long exitTime = 0;
+//    //两次返回，返回到home界面（System.exit决定是否退出当前界面，重新加载程序）
+//    public boolean onKeyDown(int keyCode, KeyEvent event) {
+//        if(keyCode == android.view.KeyEvent.KEYCODE_BACK && event.getAction() == android.view.KeyEvent.ACTION_DOWN){
+//
+//            if((System.currentTimeMillis()-exitTime) > 2000){
+//                Toast.makeText(getApplicationContext(), "再按一次退出程序", Toast.LENGTH_SHORT).show();
+//                exitTime = System.currentTimeMillis();
+//            } else {
+//                Intent home = new Intent(Intent.ACTION_MAIN);
+//                home.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+//                home.addCategory(Intent.CATEGORY_HOME);
+//                startActivity(home);
+//                //退出系统，不保存之前页面
+//                System.exit(0);
+//            }
+//            return true;
+//        }
+//        return super.onKeyDown(keyCode, event);
+//    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dreams);
 
+        MaterialToolbar topAppBar=findViewById(R.id.topAppBar);
+        topAppBar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(DreamsActivity.this, DashboardActivity.class);
+                startActivity(intent, null);
+            }
+        });
 
         if (android.os.Build.VERSION.SDK_INT > 9) {
             StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();

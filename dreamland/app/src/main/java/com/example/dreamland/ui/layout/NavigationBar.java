@@ -10,7 +10,7 @@ import androidx.annotation.Nullable;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import com.example.dreamland.R;
 import com.example.dreamland.databinding.LayoutNavigationBarBinding;
-import com.example.dreamland.ui.WritedreamActivity.WritedreamActivity;
+import com.example.dreamland.ui.writeDream.WriteDreamActivity;
 import com.example.dreamland.ui.dashboard.DashboardActivity;
 import com.example.dreamland.ui.personal.PersonalActivity;
 
@@ -41,7 +41,7 @@ public class NavigationBar extends ConstraintLayout {
                         startActivity(context,intent1, null);
                         break;
                     case R.id.item_2:
-                        Intent intent2 = new Intent(context, WritedreamActivity.class);
+                        Intent intent2 = new Intent(context, WriteDreamActivity.class);
                         startActivity(context,intent2, null);
                         break;
                     case R.id.item_3:

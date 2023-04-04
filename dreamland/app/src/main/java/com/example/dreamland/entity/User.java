@@ -13,10 +13,10 @@ import java.util.List;
 /**
  * 系统用户
  */
+@EqualsAndHashCode(callSuper=false)
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@EqualsAndHashCode(callSuper=false)
 public class User extends LitePalSupport {
 
     private int id;

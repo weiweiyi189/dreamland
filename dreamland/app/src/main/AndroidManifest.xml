@@ -24,8 +24,11 @@
             android:name=".ui.floater.FloaterActivity"
             android:exported="true"/>
         <activity
-            android:name=".ui.WritedreamActivity.WritedreamActivity"
-            android:exported="false" />
+                android:name=".ui.setting.SettingActivity"
+                android:exported="true"/>
+        <activity
+                android:name=".ui.writeDream.WriteDreamActivity"
+                android:exported="true"/>
         <activity
                 android:name=".ui.dreams.DreamsActivity"
                 android:exported="true"/>
