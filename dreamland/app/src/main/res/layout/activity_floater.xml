@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+        xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <com.google.android.material.appbar.AppBarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" android:id="@+id/appBarLayout">
+
+        <com.google.android.material.appbar.MaterialToolbar
+                android:id="@+id/floaterTopAppBar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                app:title="梦境漂流瓶"
+                android:background="?attr/colorPrimary"
+                app:titleTextColor="@color/white"
+                app:menu="@menu/floater_top_app_bar"
+                app:titleCentered="true"
+                app:navigationIcon="@drawable/floater_back">
+        </com.google.android.material.appbar.MaterialToolbar>
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="?attr/actionBarSize"
+            android:id="@+id/relativeLayout">
+        <Button
+                android:id="@+id/floaterWrite"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/Widget.Material3.Button.ElevatedButton.Icon"
+                android:text="漂一漂"
+                android:textColor="@color/grey"
+                android:layout_alignBottom="@id/floaterRead"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="60dp"
+                android:backgroundTint="#FFA500"
+                app:icon="@drawable/floater_write"
+                app:iconTint="@color/grey">
+        </Button>
+
+        <Button
+                android:id="@+id/floaterRead"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/Widget.Material3.Button.ElevatedButton.Icon"
+                android:text="捞一捞"
+                android:textColor="#E91E63"
+                android:layout_alignParentBottom="true"
+                android:layout_marginBottom="50dp"
+                android:layout_marginLeft="60dp"
+                android:backgroundTint="@color/grey"
+                app:icon="@drawable/floater_read"
+                app:iconTint="#E91E63">
+        </Button>
+
+        <ImageView
+                android:id="@+id/sky"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:src="@drawable/floater_sky"
+                android:scaleX="3.5" android:scaleY="3.5"
+        />
+
+        <ImageView
+                android:id="@+id/sea"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/floater_sea"
+                android:scaleType="fitEnd"
+        />
+        <ImageView
+                android:id="@+id/floaterColored"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:srcCompat="@drawable/floater_colored"
+                android:scaleX="0.25" android:scaleY="0.25"
+                android:scaleType="center"
+                tools:visibility="gone"/>
+        <RelativeLayout
+                android:id="@+id/floaterReadLetterLayout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                tools:visibility="gone" android:layout_centerInParent="true">
+            <ImageView
+                    android:id="@+id/floaterReadLetter"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="centerInside"
+                    android:src="@drawable/floater_letter">
+            </ImageView>
+            <TextView
+                    android:id="@+id/floaterReadContent"
+                    android:layout_width="wrap_content"
+                    android:layout_height="250dp"
+                    android:layout_below="@id/floaterReadTitle"
+                    android:layout_marginLeft="50dp"
+                    android:layout_marginRight="40dp"
+                    android:inputType="textMultiLine"
+                    android:gravity="top"
+                    android:textSize="18sp"
+                    android:padding="20dp"
+                    android:text="I just dreamed of those who lent me courage. Alpha Beta E, right?I just dreamed of those who lent me courage. Alpha Beta E, right?I just dreamed of those who lent me courage. Alpha Beta E, right?I just dreamed of those who lent me courage. Alpha Beta E, right?I just dreamed of those who lent me courage. Alpha Beta E, right?I just dreamed of those who lent me courage. Alpha Beta E, right?">
+            </TextView>
+            <TextView
+                    android:id="@+id/floaterReadTitle"
+                    android:text="TextView"
+                    android:layout_centerHorizontal="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginTop="120dp"
+                    android:layout_marginLeft="100dp"
+                    android:textSize="24sp"
+                    android:textStyle="bold"
+            />
+            <Button
+                    android:id="@+id/floaterStopRead"
+                    android:text="关闭"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="@color/md_theme_dark_error"
+                    android:textColor="@color/md_theme_dark_errorContainer"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="10dp"
+                    android:layout_below="@id/floaterReadContent">
+
+            </Button>
+        </RelativeLayout>
+
+        <ImageView
+                android:id="@+id/floaterCapture"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/floater_capture"
+                android:rotation="0" android:scaleX="0.75" tools:visibility="gone">
+        </ImageView>
+        <ImageView
+                android:id="@+id/floaterArrow"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_alignParentRight="true"
+                android:src="@drawable/floater_arrow"
+                android:scaleX="0.1"
+                android:scaleY="0.1" tools:visibility="gone">
+        </ImageView>
+
+        <RelativeLayout
+                android:id="@+id/floaterWriteLetterLayout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                tools:visibility="gone" android:layout_centerInParent="true">
+            <ImageView
+                    android:id="@+id/floaterWriteLetter"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="centerInside"
+                    android:src="@drawable/floater_letter">
+            </ImageView>
+            <EditText
+                    android:id="@+id/floaterWriteContent"
+                    android:background="@color/float_transparent"
+                    android:textColorHint="#85857B"
+                    android:hint="请输入内容"
+                    android:layout_width="wrap_content"
+                    android:layout_height="250dp"
+                    android:layout_below="@id/floaterWriteTitle"
+                    android:layout_marginLeft="50dp"
+                    android:layout_marginRight="40dp"
+                    android:inputType="textMultiLine"
+                    android:gravity="top"
+                    android:textSize="18sp"
+                    android:padding="20dp">
+            </EditText>
+            <EditText
+                    android:id="@+id/floaterWriteTitle"
+                    android:textColorHint="#85857B"
+                    android:hint="请输入标题"
+                    android:background="@color/float_transparent"
+                    android:layout_centerHorizontal="true"
+                    android:gravity="center"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginTop="120dp"
+                    android:layout_marginLeft="100dp"
+                    android:textSize="24sp"
+                    android:textStyle="bold"
+            />
+            <Button
+                    android:id="@+id/floaterStopWrite"
+                    android:text="关闭"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="@color/md_theme_dark_error"
+                    android:textColor="@color/md_theme_dark_errorContainer"
+                    android:layout_alignParentLeft="true"
+                    android:layout_marginLeft="80dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_below="@id/floaterWriteContent">
+            </Button>
+            <Button
+                    android:id="@+id/floaterSendWrite"
+                    android:text="漂流"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="80dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_below="@id/floaterWriteContent" android:backgroundTint="#A1E850"
+                    android:textColor="#355016">
+            </Button>
+        </RelativeLayout>
+    </RelativeLayout>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
