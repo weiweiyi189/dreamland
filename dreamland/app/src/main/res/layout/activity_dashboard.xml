@@ -75,6 +75,7 @@
                     android:id="@+id/NavigationBar"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:background="?attr/colorPrimary"
                     app:layout_constraintBottom_toBottomOf="parent">
             </com.example.dreamland.ui.layout.NavigationBar>
 
@@ -87,6 +88,7 @@
             android:layout_height="match_parent"
             app:menu="@menu/navigation_drawer"
             app:headerLayout="@layout/header_navigation_drawer"
-            android:layout_gravity="start"/>
+            android:layout_gravity="start"
+            android:background="#FFFFFF"/>
 
 </androidx.drawerlayout.widget.DrawerLayout>

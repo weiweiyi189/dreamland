@@ -22,7 +22,7 @@ import com.example.dreamland.entity.Dream;
 import com.example.dreamland.ui.adapter.DreamAdapter;
 import com.example.dreamland.ui.chat.MessageListActivity;
 import com.example.dreamland.ui.dreams.DreamsActivity;
-
+import com.example.dreamland.ui.setting.SettingActivity;
 import com.example.dreamland.ui.floater.FloaterActivity;
 import com.google.android.material.color.DynamicColors;
 import com.google.android.material.navigation.NavigationBarView;
@@ -115,16 +115,24 @@ public class DashboardActivity extends AppCompatActivity {
                         drawerLayout.close();
                         Intent intent1 = new Intent(DashboardActivity.this, MessageListActivity.class);
                         startActivity(intent1, null);
+                        overridePendingTransition(0,0);
                         break;
                     case R.id.dreams:
                         drawerLayout.close();
                         Intent intent2 = new Intent(DashboardActivity.this, DreamsActivity.class);
                         startActivity(intent2, null);
+                        overridePendingTransition(0,0);
+                        break;
+                    case R.id.setting:
+                        drawerLayout.close();
+                        Intent intent3 = new Intent(DashboardActivity.this, SettingActivity.class);
+                        startActivity(intent3, null);
+                        overridePendingTransition(0,0);
                         break;
                     case R.id.floater:
                         drawerLayout.close();
-                        Intent intent3 = new Intent(DashboardActivity.this, FloaterActivity.class);
-                        startActivity(intent3, null);
+                        Intent intent4 = new Intent(DashboardActivity.this, FloaterActivity.class);
+                        startActivity(intent4, null);
                         break;
                 }
                 return true;
@@ -155,8 +163,9 @@ public class DashboardActivity extends AppCompatActivity {
         recyclerView.setAdapter(this.dreamAdapter);
     }
 
+
     private void initDataAndSort() {
-        List<Dream> dreamList = LitePal.findAll(Dream.class, true);
+        List<Dream> dreamList = LitePal.findAll(Dream.class,true);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
             dreamList.sort(Comparator.comparing(Dream::getCreateTime, new Comparator<Date>() {
                 @Override

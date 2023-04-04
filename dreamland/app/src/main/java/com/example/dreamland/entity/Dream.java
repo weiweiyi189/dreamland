@@ -1,5 +1,6 @@
 package com.example.dreamland.entity;
 
+import lombok.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;

@@ -4,18 +4,22 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/idea/dreamland/dreamland/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.2265" />
+        <entry key="..\:/idea/dreamland/dreamland/app/src/main/res/drawable/block.xml" value="0.1645" />
         <entry key="..\:/idea/dreamland/dreamland/app/src/main/res/drawable/circle_notification.xml" value="0.2" />
         <entry key="..\:/idea/dreamland/dreamland/app/src/main/res/drawable/dream_background.xml" value="0.12" />
         <entry key="..\:/idea/dreamland/dreamland/app/src/main/res/drawable/face-48px.xml" value="0.2265" />
         <entry key="..\:/idea/dreamland/dreamland/app/src/main/res/drawable/favorite.xml" value="0.1205" />
         <entry key="..\:/idea/dreamland/dreamland/app/src/main/res/drawable/flutter_dash.xml" value="0.2265" />
         <entry key="..\:/idea/dreamland/dreamland/app/src/main/res/drawable/history_edu-48px.xml" value="0.2265" />
+        <entry key="..\:/idea/dreamland/dreamland/app/src/main/res/drawable/ic_arrow_back.xml" value="0.1645" />
         <entry key="..\:/idea/dreamland/dreamland/app/src/main/res/drawable/ic_launcher_background.xml" value="0.2265" />
+        <entry key="..\:/idea/dreamland/dreamland/app/src/main/res/drawable/ic_share.xml" value="0.1645" />
         <entry key="..\:/idea/dreamland/dreamland/app/src/main/res/drawable/interpret_dream.xml" value="0.1205" />
         <entry key="..\:/idea/dreamland/dreamland/app/src/main/res/drawable/isend.xml" value="0.1915" />
         <entry key="..\:/idea/dreamland/dreamland/app/src/main/res/drawable/menu.xml" value="0.1205" />
         <entry key="..\:/idea/dreamland/dreamland/app/src/main/res/drawable/moon.xml" value="0.1205" />
         <entry key="..\:/idea/dreamland/dreamland/app/src/main/res/drawable/rabbit.xml" value="0.1205" />
+        <entry key="..\:/idea/dreamland/dreamland/app/src/main/res/drawable/send.xml" value="0.1645" />
         <entry key="..\:/idea/dreamland/dreamland/app/src/main/res/drawable/setting.xml" value="0.1205" />
         <entry key="..\:/idea/dreamland/dreamland/app/src/main/res/drawable/user_circle.xml" value="0.2265" />
         <entry key="..\:/idea/dreamland/dreamland/app/src/main/res/drawable/write.xml" value="0.2265" />
@@ -26,14 +30,28 @@
         <entry key="..\:/idea/dreamland/dreamland/app/src/main/res/layout/activity_dashboard.xml" value="0.1" />
         <entry key="..\:/idea/dreamland/dreamland/app/src/main/res/layout/activity_dashbord.xml" value="0.152" />
         <entry key="..\:/idea/dreamland/dreamland/app/src/main/res/layout/activity_drawer.xml" value="0.22826086956521738" />
+        <entry key="..\:/idea/dreamland/dreamland/app/src/main/res/layout/activity_dreams.xml" value="0.2463768115942029" />
+        <entry key="..\:/idea/dreamland/dreamland/app/src/main/res/layout/activity_floater.xml" value="0.2463768115942029" />
+        <entry key="..\:/idea/dreamland/dreamland/app/src/main/res/layout/activity_floater_messages.xml" value="0.2463768115942029" />
         <entry key="..\:/idea/dreamland/dreamland/app/src/main/res/layout/activity_login.xml" value="0.22826086956521738" />
+        <entry key="..\:/idea/dreamland/dreamland/app/src/main/res/layout/activity_personal.xml" value="0.2463768115942029" />
+        <entry key="..\:/idea/dreamland/dreamland/app/src/main/res/layout/activity_test.xml" value="0.2463768115942029" />
+        <entry key="..\:/idea/dreamland/dreamland/app/src/main/res/layout/activity_writedream.xml" value="0.2463768115942029" />
+        <entry key="..\:/idea/dreamland/dreamland/app/src/main/res/layout/fragment_floater_read.xml" value="0.2463768115942029" />
+        <entry key="..\:/idea/dreamland/dreamland/app/src/main/res/layout/fragment_floater_write.xml" value="0.2463768115942029" />
         <entry key="..\:/idea/dreamland/dreamland/app/src/main/res/layout/header_navigation_drawer.xml" value="0.1" />
+        <entry key="..\:/idea/dreamland/dreamland/app/src/main/res/layout/item_chat_me.xml" value="0.2463768115942029" />
+        <entry key="..\:/idea/dreamland/dreamland/app/src/main/res/layout/item_chat_others.xml" value="0.2463768115942029" />
+        <entry key="..\:/idea/dreamland/dreamland/app/src/main/res/layout/item_message_received.xml" value="0.264" />
+        <entry key="..\:/idea/dreamland/dreamland/app/src/main/res/layout/item_message_sent.xml" value="0.2463768115942029" />
         <entry key="..\:/idea/dreamland/dreamland/app/src/main/res/layout/layout_dashboard_top_bar.xml" value="0.11626139817629179" />
         <entry key="..\:/idea/dreamland/dreamland/app/src/main/res/layout/layout_dashbord_top_bar.xml" value="0.22826086956521738" />
         <entry key="..\:/idea/dreamland/dreamland/app/src/main/res/layout/layout_dream.xml" value="0.264" />
         <entry key="..\:/idea/dreamland/dreamland/app/src/main/res/layout/layout_dream_item.xml" value="0.23505434782608695" />
         <entry key="..\:/idea/dreamland/dreamland/app/src/main/res/layout/layout_navigation_bar.xml" value="0.22826086956521738" />
+        <entry key="..\:/idea/dreamland/dreamland/app/src/main/res/layout/message_list_activity.xml" value="0.2463768115942029" />
         <entry key="..\:/idea/dreamland/dreamland/app/src/main/res/menu/bottom_navigation_menu.xml" value="0.2390625" />
+        <entry key="..\:/idea/dreamland/dreamland/app/src/main/res/menu/chat_top_app_bar.xml" value="0.26458333333333334" />
         <entry key="..\:/idea/dreamland/dreamland/app/src/main/res/menu/dashboard_top_app_bar.xml" value="0.2526041666666667" />
         <entry key="..\:/idea/dreamland/dreamland/app/src/main/res/menu/navigation_drawer.xml" value="0.2682291666666667" />
         <entry key="..\:/idea/dreamland/dreamland/app/src/main/res/mipmap-anydpi-v26/dream.xml" value="0.1205" />
