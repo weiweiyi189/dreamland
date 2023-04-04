@@ -15,7 +15,7 @@ import com.example.dreamland.db.initDataBase;
 import com.example.dreamland.entity.Dream;
 import com.example.dreamland.ui.dashboard.DashboardActivity;
 import com.google.android.material.appbar.MaterialToolbar;
-
+import com.google.android.material.navigation.NavigationBarView;
 import java.sql.Timestamp;
 import java.util.Date;
 
@@ -23,6 +23,9 @@ import java.util.Date;
 public class WriteDreamActivity extends AppCompatActivity{
 
     private ActivityWritedreamBinding binding;
+
+
+    NavigationBarView navigationView;
 
     private long exitTime = 0;
 
