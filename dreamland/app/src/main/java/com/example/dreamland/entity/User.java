@@ -1,40 +1,28 @@
 package com.example.dreamland.entity;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import org.litepal.annotation.Column;
+import org.litepal.crud.LitePalSupport;
+
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * 系统用户
  */
-public class User {
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+public class User extends LitePalSupport {
 
-    private Long id;
+    private int id;
 
+    @Column(unique = true, defaultValue = "unknown")
     private String username;
-
+    @Column(defaultValue = "123")
     private String password;
 
-    public User(){
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
+    private List<Dream> dreams = new ArrayList<>();
 }

@@ -66,4 +66,5 @@ dependencies {
     compileOnly 'org.projectlombok:lombok:1.18.4'
     annotationProcessor 'org.projectlombok:lombok:1.18.4'
     implementation 'org.apache.commons:commons-lang3:3.6'
+    implementation 'org.litepal.guolindev:core:3.2.3'
 }

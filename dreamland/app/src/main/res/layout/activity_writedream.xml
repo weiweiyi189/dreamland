@@ -30,11 +30,11 @@
                 android:layout_height="match_parent"
                 android:padding="8dp"
                 android:textSize="16sp"
-                android:textColor="#a2a4b5"
+                android:textColor="@color/black"
                 android:ems="10"
                 android:id="@+id/context"
                 android:background="@null"
-
+                android:textColorHint="#a2a4b5"
                 android:hint="梦见了... \n 小梦Tips: \n 1.点击顶部“哆啦A梦” \n 可切换公开、匿名、私密发布 \n 2.点击顶部“纸飞机” \n 发布梦境"
         />
 
