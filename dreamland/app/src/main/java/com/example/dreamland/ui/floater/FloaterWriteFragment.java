@@ -35,7 +35,6 @@ public class FloaterWriteFragment extends Fragment {
         Dream dream = new Dream();
         dream.setContent("I just dreamed of those who lent me courage. Alpha Beta E, right?");
         dream.setCreateTime(new Timestamp(1679390000000L));
-        dream.setId(1L);
         dream.setCreateUser(user);
 
         for (int i = 0; i < 10; i++) {

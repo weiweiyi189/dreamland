@@ -36,7 +36,6 @@ public class FloaterReadFragment extends Fragment {
         dream.setContent("梦到世界大危机，反派与正派对峙，正派死伤惨重，\n" +
                 "几个主角都被抓。而我被委托以重要使命，跳井穿越时空拿到重要宝物压制反派.结果时间乱流寄了。");
         dream.setCreateTime(new Timestamp(1679383693000L));
-        dream.setId(1L);
         dream.setCreateUser(user);
 
         for (int i = 0; i < 10; i++) {

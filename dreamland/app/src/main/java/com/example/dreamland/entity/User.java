@@ -2,6 +2,7 @@ package com.example.dreamland.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import org.litepal.annotation.Column;
 import org.litepal.crud.LitePalSupport;
@@ -15,6 +16,7 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@EqualsAndHashCode(callSuper=false)
 public class User extends LitePalSupport {
 
     private int id;
