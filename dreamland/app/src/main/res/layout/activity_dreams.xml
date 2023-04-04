@@ -4,6 +4,38 @@
                                                    xmlns:tools="http://schemas.android.com/tools"
                                                    android:layout_width="match_parent"
                                                    android:layout_height="match_parent">
+
+    <com.google.android.material.appbar.AppBarLayout
+            android:id="@id/layout_group_chat"
+            android:layout_width="match_parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_height="wrap_content"
+            android:fitsSystemWindows="true"
+            android:orientation="vertical"
+            android:background="#FF018786">
+
+        <com.google.android.material.appbar.MaterialToolbar
+                android:id="@+id/topAppBar"
+                android:layout_width="match_parent"
+                app:titleCentered="true"
+                android:layout_height="wrap_content"
+                app:title="寄相思"
+                app:titleTextColor="@color/white"
+                app:titleTextAppearance="@style/Toolbar.TitleText"
+                app:navigationIcon="@drawable/ic_arrow_back" />
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+
+    <ImageView
+            android:layout_width="0dp"
+            android:layout_height="258dp" app:srcCompat="@drawable/dreams_up_background"
+            android:id="@+id/imageView"
+            app:layout_constraintBottom_toBottomOf="@+id/layout_group_chat"
+            android:layout_marginTop="64dp" android:layout_marginBottom="33dp"
+            app:layout_constraintEnd_toEndOf="parent" app:layout_constraintBottom_toTopOf="@+id/textView4"
+            app:layout_constraintTop_toTopOf="parent" app:layout_constraintStart_toStartOf="parent"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
     <TextView
             android:text="她（他）的邮箱："
             android:layout_width="0dp"
@@ -74,14 +106,6 @@
             app:layout_constraintTop_toBottomOf="@+id/context" android:layout_marginBottom="54dp"
             app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"/>
-    <ImageView
-            android:layout_width="666dp"
-            android:layout_height="258dp" app:srcCompat="@drawable/dreams_up_background"
-            android:id="@+id/imageView"
-            android:layout_marginTop="0dp" android:layout_marginBottom="33dp"
-            app:layout_constraintEnd_toEndOf="parent" app:layout_constraintBottom_toTopOf="@+id/textView4"
-            app:layout_constraintTop_toTopOf="parent" app:layout_constraintStart_toStartOf="parent"
-    />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

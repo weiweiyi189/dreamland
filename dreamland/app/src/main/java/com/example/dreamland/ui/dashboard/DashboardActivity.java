@@ -21,6 +21,7 @@ import com.example.dreamland.ui.adapter.DreamAdapter;
 import com.example.dreamland.ui.chat.MessageListActivity;
 import com.example.dreamland.ui.dreams.DreamsActivity;
 
+import com.example.dreamland.ui.setting.SettingActivity;
 import com.google.android.material.color.DynamicColors;
 import com.google.android.material.navigation.NavigationView;
 import org.jetbrains.annotations.NotNull;
@@ -102,11 +103,19 @@ public class DashboardActivity extends AppCompatActivity {
                         drawerLayout.close();
                         Intent intent1 = new Intent(DashboardActivity.this, MessageListActivity.class);
                         startActivity(intent1, null);
+                        overridePendingTransition(0,0);
                         break;
                     case R.id.dreams:
                         drawerLayout.close();
                         Intent intent2 = new Intent(DashboardActivity.this, DreamsActivity.class);
                         startActivity(intent2, null);
+                        overridePendingTransition(0,0);
+                        break;
+                    case R.id.setting:
+                        drawerLayout.close();
+                        Intent intent3 = new Intent(DashboardActivity.this, SettingActivity.class);
+                        startActivity(intent3, null);
+                        overridePendingTransition(0,0);
                         break;
                 }
                 return true;
@@ -136,5 +145,12 @@ public class DashboardActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(layout);
         recyclerView.setAdapter(this.dreamAdapter);
     }
+
+    @Override
+    public void finish() {
+        super.finish();
+        overridePendingTransition(0, 0);
+    }
+
 
 }

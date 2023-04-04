@@ -39,7 +39,7 @@
                     android:layout_marginBottom="1dp" app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintBottom_toTopOf="@+id/recycler_view"
                     app:layout_constraintStart_toStartOf="parent"
-                    android:background="#D0E4FF">
+                    android:background="#FBFAFA">
             </com.google.android.material.tabs.TabLayout>
 
 
@@ -51,7 +51,7 @@
                     android:layout_marginStart="211dp"
                     app:layout_constraintBottom_toTopOf="@+id/recycler_view"
                     app:layout_constraintStart_toStartOf="parent"
-                    android:background="#D0E4FF">
+                    android:background="#FBFAFA">
                 <com.google.android.material.tabs.TabItem
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -100,10 +100,12 @@
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
     <!--  侧边栏-->
     <com.google.android.material.navigation.NavigationView
+            android:id="@id/NavigationView"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             app:menu="@menu/navigation_drawer"
             app:headerLayout="@layout/header_navigation_drawer"
-            android:layout_gravity="start"/>
+            android:layout_gravity="start"
+            android:background="#FFFFFF"/>
 
 </androidx.drawerlayout.widget.DrawerLayout>

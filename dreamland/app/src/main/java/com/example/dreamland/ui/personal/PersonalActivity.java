@@ -26,9 +26,12 @@ import com.example.dreamland.ui.chat.MessageListActivity;
 import com.example.dreamland.ui.dashboard.DashboardActivity;
 import com.example.dreamland.ui.dreams.DreamsActivity;
 import com.example.dreamland.ui.layout.NavigationBar;
+import com.example.dreamland.ui.setting.SettingActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationItemView;
 import com.google.android.material.color.DynamicColors;
+import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.tabs.TabLayout;
+import org.jetbrains.annotations.NotNull;
 
 
 import java.sql.Timestamp;
@@ -119,6 +122,35 @@ public class PersonalActivity extends AppCompatActivity {
                 System.out.println("重复选中了他");
             }
         });
+
+        NavigationView navigationView = binding.NavigationView;
+        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull @NotNull MenuItem item) {
+                int id = item.getItemId();
+                switch(id){
+                    case R.id.interpret_dream:
+                        drawerLayout.close();
+                        Intent intent1 = new Intent(PersonalActivity.this, MessageListActivity.class);
+                        startActivity(intent1, null);
+                        overridePendingTransition(0,0);
+                        break;
+                    case R.id.dreams:
+                        drawerLayout.close();
+                        Intent intent2 = new Intent(PersonalActivity.this, DreamsActivity.class);
+                        startActivity(intent2, null);
+                        overridePendingTransition(0,0);
+                        break;
+                    case R.id.setting:
+                        drawerLayout.close();
+                        Intent intent3 = new Intent(PersonalActivity.this, SettingActivity.class);
+                        startActivity(intent3, null);
+                        overridePendingTransition(0,0);
+                        break;
+                }
+                return true;
+            }
+        });
     }
 
 
@@ -143,4 +175,11 @@ public class PersonalActivity extends AppCompatActivity {
             recyclerView.setLayoutManager(layout);
             recyclerView.setAdapter(this.dreamAdapter);
         }
+
+    @Override
+    public void finish() {
+        super.finish();
+        overridePendingTransition(0, 0);
     }
+
+}
