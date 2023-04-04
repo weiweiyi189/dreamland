@@ -17,6 +17,12 @@
         tools:replace="android:icon,android:theme,android:allowBackup"
         tools:targetApi="31" >
         <activity
+            android:name=".ui.floater.FloaterMessagesActivity"
+            android:exported="true"/>
+        <activity
+            android:name=".ui.floater.FloaterActivity"
+            android:exported="true"/>
+        <activity
             android:name=".ui.WritedreamActivity.WritedreamActivity"
             android:exported="false" />
         <activity
