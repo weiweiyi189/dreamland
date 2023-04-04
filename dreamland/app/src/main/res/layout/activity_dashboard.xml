@@ -20,7 +20,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@color/grey"
-                tools:context=".ui.dashboard.DashboardActivity">
+                tools:context=".ui.dashboard.DashboardActivity"
+                tools:ignore="MissingClass">
             <!--   顶部标签栏   -->
             <com.google.android.material.appbar.AppBarLayout
                     android:id="@+id/AppBarLayout"
@@ -42,15 +43,31 @@
 
             </com.google.android.material.appbar.AppBarLayout>
 
-            <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/recycler_view"
+
+            <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+                    android:id="@+id/swipe_refresh"
                     android:layout_width="match_parent"
                     app:layout_constraintTop_toBottomOf="@+id/AppBarLayout"
                     app:layout_constraintBottom_toTopOf="@+id/NavigationBar"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintRight_toRightOf="parent"
                     android:layout_height="0dp">
-            </androidx.recyclerview.widget.RecyclerView>
+                <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/recycler_view"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"/>
+
+            </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+<!--            <androidx.recyclerview.widget.RecyclerView-->
+<!--                    android:id="@+id/recycler_view"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    app:layout_constraintTop_toBottomOf="@+id/AppBarLayout"-->
+<!--                    app:layout_constraintBottom_toTopOf="@+id/NavigationBar"-->
+<!--                    app:layout_constraintLeft_toLeftOf="parent"-->
+<!--                    app:layout_constraintRight_toRightOf="parent"-->
+<!--                    android:layout_height="0dp">-->
+<!--            </androidx.recyclerview.widget.RecyclerView>-->
 
 
             <!--  底部导航栏 -->

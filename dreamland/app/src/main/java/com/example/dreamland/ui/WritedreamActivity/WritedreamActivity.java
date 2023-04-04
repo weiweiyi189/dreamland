@@ -20,6 +20,7 @@ import com.example.dreamland.ui.chat.MessageListActivity;
 import com.example.dreamland.ui.dashboard.DashboardActivity;
 import com.example.dreamland.ui.dreams.DreamsActivity;
 import com.google.android.material.appbar.MaterialToolbar;
+import com.google.android.material.navigation.NavigationBarView;
 import com.google.android.material.navigation.NavigationView;
 import org.jetbrains.annotations.NotNull;
 import org.litepal.LitePal;
@@ -32,6 +33,9 @@ import java.util.List;
 public class WritedreamActivity extends AppCompatActivity{
 
     private ActivityWritedreamBinding binding;
+
+
+    NavigationBarView navigationView;
 
     private long exitTime = 0;
 
