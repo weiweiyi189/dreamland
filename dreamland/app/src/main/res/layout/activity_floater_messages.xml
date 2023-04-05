@@ -39,7 +39,7 @@
             <com.google.android.material.tabs.TabItem
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="我分享的梦"
+                    android:text="我播种的梦"
             />
 
         </com.google.android.material.tabs.TabLayout>
