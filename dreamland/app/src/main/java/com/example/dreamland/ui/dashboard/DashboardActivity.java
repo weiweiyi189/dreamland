@@ -19,6 +19,8 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import com.example.dreamland.R;
 import com.example.dreamland.databinding.ActivityDashboardBinding;
 import com.example.dreamland.entity.Dream;
+import com.example.dreamland.service.BaseHttpService;
+import com.example.dreamland.service.DreamService;
 import com.example.dreamland.ui.adapter.DreamAdapter;
 import com.example.dreamland.ui.chat.MessageListActivity;
 import com.example.dreamland.ui.dreams.DreamsActivity;
@@ -30,10 +32,7 @@ import com.google.android.material.navigation.NavigationView;
 import org.jetbrains.annotations.NotNull;
 import org.litepal.LitePal;
 
-import java.util.Comparator;
-import java.util.Date;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
 /**
  * 首页
@@ -54,6 +53,8 @@ public class DashboardActivity extends AppCompatActivity {
     private long exitTime = 0;
 
     private SwipeRefreshLayout swipe_refresh;
+
+    private DreamService dreamService = DreamService.getInstance();;
 
     //两次返回，返回到home界面（System.exit决定是否退出当前界面，重新加载程序）
     public boolean onKeyDown(int keyCode, KeyEvent event) {
@@ -165,20 +166,15 @@ public class DashboardActivity extends AppCompatActivity {
 
 
     private void initDataAndSort() {
-        List<Dream> dreamList = LitePal.findAll(Dream.class,true);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-            dreamList.sort(Comparator.comparing(Dream::getCreateTime, new Comparator<Date>() {
-                @Override
-                public int compare(Date date, Date t1) {
-                    if (date.getTime() < t1.getTime()) {
-                        return 1;
-                    }
-                    return -1;
-                }
-            }));
-        }
-        this.dreams.clear();
-        this.dreams.addAll(dreamList);
+        dreamService.getAll(new BaseHttpService.CallBack() {
+            @Override
+            public void onSuccess(BaseHttpService.CustomerResponse result) {
+                List<Dream> dreamList = new ArrayList<>(Arrays.asList((Dream[]) result.getData()));
+                dreams.clear();
+                dreams.addAll(dreamList);
+                dreamAdapter.notifyDataSetChanged();
+            }
+        });
     }
 
     private void setRefresh() {
@@ -212,7 +208,6 @@ public class DashboardActivity extends AppCompatActivity {
                     @Override
                     public void run() {
                         initDataAndSort();
-                        dreamAdapter.notifyDataSetChanged();
                         swipe_refresh.setRefreshing(false);
                     }
                 });
