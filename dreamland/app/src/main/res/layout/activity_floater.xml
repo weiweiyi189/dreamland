@@ -81,6 +81,24 @@
                 android:scaleX="0.25" android:scaleY="0.25"
                 android:scaleType="center"
                 tools:visibility="gone"/>
+
+        <ImageView
+                android:id="@+id/floaterCapture"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/floater_capture"
+                android:rotation="0" android:scaleX="0.75" tools:visibility="gone">
+        </ImageView>
+        <ImageView
+                android:id="@+id/floaterArrow"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_alignParentRight="true"
+                android:src="@drawable/floater_arrow"
+                android:scaleX="0.1"
+                android:scaleY="0.1" tools:visibility="gone">
+        </ImageView>
+
         <RelativeLayout
                 android:id="@+id/floaterReadLetterLayout"
                 android:layout_width="match_parent"
@@ -113,8 +131,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentTop="true"
-                    android:layout_marginTop="120dp"
-                    android:layout_marginLeft="100dp"
+                    android:layout_marginTop="150dp"
                     android:textSize="24sp"
                     android:textStyle="bold"
             />
@@ -131,24 +148,6 @@
 
             </Button>
         </RelativeLayout>
-
-        <ImageView
-                android:id="@+id/floaterCapture"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:src="@drawable/floater_capture"
-                android:rotation="0" android:scaleX="0.75" tools:visibility="gone">
-        </ImageView>
-        <ImageView
-                android:id="@+id/floaterArrow"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_alignParentRight="true"
-                android:src="@drawable/floater_arrow"
-                android:scaleX="0.1"
-                android:scaleY="0.1" tools:visibility="gone">
-        </ImageView>
-
         <RelativeLayout
                 android:id="@+id/floaterWriteLetterLayout"
                 android:layout_width="match_parent"
@@ -186,8 +185,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentTop="true"
-                    android:layout_marginTop="120dp"
-                    android:layout_marginLeft="100dp"
+                    android:layout_marginTop="150dp"
                     android:textSize="24sp"
                     android:textStyle="bold"
             />

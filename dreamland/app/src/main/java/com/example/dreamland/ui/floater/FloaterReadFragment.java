@@ -30,11 +30,10 @@ public class FloaterReadFragment extends Fragment {
     }
     public void initList() {
         User user = new User();
-        user.setUsername("用户12345985");
+        user.setUsername("用户快斗斗丶");
 
         Dream dream = new Dream();
-        dream.setContent("梦到世界大危机，反派与正派对峙，正派死伤惨重，\n" +
-                "几个主角都被抓。而我被委托以重要使命，跳井穿越时空拿到重要宝物压制反派.结果时间乱流寄了。");
+        dream.setContent("  是载满星云的玄霄, 亦是播洒清梦的红壤.\n  漂出你的思绪, 捞起我的奇遇.\n  这里, 皆你我的天地.\n");
         dream.setCreateTime(new Timestamp(1679383693000L));
         dream.setId(1);
         dream.setCreateUser(user);
