@@ -18,4 +18,5 @@
     <string name="change">切换</string>
     <string name="send">发布</string>
     <string name="dream">您的梦境...</string>
+    <string name="title_activity_login2">LoginActivity2</string>
 </resources>

@@ -18,11 +18,23 @@
             tools:replace="android:icon,android:theme,android:allowBackup"
             tools:targetApi="31">
         <activity
-            android:name=".ui.floater.FloaterMessagesActivity"
-            android:exported="true"/>
+                android:name=".ui.auth.EnrollActivity"
+                android:exported="false"/>
         <activity
-            android:name=".ui.floater.FloaterActivity"
-            android:exported="true"/>
+                android:name=".ui.auth.BeginSplash"
+                android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+        </activity>
+        <activity
+                android:name=".ui.floater.FloaterMessagesActivity"
+                android:exported="true"/>
+        <activity
+                android:name=".ui.floater.FloaterActivity"
+                android:exported="true"/>
         <activity
                 android:name=".ui.setting.SettingActivity"
                 android:exported="true"/>
@@ -37,18 +49,11 @@
                 android:exported="true"/>
         <activity
                 android:name=".ui.auth.LoginActivity"
-                android:exported="true">
-                        <intent-filter>
-                            <action android:name="android.intent.action.MAIN" />
-
-                            <category android:name="android.intent.category.LAUNCHER" />
-                        </intent-filter>
-        </activity>
+                android:exported="true"/>
         <activity
                 android:name=".ui.dashboard.DashboardActivity"
                 android:exported="true"
-                android:label="首页">
-        </activity>
+                android:label="首页"/>
         <activity
                 android:name=".ui.chat.MessageListActivity"
                 android:exported="true"
