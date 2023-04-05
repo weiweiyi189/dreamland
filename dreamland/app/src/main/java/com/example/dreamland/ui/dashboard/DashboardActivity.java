@@ -1,5 +1,6 @@
 package com.example.dreamland.ui.dashboard;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
@@ -14,23 +15,24 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import com.example.dreamland.R;
 import com.example.dreamland.databinding.ActivityDashboardBinding;
 import com.example.dreamland.entity.Dream;
+import com.example.dreamland.service.BaseHttpService;
+import com.example.dreamland.service.DreamService;
 import com.example.dreamland.ui.adapter.DreamAdapter;
 import com.example.dreamland.ui.chat.MessageListActivity;
 import com.example.dreamland.ui.dreams.DreamsActivity;
 import com.example.dreamland.ui.setting.SettingActivity;
 import com.example.dreamland.ui.floater.FloaterActivity;
 import com.google.android.material.color.DynamicColors;
+import com.google.android.material.navigation.NavigationBarView;
 import com.google.android.material.navigation.NavigationView;
 import org.jetbrains.annotations.NotNull;
 import org.litepal.LitePal;
 
-import java.util.Comparator;
-import java.util.Date;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
 /**
  * 首页
@@ -45,12 +47,20 @@ public class DashboardActivity extends AppCompatActivity {
 
     private List<Dream> dreams = new LinkedList<>();
 
+
+    NavigationBarView navigationView;
+
     private long exitTime = 0;
+
+    private SwipeRefreshLayout swipe_refresh;
+
+    private DreamService dreamService = DreamService.getInstance();;
+
     //两次返回，返回到home界面（System.exit决定是否退出当前界面，重新加载程序）
     public boolean onKeyDown(int keyCode, KeyEvent event) {
-        if(keyCode == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_DOWN){
+        if (keyCode == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_DOWN) {
 
-            if((System.currentTimeMillis()-exitTime) > 2000){
+            if ((System.currentTimeMillis() - exitTime) > 2000) {
                 Toast.makeText(getApplicationContext(), "再按一次退出程序", Toast.LENGTH_SHORT).show();
                 exitTime = System.currentTimeMillis();
             } else {
@@ -74,6 +84,8 @@ public class DashboardActivity extends AppCompatActivity {
         // 绑定v层
         binding = ActivityDashboardBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
+        navigationView = (NavigationBarView) findViewById(R.id.bottom_navigation);
         // 隐藏系统自带的标题栏
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
@@ -93,14 +105,13 @@ public class DashboardActivity extends AppCompatActivity {
                 drawerLayout.openDrawer(GravityCompat.START);
             }
         });
-        this.initList();
 
         NavigationView navigationView = binding.NavigationView;
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull @NotNull MenuItem item) {
                 int id = item.getItemId();
-                switch(id){
+                switch (id) {
                     case R.id.interpret_dream:
                         drawerLayout.close();
                         Intent intent1 = new Intent(DashboardActivity.this, MessageListActivity.class);
@@ -128,17 +139,24 @@ public class DashboardActivity extends AppCompatActivity {
                 return true;
             }
         });
-
+        this.initList();
+        this.setRefresh();
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        this.dreams = this.initDataAndSort();
+        navigationView.getMenu().findItem(R.id.item_1).setChecked(true);
+        swipe_refresh.post(new Runnable() {
+            @Override
+            public void run() {
+                swipe_refresh.setRefreshing(true);
+            }
+        });
+        this.refreshData();
     }
 
     public void initList() {
-        this.dreams = this.initDataAndSort();
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
         LinearLayoutManager layout = new LinearLayoutManager(this);
         this.dreamAdapter = new DreamAdapter(this.dreams);
@@ -147,20 +165,54 @@ public class DashboardActivity extends AppCompatActivity {
     }
 
 
-    private List<Dream> initDataAndSort() {
-        List<Dream> dreamList = LitePal.findAll(Dream.class,true);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-            dreamList.sort(Comparator.comparing(Dream::getCreateTime, new Comparator<Date>() {
-                @Override
-                public int compare(Date date, Date t1) {
-                    if(date.getTime() < t1.getTime()) {
-                        return 1;
-                    }
-                    return -1;
+    private void initDataAndSort() {
+        dreamService.getAll(new BaseHttpService.CallBack() {
+            @Override
+            public void onSuccess(BaseHttpService.CustomerResponse result) {
+                List<Dream> dreamList = new ArrayList<>(Arrays.asList((Dream[]) result.getData()));
+                dreams.clear();
+                dreams.addAll(dreamList);
+                dreamAdapter.notifyDataSetChanged();
+            }
+        });
+    }
+
+    private void setRefresh() {
+        swipe_refresh = findViewById(R.id.swipe_refresh);
+        swipe_refresh.setColorSchemeResources(R.color.md_theme_light_primary);//设置下拉进度条颜色
+        swipe_refresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                refreshData();
+            }
+        });
+        swipe_refresh.post(new Runnable() {
+            @Override
+            public void run() {
+                swipe_refresh.setRefreshing(true);
+            }
+        });
+    }
+
+    private void refreshData() {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
                 }
-            }));
-        }
-        return dreamList;
+                runOnUiThread(new Runnable() {
+                    @SuppressLint("NotifyDataSetChanged")
+                    @Override
+                    public void run() {
+                        initDataAndSort();
+                        swipe_refresh.setRefreshing(false);
+                    }
+                });
+            }
+        }).start();
     }
 
 }

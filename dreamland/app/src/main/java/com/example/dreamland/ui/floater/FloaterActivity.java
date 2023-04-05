@@ -284,6 +284,7 @@ public class FloaterActivity extends AppCompatActivity {
         readLetterShow.setAnimationListener(new Animation.AnimationListener() {
             @Override
             public void onAnimationStart(Animation animation) {
+                readLetter.bringToFront();
                 for(int i=0;i<readLetter.getChildCount();i++){
                     readLetter.getChildAt(i).setEnabled(true);
                 }
@@ -344,6 +345,7 @@ public class FloaterActivity extends AppCompatActivity {
             public void onAnimationStart(Animation animation) {
                 read.setVisibility(View.GONE);
                 write.setVisibility(View.GONE);
+                writeLetter.bringToFront();
                 for(int i=0;i<writeLetter.getChildCount();i++){
                     writeLetter.getChildAt(i).setEnabled(true);
                 }

@@ -8,17 +8,15 @@
 
 UI组件库: https://m3.material.io/components
 
-数据库文档： https://github.com/guolindev/LitePal
 
-#### 注意
+## 后台 
+api文件夹为后台。
+框架为spring boot。数据库为mysql。跑spring boot 的步骤不再赘述。
 
-保存到数据库的实体表需要继承LitePalSupport类
+前后台交互时，手机和电脑连接同一局域网
+把com/example/dreamland/service/BaseHttpService.java 改为电脑的ip地址。
 
-当修改实体属性时，若想让数据库也生效，请修改 **assets/litepal.xml 下的version标签， 并把它加1 ！**
-
-数据库初始化代码在 com/example/dreamland/db/initDataBase.java 文件夹中。
-
-对表的增删查改请查看上方的数据库文档
+登录功能已完成， 用户名密码在 api/dreamland/src/main/java/com/example/dreamland/startup/InitData.java 下查看。
 
 ## 克隆仓库代码步骤
 
