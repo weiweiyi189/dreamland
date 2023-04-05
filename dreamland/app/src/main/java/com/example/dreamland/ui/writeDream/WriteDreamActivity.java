@@ -13,9 +13,12 @@ import com.example.dreamland.R;
 import com.example.dreamland.databinding.ActivityWritedreamBinding;
 import com.example.dreamland.db.initDataBase;
 import com.example.dreamland.entity.Dream;
+import com.example.dreamland.service.BaseHttpService;
+import com.example.dreamland.service.DreamService;
 import com.example.dreamland.ui.dashboard.DashboardActivity;
 import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.navigation.NavigationBarView;
+import com.google.android.material.snackbar.Snackbar;
 
 import java.sql.Timestamp;
 import java.util.Date;
@@ -27,6 +30,8 @@ public class WriteDreamActivity extends AppCompatActivity {
 
 
     NavigationBarView navigationView;
+
+    private DreamService dreamService = DreamService.getInstance();
 
     private long exitTime = 0;
 
@@ -68,11 +73,20 @@ public class WriteDreamActivity extends AppCompatActivity {
                         final EditText context = binding.context;
                         Dream dream = new Dream();
                         dream.setContent(context.getText().toString());
-                        dream.setCreateTime(new Timestamp(new Date().getTime()));
-                        dream.setCreateUser(initDataBase.currentLoginUser);
-                        dream.save();
-                        Toast.makeText(WriteDreamActivity.this, "发布成功", Toast.LENGTH_SHORT).show();
-                        finish();
+                        dreamService.add(new BaseHttpService.CallBack() {
+                            @Override
+                            public void onSuccess(BaseHttpService.CustomerResponse result) {
+                                // 登陆成功
+                                if (result.getResponse().code() >= 200 && result.getResponse().code() < 300) {
+                                    Toast.makeText(WriteDreamActivity.this, "发布成功", Toast.LENGTH_SHORT).show();
+                                } else {
+                                    // 登陆失败 提示错误
+                                    Toast.makeText(WriteDreamActivity.this, "发布失败", Toast.LENGTH_SHORT).show();
+                                }
+                                finish();
+                            }
+                        }, dream);
+
                         break;
                 }
                 return true;

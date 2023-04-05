@@ -1,5 +1,6 @@
 package com.example.dreamland.entity;
 
+import com.fasterxml.jackson.annotation.JsonView;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -26,6 +27,7 @@ public class Dream {
     private Long id;
 
     @ManyToOne
+    @JsonView(UserJsonView.class)
     private User createUser;
 
     // 梦境内容
@@ -38,4 +40,6 @@ public class Dream {
     // 创建时间
     @CreationTimestamp
     private Date createTime;
+
+    public interface UserJsonView {}
 }
