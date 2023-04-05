@@ -50,8 +50,7 @@ public class WriteDreamActivity extends AppCompatActivity {
         topAppBar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(WriteDreamActivity.this, DashboardActivity.class);
-                startActivity(intent, null);
+                finish();
             }
         });
 
