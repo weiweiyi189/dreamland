@@ -2,33 +2,22 @@ package com.example.dreamland.ui.auth;
 
 import android.content.Intent;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import android.widget.Button;
 import android.widget.EditText;
 
-import com.android.volley.*;
-import com.android.volley.toolbox.*;
 import com.example.dreamland.databinding.ActivityLoginBinding;
-import com.example.dreamland.entity.ChatGptResponse;
 import com.example.dreamland.entity.User;
 
+import com.example.dreamland.service.BaseHttpService;
+import com.example.dreamland.service.UserService;
 import com.example.dreamland.ui.dashboard.DashboardActivity;
-import com.example.dreamland.ui.util.ProxiedHurlStack;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.android.material.color.DynamicColors;
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.io.Serializable;
-import java.io.UnsupportedEncodingException;
-import java.nio.charset.StandardCharsets;
-import java.util.*;
+import com.google.android.material.snackbar.Snackbar;
 
 /**
  * 登录界面
@@ -36,6 +25,8 @@ import java.util.*;
 public class LoginActivity extends AppCompatActivity {
 
     private ActivityLoginBinding binding;
+
+    private final UserService userService = UserService.getInstance();
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -55,15 +46,34 @@ public class LoginActivity extends AppCompatActivity {
                     public void onClick(View view) {
                         System.out.println("登陆成功");
                         User user = new User();
-                        user.setUsername(usernameEditText.toString());
-                        user.setPassword(passwordEditText.toString());
-                        Toast.makeText(LoginActivity.this, "登陆成功", Toast.LENGTH_SHORT).show();
-                        // 启动首页
-                        Intent intent = new Intent(LoginActivity.this, DashboardActivity.class);
-                        startActivity(intent);
+                        user.setUsername(usernameEditText.getText().toString());
+                        user.setPassword(passwordEditText.getText().toString());
+
+                        // 登录示例
+                        userService.login(new BaseHttpService.CallBack() {
+                            @Override
+                            public void onSuccess(BaseHttpService.CustomerResponse result) {
+                                // 登陆成功
+                                if (result.getResponse().code() >= 200 && result.getResponse().code() < 300) {
+                                    // 存储token 用户名 密码
+                                    String token = result.getResponse().header(UserService.TOKEN_HEADER);
+                                    BaseHttpService.setToken(token);
+                                    userService.currentUser.onNext((User) result.getData());
+                                    // 启动首页
+                                    Intent intent = new Intent(LoginActivity.this, DashboardActivity.class);
+                                    startActivity(intent);
+                                    Toast.makeText(LoginActivity.this, "登陆成功", Toast.LENGTH_SHORT).show();
+                                } else {
+                                    // 登陆失败 提示错误
+                                    Toast.makeText(LoginActivity.this, "用户名或密码错误", Toast.LENGTH_SHORT).show();
+                                }
+                            }
+                        }, user);
+
                     }
                 }
         );
+
     }
 
 }
