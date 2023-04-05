@@ -8,7 +8,6 @@
 
 UI组件库: https://m3.material.io/components
 
-数据库文档： https://github.com/guolindev/LitePal
 
 ## 后台 
 api文件夹为后台。
