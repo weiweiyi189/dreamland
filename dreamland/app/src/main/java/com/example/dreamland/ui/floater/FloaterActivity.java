@@ -125,7 +125,6 @@ public class FloaterActivity extends AppCompatActivity {
         for(int i=0;i<readLetter.getChildCount();i++){
             readLetter.getChildAt(i).setEnabled(false);
         }
-        readLetter.setEnabled(false);
 
         readContent=findViewById(R.id.floaterReadContent);
         readContent.setMovementMethod(ScrollingMovementMethod.getInstance());
@@ -138,7 +137,6 @@ public class FloaterActivity extends AppCompatActivity {
         for(int i=0;i<writeLetter.getChildCount();i++){
             writeLetter.getChildAt(i).setEnabled(false);
         }
-        writeLetter.setEnabled(false);
 
         stopWrite=findViewById(R.id.floaterStopWrite);
 
