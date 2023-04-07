@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                                                   xmlns:app="http://schemas.android.com/apk/res-auto"
+                                                   xmlns:tools="http://schemas.android.com/tools"
+                                                   android:layout_width="match_parent"
+                                                   android:layout_height="match_parent">
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                  android:layout_width="match_parent"
+                  android:layout_height="match_parent"
+                  android:orientation="vertical"
+                  android:background="#F0F3F6">
+        <!-- 头部导航-->
+        <com.google.android.material.appbar.AppBarLayout
+                android:id="@id/layout_group_chat"
+                android:layout_width="match_parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_height="wrap_content"
+                android:fitsSystemWindows="true"
+                android:orientation="vertical"
+                android:background="?attr/colorPrimary">
+
+            <com.google.android.material.appbar.MaterialToolbar
+                    android:id="@+id/topAppBar"
+                    android:layout_width="match_parent"
+                    app:titleCentered="true"
+                    android:layout_height="wrap_content"
+                    app:title="关于我们"
+                    app:titleTextColor="@color/white"
+                    app:titleTextAppearance="@style/Toolbar.TitleText"
+                    app:navigationIcon="@drawable/ic_arrow_back"/>
+
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <!-- 全圆角-->
+
+        <TextView
+                android:inputType="textMultiLine"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:textSize="18sp"
+                android:textColor="#716C6C"
+                android:ems="10"
+                android:id="@+id/about"
+                android:background="@null"
+                android:textColorHint="#a2a4b5"
+                android:layout_gravity="center_horizontal"
+                android:gravity="center"
+                android:text="\n\n梦境中有个更真实的你\n你的愿望，你的担心\n你的邪恶，你的天真\n在这里保存它\n某一天重现它\n\n\n
+纷纷扰扰的世界中\n我们只想做些直指人心的事\n真实的\n不虚伪的\n不矫作的\n以及\n不必小心的\n\n\n\n\n\n"
+                app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
+
+
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

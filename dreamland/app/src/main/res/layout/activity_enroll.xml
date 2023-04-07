@@ -41,7 +41,7 @@
                 android:fontFamily="sans-serif-medium"
                 android:text="欢迎来到梦的世界"
                 android:textColor="@color/black"
-                android:textSize="20sp" />
+                android:textSize="20sp"/>
 
         <TextView
                 android:layout_width="wrap_content"
@@ -50,10 +50,10 @@
                 android:text="注册梦境使者"
                 android:layout_marginTop="9dp"
                 android:textColor="@color/grey_more"
-                android:textSize="14sp" />
+                android:textSize="14sp"/>
 
         <EditText
-                android:id="@+id/username"
+                android:id="@+id/eusername"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="38dp"
@@ -68,7 +68,7 @@
                 android:layout_gravity="center_horizontal"/>
 
         <EditText
-                android:id="@+id/password"
+                android:id="@+id/epassword"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="38dp"
@@ -77,18 +77,17 @@
                 android:drawableLeft="@drawable/password"
                 android:drawablePadding="16dp"
                 android:hint="密码"
-                android:inputType="textPassword"
                 android:padding="16dp"
                 android:textSize="14sp"
                 android:layout_gravity="center_horizontal"/>
 
         <Button
-                android:id="@+id/login"
+                android:id="@+id/enroll"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="48dp"
                 android:background="@drawable/button_bg"
-                android:text="登     陆"
+                android:text="注     册"
                 android:textStyle="bold"
                 android:textSize="16dp"
                 android:textColor="@color/white"
@@ -97,30 +96,15 @@
     </LinearLayout>
 
     <TextView
-            android:id="@+id/tv_forgotPassword"
+            android:id="@+id/return_login"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="13dp"
             android:layout_marginEnd="30dp"
             android:layout_marginRight="30dp"
-            android:text="忘记密码?"
+            android:text="返回登陆?"
             android:textColor="@color/grey_more"
-            android:textSize="13sp"
+            android:textSize="15sp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/linlay_inputs" />
-
-
-    <TextView
-            android:id="@+id/tv_register"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="没有账号？点击注册"
-            android:textColor="@color/grey_more"
-            android:textSize="13sp"
-            android:gravity="center"
-            android:layout_marginBottom="30dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-    />
+            app:layout_constraintTop_toBottomOf="@id/linlay_inputs"/>
 </androidx.constraintlayout.widget.ConstraintLayout>
