@@ -93,7 +93,7 @@ public class UserServiceImpl implements UserService {
   @Override
   public User register(User user, HttpServletResponse response) {
     // 保存用户
-    user.setId(null);
+//    user.setId(null);
     user = userRepository.save(user);
     // 生成token 返回token
     String token = CommonService.createJwtToken(user.getId());

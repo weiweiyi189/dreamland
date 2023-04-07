@@ -47,7 +47,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="sans-serif"
-                android:text="注册梦境使者"
+                android:text="找回遗失的自己"
                 android:layout_marginTop="9dp"
                 android:textColor="@color/grey_more"
                 android:textSize="14sp"/>
@@ -76,7 +76,7 @@
                 android:drawableStart="@drawable/password"
                 android:drawableLeft="@drawable/password"
                 android:drawablePadding="16dp"
-                android:hint="密码"
+                android:hint="新密码"
                 android:padding="16dp"
                 android:textSize="14sp"
                 android:layout_gravity="center_horizontal"/>
@@ -87,7 +87,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="48dp"
                 android:background="@drawable/button_bg"
-                android:text="注     册"
+                android:text="找     回"
                 android:textStyle="bold"
                 android:textSize="16dp"
                 android:textColor="@color/white"
