@@ -4,79 +4,78 @@
                                                    xmlns:tools="http://schemas.android.com/tools"
                                                    android:layout_width="match_parent"
                                                    android:layout_height="match_parent">
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:orientation="vertical"
-              android:background="#F0F3F6">
-    <!-- 头部导航-->
-    <com.google.android.material.appbar.AppBarLayout
-            android:id="@id/layout_group_chat"
-            android:layout_width="match_parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:layout_height="wrap_content"
-            android:fitsSystemWindows="true"
-            android:orientation="vertical"
-            android:background="?attr/colorPrimary">
-
-        <com.google.android.material.appbar.MaterialToolbar
-                android:id="@+id/topAppBar"
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                  android:layout_width="match_parent"
+                  android:layout_height="match_parent"
+                  android:orientation="vertical"
+                  android:background="#F0F3F6">
+        <!-- 头部导航-->
+        <com.google.android.material.appbar.AppBarLayout
+                android:id="@id/layout_group_chat"
                 android:layout_width="match_parent"
-                app:titleCentered="true"
+                app:layout_constraintTop_toTopOf="parent"
                 android:layout_height="wrap_content"
-                app:title="设置"
-                app:titleTextColor="@color/white"
-                app:titleTextAppearance="@style/Toolbar.TitleText"
-                app:navigationIcon="@drawable/ic_arrow_back" />
+                android:fitsSystemWindows="true"
+                android:orientation="vertical"
+                android:background="?attr/colorPrimary">
 
-    </com.google.android.material.appbar.AppBarLayout>
+            <com.google.android.material.appbar.MaterialToolbar
+                    android:id="@+id/topAppBar"
+                    android:layout_width="match_parent"
+                    app:titleCentered="true"
+                    android:layout_height="wrap_content"
+                    app:title="设置"
+                    app:titleTextColor="@color/white"
+                    app:titleTextAppearance="@style/Toolbar.TitleText"
+                    app:navigationIcon="@drawable/ic_arrow_back"/>
 
-    <!-- 全圆角-->
-    <LinearLayout style="@style/wrap_layout">
-        <LinearLayout style="@style/single_layout">
-            <TextView style="@style/usertext" android:text="头像"/>
-            <ImageView style="@style/img_arrow"/>
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <!-- 全圆角-->
+        <LinearLayout style="@style/wrap_layout">
+            <LinearLayout style="@style/single_layout" android:id="@+id/avatar">
+                <TextView style="@style/usertext" android:text="头像"/>
+                <ImageView style="@style/avatar"/>
+                <ImageView style="@style/img_arrow"/>
+            </LinearLayout>
         </LinearLayout>
+
+        <LinearLayout style="@style/wrap_layout">
+            <!-- 上圆角-->
+            <LinearLayout style="@style/top_layout" android:id="@+id/account">
+                <TextView style="@style/usertext" android:text="账号"/>
+                <TextView android:id="@+id/accounts" android:gravity="right" style="@style/usertexts" android:text=""/>
+                <ImageView style="@style/img_arrow"/>
+            </LinearLayout>
+            <!-- 分割线 -->
+            <View style="@style/bg_line"/><!-- 无圆角-->
+            <LinearLayout style="@style/mid_layout" android:id="@+id/email" >
+                <TextView style="@style/usertext" android:text="邮箱"/>
+                <TextView android:id="@+id/emails" android:gravity="right" style="@style/usertexts" android:text=""/>
+                <ImageView style="@style/img_arrow"/>
+            </LinearLayout>
+            <View style="@style/bg_line"/><!-- 无圆角-->
+            <LinearLayout style="@style/mid_layout" android:id="@+id/password">
+                <TextView  style="@style/usertext" android:text="密码"/>
+                <TextView android:id="@+id/passwords" android:gravity="right" style="@style/usertexts" android:text="* * * * * *"/>
+                <ImageView style="@style/img_arrow"/>
+            </LinearLayout>
+            <View style="@style/bg_line"/>
+            <!-- 下圆角-->
+            <LinearLayout style="@style/bottom_layout" android:id="@+id/about">
+                <TextView  style="@style/usertext" android:text="关于我们"/>
+                <ImageView style="@style/img_arrow"/>
+            </LinearLayout>
+        </LinearLayout>
+
+
+        <!-- 全圆角-->
+        <LinearLayout style="@style/wrap_layout">
+            <LinearLayout style="@style/single_layout" android:id="@+id/exit">
+                <TextView style="@style/usertext" android:text="退出登陆"/>
+                <ImageView style="@style/img_arrow"/>
+            </LinearLayout>
+        </LinearLayout>
+
     </LinearLayout>
-
-    <LinearLayout style="@style/wrap_layout" >
-        <!-- 上圆角-->
-        <LinearLayout style="@style/top_layout">
-            <TextView style="@style/usertext" android:text="昵称" />
-            <ImageView style="@style/img_arrow"/>
-        </LinearLayout>
-        <!-- 分割线 -->
-        <View style="@style/bg_line"/><!-- 无圆角-->
-        <LinearLayout style="@style/mid_layout">
-                <TextView style="@style/usertext" android:text="手机号" />
-                  <ImageView style="@style/img_arrow"/>
-            </LinearLayout>
-        <View style="@style/bg_line"/><!-- 无圆角-->
-        <LinearLayout style="@style/mid_layout">
-            <TextView style="@style/usertext" android:text="邮箱" />
-            <ImageView style="@style/img_arrow"/>
-        </LinearLayout>
-        <View style="@style/bg_line"/><!-- 无圆角-->
-        <LinearLayout style="@style/mid_layout">
-            <TextView style="@style/usertext" android:text="密码" />
-            <ImageView style="@style/img_arrow"/>
-        </LinearLayout>
-        <View style="@style/bg_line"/>
-           <!-- 下圆角-->
-        <LinearLayout style="@style/bottom_layout">
-               <TextView style="@style/usertext" android:text="关于我们" />
-                 <ImageView style="@style/img_arrow"/>
-            </LinearLayout>
-</LinearLayout>
-
-
-     <!-- 全圆角-->
-   <LinearLayout style="@style/wrap_layout">
-         <LinearLayout style="@style/single_layout">
-            <TextView style="@style/usertext" android:text="退出登陆"/>
-             <ImageView style="@style/img_arrow"/>
-        </LinearLayout>
-</LinearLayout>
-
- </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -27,6 +27,11 @@ public class UserController {
     return userService.login(user.getUsername(), user.getPassword(), response);
   }
 
+  @PostMapping("register")
+  public User register(@RequestBody User user, HttpServletResponse response){
+    return userService.register(user,response);
+  }
+
   @GetMapping("currentLoginUser")
   @JsonView(GetCurrentLoginUserJsonView.class)
   public User getCurrentLoginUser() {
@@ -63,6 +68,7 @@ public class UserController {
   public void updatePassword(@RequestBody VoUser user) throws ValidationException {
     this.userService.updatePassword(user.getPassword(), user.getNewPassword());
   }
+
 
   private interface GetCurrentLoginUserJsonView {
   }

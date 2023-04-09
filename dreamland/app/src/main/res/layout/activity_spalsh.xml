@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ui.auth.BeginSplash"
+        tools:ignore="MissingConstraints">
+
+    <ImageView
+            android:id="@+id/imgView_logo"
+            android:layout_width="match_parent"
+            android:layout_height="233dp"
+            android:src="@drawable/login2"
+            android:adjustViewBounds="true"
+            android:scaleType="fitXY"
+            android:foregroundGravity="center_horizontal"
+            android:transitionName="splash_image"/>
+
+    <LinearLayout
+
+            android:id="@+id/linlay_inputs"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginEnd="30dp"
+            android:layout_marginRight="30dp"
+            android:gravity="center"
+            android:layout_marginTop="44dp"
+            android:orientation="vertical"
+            android:transitionName="splash_text"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imgView_logo">
+
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="sans-serif-medium"
+                android:text="欢迎来到梦的世界"
+                android:textColor="@color/black"
+                android:textSize="20sp" />
+
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="sans-serif"
+                android:text="开启梦境"
+                android:layout_marginTop="9dp"
+                android:textColor="@color/grey_more"
+                android:textSize="14sp" />
+
+        <EditText
+                android:id="@+id/username"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="38dp"
+                android:background="@drawable/edittext_bg"
+                android:drawableStart="@drawable/account"
+                android:drawableLeft="@drawable/account"
+                android:drawablePadding="16dp"
+                android:hint="账号"
+                android:inputType="textEmailAddress"
+                android:padding="16dp"
+                android:textSize="14sp"
+                android:layout_gravity="center_horizontal"/>
+
+        <EditText
+                android:id="@+id/password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="38dp"
+                android:background="@drawable/edittext_bg"
+                android:drawableStart="@drawable/password"
+                android:drawableLeft="@drawable/password"
+                android:drawablePadding="16dp"
+                android:hint="密码"
+                android:inputType="textPassword"
+                android:padding="16dp"
+                android:textSize="14sp"
+                android:layout_gravity="center_horizontal"/>
+
+        <Button
+                android:id="@+id/login"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="48dp"
+                android:background="@drawable/button_bg"
+                android:text="登     陆"
+                android:textStyle="bold"
+                android:textSize="16dp"
+                android:textColor="@color/white"
+                android:layout_gravity="center_horizontal"/>
+
+    </LinearLayout>
+
+    <TextView
+            android:id="@+id/tv_forgotPassword"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="13dp"
+            android:layout_marginEnd="30dp"
+            android:layout_marginRight="30dp"
+            android:text="忘记密码?"
+            android:textColor="@color/grey_more"
+            android:textSize="13sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/linlay_inputs" />
+
+
+    <TextView
+            android:id="@+id/tv_register"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="没有账号？点击注册"
+            android:textColor="@color/grey_more"
+            android:textSize="13sp"
+            android:gravity="center"
+            android:layout_marginBottom="30dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+    />
+</androidx.constraintlayout.widget.ConstraintLayout>

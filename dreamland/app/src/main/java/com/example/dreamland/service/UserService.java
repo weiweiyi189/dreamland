@@ -1,6 +1,7 @@
 package com.example.dreamland.service;
 
 import com.example.dreamland.entity.User;
+import com.example.dreamland.entity.VoUser;
 import io.reactivex.rxjava3.subjects.BehaviorSubject;
 import okhttp3.RequestBody;
 
@@ -41,6 +42,8 @@ public class UserService {
         httpService.get(LOCAL_URL + "user/currentLoginUser", callBack, User.class);
     }
 
+
+
     /**
      * 修改头像
      *
@@ -49,5 +52,21 @@ public class UserService {
      */
     public void uploadImage(RequestBody data, BaseHttpService.CallBack callBack) {
         httpService.putByForm(LOCAL_URL + "user/changeImage", data, callBack, String.class);
+    }
+
+    /**
+     * 注册
+     *
+     */
+    public void regester(BaseHttpService.CallBack callBack, User user) {
+        httpService.post(LOCAL_URL + "user/register", user, callBack, User.class);
+    }
+
+    /**
+     * 修改密码
+     *
+     */
+    public void updatePassword(BaseHttpService.CallBack callBack,VoUser user) {
+        httpService.put(LOCAL_URL + "user/updatePassword", user, callBack, VoUser.class);
     }
 }

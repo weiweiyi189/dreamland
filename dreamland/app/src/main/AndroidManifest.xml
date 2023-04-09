@@ -8,22 +8,49 @@
     <application
             android:name=".MainApplication"
             android:allowBackup="true"
-            android:networkSecurityConfig="@xml/network_config"
             android:dataExtractionRules="@xml/data_extraction_rules"
             android:fullBackupContent="@xml/backup_rules"
             android:icon="@mipmap/ic_launcher"
             android:label="@string/app_name"
+            android:networkSecurityConfig="@xml/network_config"
             android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
             android:theme="@style/AppTheme"
             tools:replace="android:icon,android:theme,android:allowBackup"
             tools:targetApi="31">
         <activity
-            android:name=".ui.floater.FloaterMessagesActivity"
-            android:exported="true"/>
+                android:name=".ui.setting.AboutActivity"
+                android:exported="false"/>
         <activity
-            android:name=".ui.floater.FloaterActivity"
-            android:exported="true"/>
+                android:name=".ui.setting.EmailActivity"
+                android:exported="false"/>
+        <activity
+                android:name=".ui.setting.PasswordActivity"
+                android:exported="false"/>
+        <activity
+                android:name=".ui.setting.AccountActivity"
+                android:exported="false"/>
+        <activity
+                android:name=".ui.auth.ForgetActivity"
+                android:exported="false"/>
+        <activity
+                android:name=".ui.auth.EnrollActivity"
+                android:exported="false"/>
+        <activity
+                android:name=".ui.auth.BeginSplash"
+                android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+        </activity>
+        <activity
+                android:name=".ui.floater.FloaterMessagesActivity"
+                android:exported="true"/>
+        <activity
+                android:name=".ui.floater.FloaterActivity"
+                android:exported="true"/>
         <activity
                 android:name=".ui.setting.SettingActivity"
                 android:exported="true"/>
@@ -38,18 +65,11 @@
                 android:exported="true"/>
         <activity
                 android:name=".ui.auth.LoginActivity"
-                android:exported="true">
-                        <intent-filter>
-                            <action android:name="android.intent.action.MAIN" />
-
-                            <category android:name="android.intent.category.LAUNCHER" />
-                        </intent-filter>
-        </activity>
+                android:exported="true"/>
         <activity
                 android:name=".ui.dashboard.DashboardActivity"
                 android:exported="true"
-                android:label="首页">
-        </activity>
+                android:label="首页"/>
         <activity
                 android:name=".ui.chat.MessageListActivity"
                 android:exported="true"
