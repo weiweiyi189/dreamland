@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.dreamland.R;
 import com.example.dreamland.entity.Dream;
+import com.example.dreamland.entity.Letter;
 import com.example.dreamland.entity.User;
 import com.example.dreamland.ui.adapter.DreamAdapter;
 
@@ -20,6 +21,7 @@ import java.util.List;
 public class FloaterReadFragment extends Fragment {
     private DreamAdapter dreamAdapter;
     private List<Dream> dreams = new LinkedList<>();
+    private List<Letter> letters=new LinkedList<>();
     private View view;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
