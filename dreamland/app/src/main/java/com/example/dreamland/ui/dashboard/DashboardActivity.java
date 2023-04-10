@@ -54,7 +54,6 @@ public class DashboardActivity extends AppCompatActivity {
 
     private List<Dream> dreams = new LinkedList<>();
 
-
     NavigationBarView navigationView;
 
     private long exitTime = 0;
@@ -63,7 +62,8 @@ public class DashboardActivity extends AppCompatActivity {
 
     RecyclerView recyclerView;
 
-    private DreamService dreamService = DreamService.getInstance();;
+    private DreamService dreamService = DreamService.getInstance();
+
 
     //两次返回，返回到home界面（System.exit决定是否退出当前界面，重新加载程序）
     public boolean onKeyDown(int keyCode, KeyEvent event) {
@@ -114,21 +114,24 @@ public class DashboardActivity extends AppCompatActivity {
                 drawerLayout.openDrawer(GravityCompat.START);
 
                 //加载头像
-                CircleImageView headshott =  findViewById(R.id.headshot);
-                userService.getCurrentUser(new BaseHttpService.CallBack() {
-                    @Override
-                    public void onSuccess(BaseHttpService.CustomerResponse result) {
-                        //获取当前登陆用户
-                        User currentUser= (User) result.getData();
-                        if (result.getResponse().code() >= 200 && result.getResponse().code() < 300) {
-                            String urlString = BaseHttpService.BASE_URL + currentUser.getImageUrl();
-                            new DownloadImageTask(headshott)
-                                    .execute(urlString);
-                        } else {
-                            Toast.makeText(DashboardActivity.this, "头像加载失败", Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                });
+                CircleImageView headshot = findViewById(R.id.headshot);
+//                userService.getCurrentUser(new BaseHttpService.CallBack() {
+//                    @Override
+//                    public void onSuccess(BaseHttpService.CustomerResponse result) {
+//                        //获取当前登陆用户
+//                        User currentUser= (User) result.getData();
+//                        if (result.getResponse().code() >= 200 && result.getResponse().code() < 300) {
+//                            String urlString = BaseHttpService.BASE_URL + currentUser.getImageUrl();
+//                            new DownloadImageTask(headshott)
+//                                    .execute(urlString);
+//                        } else {
+//                            Toast.makeText(DashboardActivity.this, "头像加载失败", Toast.LENGTH_SHORT).show();
+//                        }
+//                    }
+//                });
+                String urlString = BaseHttpService.BASE_URL + userService.currentUser.getValue().getImageUrl();
+                new DownloadImageTask(headshot)
+                        .execute(urlString);
             }
         });
 
@@ -143,22 +146,23 @@ public class DashboardActivity extends AppCompatActivity {
                         drawerLayout.close();
                         Intent intent1 = new Intent(DashboardActivity.this, MessageListActivity.class);
                         startActivity(intent1, null);
-                        overridePendingTransition(0,0);
+                        overridePendingTransition(0, 0);
                         break;
                     case R.id.sleep:
+                        drawerLayout.close();
                         share();
                         break;
                     case R.id.dreams:
                         drawerLayout.close();
                         Intent intent2 = new Intent(DashboardActivity.this, DreamsActivity.class);
                         startActivity(intent2, null);
-                        overridePendingTransition(0,0);
+                        overridePendingTransition(0, 0);
                         break;
                     case R.id.setting:
                         drawerLayout.close();
                         Intent intent3 = new Intent(DashboardActivity.this, SettingActivity.class);
                         startActivity(intent3, null);
-                        overridePendingTransition(0,0);
+                        overridePendingTransition(0, 0);
                         break;
                     case R.id.floater:
                         drawerLayout.close();
@@ -170,21 +174,34 @@ public class DashboardActivity extends AppCompatActivity {
             }
         });
         this.initList();
-        this.setRefresh();}
+        this.setRefresh();
+//        link = findViewById(R.id.share);
+//        link.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Toast.makeText(DashboardActivity.this, "点击了分享", Toast.LENGTH_SHORT).show();
+//            }
+//        });
+    }
 
+
+    public void test(){
+        Toast.makeText(DashboardActivity.this, "点击了分享", Toast.LENGTH_SHORT).show();
+    }
 
     /**
      * 点击进行分享
      */
-    public void share(){
+    public void share() {
         // 设置要分享的内容
-        String shareContent="#神码工作室#博客地址：https://blog.csdn.net/qq15577969";
+        String shareContent = "#神码工作室#博客地址：https://blog.csdn.net/qq15577969";
         SharePopupWindow spw = new SharePopupWindow(this, shareContent);
         // 显示窗口
         spw.showAtLocation(drawerLayout, Gravity.BOTTOM, 0, 0);
     }
 
-    public void OnItemClick(View view){
+
+    public void OnItemClick(View view) {
         // 获取itemView的位置
         int position = recyclerView.getChildAdapterPosition(view);
         Intent intent = new Intent(DashboardActivity.this, DetailActivity.class);
