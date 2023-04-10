@@ -18,7 +18,7 @@
             android:orientation="vertical"
             android:background="?attr/colorPrimary">
         <com.google.android.material.appbar.MaterialToolbar
-                android:id="@+id/topAppBar"
+                android:id="@+id/Dream_detail_topAppBar"
                 android:layout_width="match_parent"
                 app:titleCentered="true"
                 android:layout_height="wrap_content"

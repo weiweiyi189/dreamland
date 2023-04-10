@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.dreamland.R;
 import com.example.dreamland.entity.Dream;
 import com.example.dreamland.entity.User;
+import com.example.dreamland.ui.adapter.ClickListener;
 import com.example.dreamland.ui.adapter.DreamAdapter;
 
 import java.sql.Timestamp;
@@ -44,7 +45,12 @@ public class FloaterReadFragment extends Fragment {
 
         RecyclerView recyclerView= view.findViewById(R.id.floaterReadRecyclerView);
         LinearLayoutManager layout = new LinearLayoutManager(getContext());
-        this.dreamAdapter = new DreamAdapter(this.dreams);
+        this.dreamAdapter = new DreamAdapter(this.dreams, new ClickListener() {
+            @Override public void onPositionClicked(int position) {
+                // callback performed on click
+            }
+
+        });
         recyclerView.setLayoutManager(layout);
         recyclerView.setAdapter(this.dreamAdapter);
     }

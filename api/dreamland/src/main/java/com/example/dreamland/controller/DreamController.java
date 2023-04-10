@@ -15,10 +15,10 @@ public class DreamController {
     @Autowired
     DreamService dreamService;
 
-    @GetMapping("getAll")
+    @GetMapping("getAll/{id}")
     @JsonView(GetAllJsonView.class)
-    public List<Dream> getAll() {
-        return this.dreamService.getAll();
+    public List<Dream> getAllByUserId(@PathVariable Long id) {
+        return this.dreamService.getAllByUserId(id);
     }
 
     @PostMapping("add")
