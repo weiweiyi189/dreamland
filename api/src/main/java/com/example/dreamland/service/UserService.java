@@ -1,5 +1,6 @@
 package com.example.dreamland.service;
 
+import com.example.dreamland.entity.Dream;
 import com.example.dreamland.entity.User;
 import org.springframework.web.multipart.MultipartFile;
 
