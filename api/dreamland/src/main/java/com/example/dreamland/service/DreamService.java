@@ -5,7 +5,7 @@ import com.example.dreamland.entity.Dream;
 import java.util.List;
 
 public interface DreamService {
-    List<Dream> getAllByUserId(Long userId);
+    List<Dream> getAllByCurrentUser();
 
     Dream add(Dream dream);
 

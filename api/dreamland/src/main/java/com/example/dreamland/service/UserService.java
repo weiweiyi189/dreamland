@@ -1,5 +1,6 @@
 package com.example.dreamland.service;
 
+import com.example.dreamland.entity.Dream;
 import com.example.dreamland.entity.User;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -9,6 +10,13 @@ import javax.servlet.http.HttpServletResponse;
 import javax.xml.bind.ValidationException;
 
 public interface UserService {
+
+  /**
+   * 对梦境点赞
+   * @param dream
+   * @return
+   */
+  Dream likeDream(Dream dream);
 
   String tokenHeader = "Authorization";
 

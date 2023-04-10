@@ -1,7 +1,9 @@
 package com.example.dreamland.service;
 
+import com.example.dreamland.entity.Dream;
 import com.example.dreamland.entity.User;
 import com.example.dreamland.exceptionHandler.NotAuthenticationException;
+import com.example.dreamland.repository.DreamRepository;
 import com.example.dreamland.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.multipart.MultipartFile;
@@ -13,6 +15,7 @@ import org.springframework.stereotype.Service;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.xml.bind.ValidationException;
+import java.util.List;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -20,14 +23,34 @@ public class UserServiceImpl implements UserService {
 
   private final UserRepository userRepository;
 
+  private final DreamRepository dreamRepository;
+
   @Autowired
   HttpServletRequest request;
 
   @Autowired
   CommonService commonService;
 
-  public UserServiceImpl(UserRepository userRepository) {
+  public UserServiceImpl(UserRepository userRepository,
+                         DreamRepository dreamRepository) {
     this.userRepository = userRepository;
+    this.dreamRepository = dreamRepository;
+  }
+
+  @Override
+  public Dream likeDream(Dream dream) {
+    // 梦境点赞数+1
+    dream.setLikes(dream.getLikes() + 1);
+    this.dreamRepository.save(dream);
+    // 加入到用户收藏
+    // todo 测试hibernate 是否会去重
+    User currentUser = this.getCurrentUser();
+    List<Dream> collectDream = currentUser.getCollectDream();
+    collectDream.add(dream);
+
+    currentUser.setCollectDream(collectDream);
+    this.userRepository.save(currentUser);
+    return dream;
   }
 
   @Override

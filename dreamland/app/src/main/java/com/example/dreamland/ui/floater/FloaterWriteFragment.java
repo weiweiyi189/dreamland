@@ -46,7 +46,7 @@ public class FloaterWriteFragment extends Fragment {
         RecyclerView recyclerView= view.findViewById(R.id.floaterWriteRecyclerView);
         LinearLayoutManager layout = new LinearLayoutManager(getContext());
         this.dreamAdapter = new DreamAdapter(this.dreams, new ClickListener() {
-            @Override public void onPositionClicked(int position) {
+            @Override public void onPositionClicked(int position, View view) {
                 // callback performed on click
             }
 

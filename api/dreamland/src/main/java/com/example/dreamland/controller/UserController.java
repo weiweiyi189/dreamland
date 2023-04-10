@@ -1,5 +1,6 @@
 package com.example.dreamland.controller;
 
+import com.example.dreamland.entity.Dream;
 import com.example.dreamland.entity.User;
 import com.example.dreamland.entity.VoUser;
 import com.example.dreamland.service.UserService;
@@ -48,15 +49,15 @@ public class UserController {
     return this.userService.checkPasswordIsRight(user.getPassword());
   }
 
-  @GetMapping("test")
-  public String test() {
-    return "success";
-  }
-
   @PutMapping("/changeImage")
   public String changeImage(@RequestParam("file") MultipartFile file, HttpServletRequest request) {
     User user = userService.getCurrentUser(request);
     return userService.changeImage(file, user);
+  }
+
+  @PostMapping("likeDream")
+  public Dream likeDream(@RequestBody Dream dream) {
+    return this.userService.likeDream(dream);
   }
 
   /**
@@ -70,10 +71,10 @@ public class UserController {
   }
 
 
-  private interface GetCurrentLoginUserJsonView {
+  private interface GetCurrentLoginUserJsonView extends User.CollectDreamJsonView {
   }
 
-  private interface LoginJsonView {
+  private interface LoginJsonView extends User.CollectDreamJsonView {
   }
 
 }

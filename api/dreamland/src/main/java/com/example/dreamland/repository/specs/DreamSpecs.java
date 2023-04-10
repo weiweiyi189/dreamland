@@ -9,7 +9,7 @@ public class DreamSpecs {
         if (userId != null) {
             return (root, criteriaQuery, criteriaBuilder) -> {
                 criteriaQuery.orderBy(criteriaBuilder.desc(root.get("createTime")));
-                return criteriaBuilder.equal(root.join("user").get("id"), userId);
+                return criteriaBuilder.equal(root.join("createUser").get("id"), userId);
             };
         } else {
             return Specification.where(null);

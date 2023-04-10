@@ -1,5 +1,6 @@
 package com.example.dreamland.service;
 
+import com.example.dreamland.entity.Dream;
 import com.example.dreamland.entity.User;
 import com.example.dreamland.entity.VoUser;
 import io.reactivex.rxjava3.subjects.BehaviorSubject;
@@ -40,6 +41,15 @@ public class UserService {
      */
     public void getCurrentUser(BaseHttpService.CallBack callBack) {
         httpService.get(LOCAL_URL + "user/currentLoginUser", callBack, User.class);
+    }
+
+    /**
+     * 点赞梦境
+     * @param callBack
+     * @param dream
+     */
+    public void likeDream(BaseHttpService.CallBack callBack, Dream dream) {
+        httpService.post(LOCAL_URL + "user/likeDream", dream, callBack, Dream.class);
     }
 
 
