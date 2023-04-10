@@ -27,5 +27,7 @@ public class User extends LitePalSupport implements Serializable {
     @Column(defaultValue = "123")
     private String password;
 
+    private String imageUrl;
+
     private List<Dream> dreams = new ArrayList<>();
 }

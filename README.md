@@ -8,7 +8,6 @@
 
 UI组件库: https://m3.material.io/components
 
-数据库文档： https://github.com/guolindev/LitePal
 
 ## 后台 
 api文件夹为后台。
@@ -34,7 +33,7 @@ api文件夹为后台。
 然后进行代码开发
 
 ## 提交代码步骤
- 
+
 在 idea 的terminal终端中，进入到 dreamland 下
 
 1.`git status` 查看目前自己修改的文件
@@ -53,5 +52,4 @@ api文件夹为后台。
 1. `git status` 查看目前自己修改的文件。 若无文件修改，进行第二步。若有文件修改。 则先进行“提交代码步骤的第2,3步”,或者将该文件修改恢复。。
 2. `git fetch --all` 拉取仓库代码
 3. `git merge origin/main` 合并仓库代码
-
 
