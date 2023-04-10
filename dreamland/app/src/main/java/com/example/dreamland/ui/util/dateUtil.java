@@ -29,7 +29,7 @@ public class dateUtil {
 
         long dayBefore = l / (24 * 60 * 60 * 1000);
         if (dayBefore < 7) {
-            return hourBefore + "天前";
+            return dayBefore + "天前";
         }
 
         return format(date, DATE_TIME_PATTERN);
