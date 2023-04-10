@@ -35,7 +35,7 @@ public class FloaterReadFragment extends Fragment {
         Dream dream = new Dream();
         dream.setContent("  是载满星云的玄霄, 亦是播洒清梦的红壤.\n  漂出你的思绪, 捞起我的奇遇.\n  这里, 皆你我的天地.\n");
         dream.setCreateTime(new Timestamp(1679383693000L));
-        dream.setId(1);
+        dream.setId(1L);
         dream.setCreateUser(user);
 
         for (int i = 0; i < 10; i++) {

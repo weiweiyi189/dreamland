@@ -54,6 +54,8 @@ public class DashboardActivity extends AppCompatActivity {
 
     private SwipeRefreshLayout swipe_refresh;
 
+    RecyclerView recyclerView;
+
     private DreamService dreamService = DreamService.getInstance();;
 
     //两次返回，返回到home界面（System.exit决定是否退出当前界面，重新加载程序）
@@ -143,6 +145,16 @@ public class DashboardActivity extends AppCompatActivity {
         this.setRefresh();
     }
 
+    public void OnItemClick(View view){
+        // 获取itemView的位置
+        int position = recyclerView.getChildAdapterPosition(view);
+        Intent intent = new Intent(DashboardActivity.this, DetailActivity.class);
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("dream", dreams.get(position));
+        intent.putExtras(bundle);
+        startActivity(intent, null);
+    }
+
     @Override
     protected void onResume() {
         super.onResume();
@@ -157,7 +169,7 @@ public class DashboardActivity extends AppCompatActivity {
     }
 
     public void initList() {
-        RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
+        recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
         LinearLayoutManager layout = new LinearLayoutManager(this);
         this.dreamAdapter = new DreamAdapter(this.dreams);
         recyclerView.setLayoutManager(layout);
@@ -167,6 +179,7 @@ public class DashboardActivity extends AppCompatActivity {
 
     private void initDataAndSort() {
         dreamService.getAll(new BaseHttpService.CallBack() {
+            @SuppressLint("NotifyDataSetChanged")
             @Override
             public void onSuccess(BaseHttpService.CustomerResponse result) {
                 List<Dream> dreamList = new ArrayList<>(Arrays.asList((Dream[]) result.getData()));

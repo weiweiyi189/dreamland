@@ -55,6 +55,10 @@
                 android:exported="true"
                 android:label="解梦">
         </activity>
+        <activity
+                android:name=".ui.dashboard.DetailActivity"
+                android:exported="true">
+        </activity>
     </application>
 
 </manifest>

@@ -9,6 +9,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:strokeColor="@color/white"
         app:strokeWidth="1dp"
+        android:onClick="OnItemClick"
         android:layout_margin="2dp">
 
     <LinearLayout
