@@ -74,7 +74,7 @@ public class InitData {
     }
 
     Letter letter1=new Letter();
-    letter1.setTitle("漂流——一方天地, 一方奇遇");
+    letter1.setTitle("一方天地, 一方奇遇");
     letter1.setContent("  是载满星云的玄霄, 亦是播洒清梦的红壤.\n  漂出你的思绪, 捞起我的奇遇.\n  这里, 皆你我的天地.\n");
     letter1.setCreateTime(new Timestamp(new Date().getTime()+1));
     letter1.setCreateUser(user);
@@ -82,7 +82,7 @@ public class InitData {
 
     Letter letter2=new Letter();
     letter2.setTitle("发病时间");
-    letter2.setContent("  If not for Scaramouche, who would be working?\n嘿嘿嘿, Little Meow Meow, 嘶哈嘶哈\\uD83E\\uDD24, （尖叫）（扭曲）（阴暗地爬行）（尖叫）（扭曲）（阴暗地爬行）（尖叫） （爬行）（扭动）（分裂）（阴暗地蠕动）（翻滚）（激烈地爬动）（扭曲）（痉挛）（嘶吼）（蠕动）（阴森地低吼）（爬行）（分裂）（走上岸）（扭动）（痉挛）（蠕动）（扭曲地行走）\n");
+    letter2.setContent("    If not for Scaramouche, who would be working?\n");
     letter2.setCreateTime(new Timestamp(new Date().getTime()));
     letter2.setCreateUser(user);
     this.letterRepository.save(letter2);

@@ -29,4 +29,5 @@ public class User extends LitePalSupport {
     private String imageUrl;
 
     private List<Dream> dreams = new ArrayList<>();
+    private List<Letter> letters=new ArrayList<>();
 }

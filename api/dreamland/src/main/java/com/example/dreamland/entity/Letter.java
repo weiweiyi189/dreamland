@@ -21,7 +21,7 @@ public class Letter {
     private Long id;
 
     @ManyToOne
-    @JsonView(Dream.UserJsonView.class)
+    @JsonView(UserJsonView.class)
     private User createUser;
 
     private String title;

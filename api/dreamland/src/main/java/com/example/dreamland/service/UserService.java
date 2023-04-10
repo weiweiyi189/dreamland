@@ -1,5 +1,6 @@
 package com.example.dreamland.service;
 
+import com.example.dreamland.entity.Letter;
 import com.example.dreamland.entity.User;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -37,4 +38,6 @@ public interface UserService {
   User login(String username, String password, HttpServletResponse response);
 
   String changeImage(MultipartFile file, User user);
+
+  User addUserLetter(Letter letter);
 }

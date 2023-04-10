@@ -1,5 +1,6 @@
 package com.example.dreamland.service;
 
+import com.example.dreamland.entity.Letter;
 import com.example.dreamland.entity.User;
 import com.example.dreamland.entity.VoUser;
 import io.reactivex.rxjava3.subjects.BehaviorSubject;
@@ -69,4 +70,5 @@ public class UserService {
     public void updatePassword(BaseHttpService.CallBack callBack,VoUser user) {
         httpService.put(LOCAL_URL + "user/updatePassword", user, callBack, VoUser.class);
     }
+
 }

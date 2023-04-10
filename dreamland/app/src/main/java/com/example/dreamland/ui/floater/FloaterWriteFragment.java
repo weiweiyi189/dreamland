@@ -9,17 +9,26 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.dreamland.R;
 import com.example.dreamland.entity.Dream;
+import com.example.dreamland.entity.Letter;
 import com.example.dreamland.entity.User;
+import com.example.dreamland.service.BaseHttpService;
+import com.example.dreamland.service.LetterService;
+import com.example.dreamland.service.UserService;
 import com.example.dreamland.ui.adapter.DreamAdapter;
+import com.example.dreamland.ui.adapter.LetterAdapter;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 
 
 public class FloaterWriteFragment extends Fragment {
-    private DreamAdapter dreamAdapter;
-    private List<Dream> dreams = new LinkedList<>();
+    private LetterAdapter letterAdapter;
+    private List<Letter> letters=new LinkedList<>();
+    private LetterService letterService = LetterService.getInstance();
+    private UserService userService=UserService.getInstance();
     private View view;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -29,23 +38,21 @@ public class FloaterWriteFragment extends Fragment {
         return view;
     }
     public void initList() {
-        User user = new User();
-        user.setUsername("用户快斗斗丶");
 
-        Dream dream = new Dream();
-        dream.setContent("I just dreamed of those who lent me courage. Alpha Beta E, right?");
-        dream.setCreateTime(new Timestamp(1679390000000L));
-        dream.setId(1);
-        dream.setCreateUser(user);
-
-        for (int i = 0; i < 10; i++) {
-            this.dreams.add(dream);
-        }
+        letterService.getAllByCreateUserId(new BaseHttpService.CallBack() {
+            @Override
+            public void onSuccess(BaseHttpService.CustomerResponse result) {
+                List<Letter> letterList = new ArrayList<>(Arrays.asList((Letter[]) result.getData()));
+                letters.clear();
+                letters.addAll(letterList);
+                letterAdapter.notifyDataSetChanged();
+            }
+        },new Long(userService.currentUser.getValue().getId()));
 
         RecyclerView recyclerView= view.findViewById(R.id.floaterWriteRecyclerView);
         LinearLayoutManager layout = new LinearLayoutManager(getContext());
-        this.dreamAdapter = new DreamAdapter(this.dreams);
+        this.letterAdapter = new LetterAdapter(this.letters);
         recyclerView.setLayoutManager(layout);
-        recyclerView.setAdapter(this.dreamAdapter);
+        recyclerView.setAdapter(this.letterAdapter);
     }
 }
