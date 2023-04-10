@@ -4,9 +4,9 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
-import android.view.KeyEvent;
-import android.view.MenuItem;
-import android.view.View;
+import android.view.*;
+import android.widget.Button;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
@@ -19,8 +19,11 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import com.example.dreamland.R;
 import com.example.dreamland.databinding.ActivityDashboardBinding;
 import com.example.dreamland.entity.Dream;
+import com.example.dreamland.entity.User;
 import com.example.dreamland.service.BaseHttpService;
+import com.example.dreamland.service.DownloadImageTask;
 import com.example.dreamland.service.DreamService;
+import com.example.dreamland.service.UserService;
 import com.example.dreamland.ui.adapter.DreamAdapter;
 import com.example.dreamland.ui.chat.MessageListActivity;
 import com.example.dreamland.ui.dreams.DreamsActivity;
@@ -29,6 +32,7 @@ import com.example.dreamland.ui.floater.FloaterActivity;
 import com.google.android.material.color.DynamicColors;
 import com.google.android.material.navigation.NavigationBarView;
 import com.google.android.material.navigation.NavigationView;
+import de.hdodenhof.circleimageview.CircleImageView;
 import org.jetbrains.annotations.NotNull;
 import org.litepal.LitePal;
 
@@ -38,6 +42,8 @@ import java.util.*;
  * 首页
  */
 public class DashboardActivity extends AppCompatActivity {
+
+    private final UserService userService = UserService.getInstance();
 
     private DrawerLayout drawerLayout;
 
@@ -103,8 +109,26 @@ public class DashboardActivity extends AppCompatActivity {
             public void onClick(View v) {
                 drawerLayout = (DrawerLayout) findViewById(R.id.drawerLayout);
                 drawerLayout.openDrawer(GravityCompat.START);
+
+                //加载头像
+                CircleImageView headshott =  findViewById(R.id.headshot);
+                userService.getCurrentUser(new BaseHttpService.CallBack() {
+                    @Override
+                    public void onSuccess(BaseHttpService.CustomerResponse result) {
+                        //获取当前登陆用户
+                        User currentUser= (User) result.getData();
+                        if (result.getResponse().code() >= 200 && result.getResponse().code() < 300) {
+                            String urlString = BaseHttpService.BASE_URL + currentUser.getImageUrl();
+                            new DownloadImageTask(headshott)
+                                    .execute(urlString);
+                        } else {
+                            Toast.makeText(DashboardActivity.this, "头像加载失败", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
             }
         });
+
 
         NavigationView navigationView = binding.NavigationView;
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
@@ -117,6 +141,9 @@ public class DashboardActivity extends AppCompatActivity {
                         Intent intent1 = new Intent(DashboardActivity.this, MessageListActivity.class);
                         startActivity(intent1, null);
                         overridePendingTransition(0,0);
+                        break;
+                    case R.id.sleep:
+                        share();
                         break;
                     case R.id.dreams:
                         drawerLayout.close();
@@ -140,7 +167,18 @@ public class DashboardActivity extends AppCompatActivity {
             }
         });
         this.initList();
-        this.setRefresh();
+        this.setRefresh();}
+
+
+    /**
+     * 点击进行分享
+     */
+    public void share(){
+        // 设置要分享的内容
+        String shareContent="#神码工作室#博客地址：https://blog.csdn.net/qq15577969";
+        SharePopupWindow spw = new SharePopupWindow(this, shareContent);
+        // 显示窗口
+        spw.showAtLocation(drawerLayout, Gravity.BOTTOM, 0, 0);
     }
 
     @Override

@@ -21,6 +21,9 @@ import com.example.dreamland.R;
 import com.example.dreamland.databinding.ActivityPersonalBinding;
 import com.example.dreamland.entity.Dream;
 import com.example.dreamland.entity.User;
+import com.example.dreamland.service.BaseHttpService;
+import com.example.dreamland.service.DownloadImageTask;
+import com.example.dreamland.service.UserService;
 import com.example.dreamland.ui.adapter.DreamAdapter;
 import com.example.dreamland.ui.chat.MessageListActivity;
 import com.example.dreamland.ui.dashboard.DashboardActivity;
@@ -31,6 +34,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationItemView;
 import com.google.android.material.color.DynamicColors;
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.tabs.TabLayout;
+import de.hdodenhof.circleimageview.CircleImageView;
 import org.jetbrains.annotations.NotNull;
 
 
@@ -41,6 +45,7 @@ import java.util.List;
 import static androidx.core.content.ContextCompat.startActivity;
 
 public class PersonalActivity extends AppCompatActivity {
+    private final UserService userService = UserService.getInstance();
 
     private DrawerLayout drawerLayout;
 
@@ -53,7 +58,7 @@ public class PersonalActivity extends AppCompatActivity {
     private long exitTime = 0;
     //两次返回，返回到home界面（System.exit决定是否退出当前界面，重新加载程序）
     public boolean onKeyDown(int keyCode, KeyEvent event) {
-        if(keyCode == android.view.KeyEvent.KEYCODE_BACK && event.getAction() == android.view.KeyEvent.ACTION_DOWN){
+        if(keyCode == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_DOWN){
 
             if((System.currentTimeMillis()-exitTime) > 2000){
                 Toast.makeText(getApplicationContext(), "再按一次退出程序", Toast.LENGTH_SHORT).show();
@@ -102,6 +107,22 @@ public class PersonalActivity extends AppCompatActivity {
             public void onClick(View v) {
                 drawerLayout = (DrawerLayout) findViewById(R.id.drawerLayout);
                 drawerLayout.openDrawer(GravityCompat.START);
+
+                //加载头像
+                CircleImageView headshot =  findViewById(R.id.headshot);
+                userService.getCurrentUser(new BaseHttpService.CallBack() {
+                    @Override
+                    public void onSuccess(BaseHttpService.CustomerResponse result) {
+                        //获取当前登陆用户
+                        User currentUser= (User) result.getData();
+                        if (result.getResponse().code() >= 200 && result.getResponse().code() < 300) {
+                            String urlString = BaseHttpService.BASE_URL + currentUser.getImageUrl();
+                            new DownloadImageTask(headshot)
+                                    .execute(urlString);
+                        } else {
+                        }
+                    }
+                });
             }
         });
 

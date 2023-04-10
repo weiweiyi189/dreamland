@@ -9,6 +9,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.content.ContextCompat;
 import com.example.dreamland.R;
 import com.example.dreamland.databinding.ActivityWritedreamBinding;
 import com.example.dreamland.db.initDataBase;
@@ -35,6 +36,8 @@ public class WriteDreamActivity extends AppCompatActivity {
 
     private long exitTime = 0;
 
+    private int flag = 1;
+
 
     //android 捕获返回（后退）按钮事件
     public void onBackPressed() {
@@ -59,7 +62,7 @@ public class WriteDreamActivity extends AppCompatActivity {
             }
         });
 
-
+        Menu menu = topAppBar.getMenu();
         //导航栏发布和匿名的图片按钮监听
         topAppBar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
             @Override
@@ -67,7 +70,15 @@ public class WriteDreamActivity extends AppCompatActivity {
                 int id = item.getItemId();
                 switch (id) {
                     case R.id.duolaameng:
-                        System.out.println("点击了哆啦A梦");
+                        if(flag%2==1){
+                            menu.getItem(0).setIcon(ContextCompat.getDrawable(WriteDreamActivity.this, R.drawable.paidaxing));
+                            Toast.makeText(WriteDreamActivity.this, "匿名发布", Toast.LENGTH_SHORT).show();
+                        }
+                        else{
+                            menu.getItem(0).setIcon(ContextCompat.getDrawable(WriteDreamActivity.this, R.drawable.haimianbaobao));
+                            Toast.makeText(WriteDreamActivity.this, "公开发布", Toast.LENGTH_SHORT).show();
+                        }
+                        flag=flag+1;
                         break;
                     case R.id.send:
                         final EditText context = binding.context;

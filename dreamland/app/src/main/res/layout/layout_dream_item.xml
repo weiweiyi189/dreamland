@@ -104,11 +104,12 @@
                     />
 
             <Button
+                    android:id="@+id/shared"
                     style="?attr/materialIconButtonStyle"
                     app:icon="@drawable/ic_share"
                     android:layout_width="wrap_content"
                     android:layout_height="25dp"
-                    />
+            android:onClick="test"/>
 
             <Button
                     style="?attr/materialIconButtonStyle"

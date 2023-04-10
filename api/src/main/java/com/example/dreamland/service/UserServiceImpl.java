@@ -1,7 +1,9 @@
 package com.example.dreamland.service;
 
+import com.example.dreamland.entity.Dream;
 import com.example.dreamland.entity.User;
 import com.example.dreamland.exceptionHandler.NotAuthenticationException;
+import com.example.dreamland.repository.DreamRepository;
 import com.example.dreamland.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.multipart.MultipartFile;
@@ -13,6 +15,7 @@ import org.springframework.stereotype.Service;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.xml.bind.ValidationException;
+import java.util.List;
 
 @Service
 public class UserServiceImpl implements UserService {
