@@ -8,7 +8,7 @@ import okhttp3.RequestBody;
 
 public class UserService {
     // 若启用nginx 则为后台的转发url
-    private static final String LOCAL_URL = "";
+    private static final String LOCAL_URL = "api/";
     public static UserService userService;
 
     public static UserService getInstance() {

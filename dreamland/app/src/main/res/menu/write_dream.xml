@@ -3,7 +3,7 @@
 
     <item
             android:id="@+id/duolaameng"
-            android:icon="@drawable/duolaameng"
+            android:icon="@drawable/haimianbaobao"
             android:title="@string/change"
             android:contentDescription="@string/personal"
             app:showAsAction="ifRoom" />

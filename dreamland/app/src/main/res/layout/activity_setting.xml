@@ -35,7 +35,7 @@
         <LinearLayout style="@style/wrap_layout">
             <LinearLayout style="@style/single_layout" android:id="@+id/avatar">
                 <TextView style="@style/usertext" android:text="头像"/>
-                <ImageView style="@style/avatar"/>
+                <de.hdodenhof.circleimageview.CircleImageView android:layout_height="29dp" android:layout_width="29dp" style="@style/avatar" android:id="@+id/touxiang"/>
                 <ImageView style="@style/img_arrow"/>
             </LinearLayout>
         </LinearLayout>

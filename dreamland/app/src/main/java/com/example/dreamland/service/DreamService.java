@@ -16,11 +16,13 @@ public class DreamService {
     BaseHttpService httpService = BaseHttpService.getInstance();
 
     public void getAll(BaseHttpService.CallBack callBack) {
-        httpService.get("dream/getAll", callBack, Dream[].class);
+        httpService.get("api/dream/getAll", callBack, Dream[].class);
     }
 
     public void add(BaseHttpService.CallBack callBack, Dream dream) {
-        httpService.post( "dream/add", dream, callBack, Dream.class);
+        httpService.post( "api/dream/add", dream, callBack, Dream.class);
     }
+
+
 
 }
