@@ -7,7 +7,9 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import org.litepal.crud.LitePalSupport;
 
+import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 
 /**
@@ -17,9 +19,9 @@ import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper=false)
-public class Dream extends LitePalSupport {
+public class Dream extends LitePalSupport implements Serializable {
 
-    private int id;
+    private Long id;
 
     private User createUser;
 
@@ -31,4 +33,6 @@ public class Dream extends LitePalSupport {
 
     // 创建时间
     private Date createTime;
+
+    private List<DreamComment> commentList;
 }

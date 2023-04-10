@@ -83,14 +83,10 @@
                 android:exported="true"
                 android:label="解梦">
         </activity>
-
-<!--        <provider android:authorities="com.ddzn.suyan.fileProvider"-->
-<!--                  android:name="androidx.core.content.FileProvider"-->
-<!--                  android:exported="false"-->
-<!--                  android:grantUriPermissions="true">-->
-<!--            <meta-data android:name="android.support.FILE_PROVIDER_PATHS"-->
-<!--                       android:resource="@xml/file_paths"/>-->
-<!--        </provider>-->
+        <activity
+                android:name=".ui.dashboard.DetailActivity"
+                android:exported="true">
+        </activity>
     </application>
 
 </manifest>

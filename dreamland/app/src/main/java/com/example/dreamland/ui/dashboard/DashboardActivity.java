@@ -24,6 +24,7 @@ import com.example.dreamland.service.BaseHttpService;
 import com.example.dreamland.service.DownloadImageTask;
 import com.example.dreamland.service.DreamService;
 import com.example.dreamland.service.UserService;
+import com.example.dreamland.ui.adapter.ClickListener;
 import com.example.dreamland.ui.adapter.DreamAdapter;
 import com.example.dreamland.ui.chat.MessageListActivity;
 import com.example.dreamland.ui.dreams.DreamsActivity;
@@ -59,6 +60,8 @@ public class DashboardActivity extends AppCompatActivity {
     private long exitTime = 0;
 
     private SwipeRefreshLayout swipe_refresh;
+
+    RecyclerView recyclerView;
 
     private DreamService dreamService = DreamService.getInstance();;
 
@@ -181,6 +184,16 @@ public class DashboardActivity extends AppCompatActivity {
         spw.showAtLocation(drawerLayout, Gravity.BOTTOM, 0, 0);
     }
 
+    public void OnItemClick(View view){
+        // 获取itemView的位置
+        int position = recyclerView.getChildAdapterPosition(view);
+        Intent intent = new Intent(DashboardActivity.this, DetailActivity.class);
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("dream", dreams.get(position));
+        intent.putExtras(bundle);
+        startActivity(intent, null);
+    }
+
     @Override
     protected void onResume() {
         super.onResume();
@@ -195,9 +208,14 @@ public class DashboardActivity extends AppCompatActivity {
     }
 
     public void initList() {
-        RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
+        recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
         LinearLayoutManager layout = new LinearLayoutManager(this);
-        this.dreamAdapter = new DreamAdapter(this.dreams);
+        this.dreamAdapter = new DreamAdapter(this.dreams, new ClickListener() {
+            @Override public void onPositionClicked(int position) {
+
+            }
+
+        });
         recyclerView.setLayoutManager(layout);
         recyclerView.setAdapter(this.dreamAdapter);
     }
@@ -205,6 +223,7 @@ public class DashboardActivity extends AppCompatActivity {
 
     private void initDataAndSort() {
         dreamService.getAll(new BaseHttpService.CallBack() {
+            @SuppressLint("NotifyDataSetChanged")
             @Override
             public void onSuccess(BaseHttpService.CustomerResponse result) {
                 List<Dream> dreamList = new ArrayList<>(Arrays.asList((Dream[]) result.getData()));

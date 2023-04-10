@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.dreamland.R;
 import com.example.dreamland.entity.Dream;
 import com.example.dreamland.entity.User;
+import com.example.dreamland.ui.adapter.ClickListener;
 import com.example.dreamland.ui.adapter.DreamAdapter;
 
 import java.sql.Timestamp;
@@ -35,7 +36,7 @@ public class FloaterWriteFragment extends Fragment {
         Dream dream = new Dream();
         dream.setContent("I just dreamed of those who lent me courage. Alpha Beta E, right?");
         dream.setCreateTime(new Timestamp(1679390000000L));
-        dream.setId(1);
+        dream.setId(1L);
         dream.setCreateUser(user);
 
         for (int i = 0; i < 10; i++) {
@@ -44,7 +45,12 @@ public class FloaterWriteFragment extends Fragment {
 
         RecyclerView recyclerView= view.findViewById(R.id.floaterWriteRecyclerView);
         LinearLayoutManager layout = new LinearLayoutManager(getContext());
-        this.dreamAdapter = new DreamAdapter(this.dreams);
+        this.dreamAdapter = new DreamAdapter(this.dreams, new ClickListener() {
+            @Override public void onPositionClicked(int position) {
+                // callback performed on click
+            }
+
+        });
         recyclerView.setLayoutManager(layout);
         recyclerView.setAdapter(this.dreamAdapter);
     }

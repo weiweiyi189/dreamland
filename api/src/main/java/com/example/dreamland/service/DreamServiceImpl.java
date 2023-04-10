@@ -21,14 +21,14 @@ public class DreamServiceImpl implements DreamService {
     }
 
     @Override
-    public List<Dream> getAll() {
-        return this.dreamRepository.findAllByOrderByCreateTimeDesc();
+    public List<Dream> getAllByUserId(Long userId) {
+        return this.dreamRepository.findAllByUserIdAndCreamTimeDesc(userId);
     }
 
     @Override
-    public Dream add(Dream goods) {
-        goods.setCreateUser(this.userService.getCurrentUser());
-        return this.dreamRepository.save(goods);
+    public Dream add(Dream dream) {
+        dream.setCreateUser(this.userService.getCurrentUser());
+        return this.dreamRepository.save(dream);
     }
 
     @Override

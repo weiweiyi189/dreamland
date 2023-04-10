@@ -9,7 +9,8 @@
         app:layout_constraintTop_toTopOf="parent"
         app:strokeColor="@color/white"
         app:strokeWidth="1dp"
-        android:layout_margin="2dp">
+        android:onClick="OnItemClick"
+        android:layout_margin="2dp" tools:ignore="UsingOnClickInXml">
 
     <LinearLayout
             android:layout_width="match_parent"
@@ -90,7 +91,7 @@
 
             <Button
                     style="?attr/materialIconButtonStyle"
-                    android:id="@+id/textButton"
+                    android:id="@+id/commentButton"
                     app:icon="@drawable/comment"
                     android:layout_width="wrap_content"
                     android:layout_height="25dp"
@@ -99,6 +100,7 @@
             <Button
                     style="?attr/materialIconButtonStyle"
                     app:icon="@drawable/favorite"
+                    android:id="@+id/favorite"
                     android:layout_width="wrap_content"
                     android:layout_height="25dp"
                     />
@@ -114,6 +116,7 @@
             <Button
                     style="?attr/materialIconButtonStyle"
                     app:icon="@drawable/ic_more_vert"
+                    android:id="@+id/more"
                     android:layout_width="wrap_content"
                     android:layout_height="25dp"
                     />

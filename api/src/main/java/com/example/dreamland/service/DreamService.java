@@ -5,9 +5,9 @@ import com.example.dreamland.entity.Dream;
 import java.util.List;
 
 public interface DreamService {
-    List<Dream> getAll();
+    List<Dream> getAllByUserId(Long userId);
 
-    Dream add(Dream goods);
+    Dream add(Dream dream);
 
     Dream getById(Long id);
 }
