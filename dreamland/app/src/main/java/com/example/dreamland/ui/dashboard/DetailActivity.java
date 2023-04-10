@@ -27,6 +27,7 @@ import com.example.dreamland.ui.chat.MessageListActivity;
 import com.example.dreamland.ui.dreams.DreamsActivity;
 import com.example.dreamland.ui.util.SystemUtil;
 import com.example.dreamland.ui.util.dateUtil;
+import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.textfield.TextInputLayout;
 import org.litepal.LitePal;
 
@@ -71,6 +72,14 @@ public class DetailActivity extends AppCompatActivity {
         this.dreamCommentAdapter = new DreamCommentAdapter(commentList);
         recyclerView.setLayoutManager(layout);
         recyclerView.setAdapter(this.dreamCommentAdapter);
+
+        MaterialToolbar topAppBar = findViewById(R.id.Dream_detail_topAppBar);
+        topAppBar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
     }
 
     private void setDate(Dream dream) {

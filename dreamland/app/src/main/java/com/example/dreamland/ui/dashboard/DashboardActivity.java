@@ -21,6 +21,7 @@ import com.example.dreamland.databinding.ActivityDashboardBinding;
 import com.example.dreamland.entity.Dream;
 import com.example.dreamland.service.BaseHttpService;
 import com.example.dreamland.service.DreamService;
+import com.example.dreamland.ui.adapter.ClickListener;
 import com.example.dreamland.ui.adapter.DreamAdapter;
 import com.example.dreamland.ui.chat.MessageListActivity;
 import com.example.dreamland.ui.dreams.DreamsActivity;
@@ -171,7 +172,12 @@ public class DashboardActivity extends AppCompatActivity {
     public void initList() {
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
         LinearLayoutManager layout = new LinearLayoutManager(this);
-        this.dreamAdapter = new DreamAdapter(this.dreams);
+        this.dreamAdapter = new DreamAdapter(this.dreams, new ClickListener() {
+            @Override public void onPositionClicked(int position) {
+
+            }
+
+        });
         recyclerView.setLayoutManager(layout);
         recyclerView.setAdapter(this.dreamAdapter);
     }
