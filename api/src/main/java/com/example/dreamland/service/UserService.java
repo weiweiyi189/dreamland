@@ -11,6 +11,13 @@ import javax.xml.bind.ValidationException;
 
 public interface UserService {
 
+  /**
+   * 对梦境点赞
+   * @param dream
+   * @return
+   */
+  Dream likeDream(Dream dream);
+
   String tokenHeader = "Authorization";
 
   /**

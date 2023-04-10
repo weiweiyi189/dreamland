@@ -1,6 +1,7 @@
 package com.example.dreamland.ui.adapter;
 
 
+import android.content.Intent;
 import android.text.format.DateUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,6 +14,10 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.dreamland.R;
 import com.example.dreamland.entity.Dream;
+import com.example.dreamland.service.BaseHttpService;
+import com.example.dreamland.service.UserService;
+import com.example.dreamland.ui.auth.EnrollActivity;
+import com.example.dreamland.ui.auth.LoginActivity;
 import com.example.dreamland.ui.util.dateUtil;
 import org.jetbrains.annotations.NotNull;
 
@@ -25,6 +30,8 @@ public class DreamAdapter  extends RecyclerView.Adapter<DreamAdapter.ViewHolder>
     private List<Dream> dreams;
 
     private final ClickListener listener;
+
+    private final UserService userService = UserService.getInstance();
 
     public static class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         TextView username;
@@ -56,10 +63,7 @@ public class DreamAdapter  extends RecyclerView.Adapter<DreamAdapter.ViewHolder>
 
         @Override
         public void onClick(View v) {
-            if (v.getId() == R.id.favorite) {
-                Toast.makeText(v.getContext(), "点击了favorite", Toast.LENGTH_SHORT).show();
-            }
-            listenerRef.get().onPositionClicked(getAdapterPosition());
+            listenerRef.get().onPositionClicked(getAdapterPosition(), v);
         }
     }
 

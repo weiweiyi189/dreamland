@@ -1,14 +1,16 @@
 package com.example.dreamland.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonView;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
-import java.util.Date;
+import java.sql.Timestamp;
 import java.util.List;
 
 
@@ -21,6 +23,8 @@ import java.util.List;
 @EqualsAndHashCode(callSuper=false)
 @Entity
 public class Dream {
+
+    public static final String TABLE_NAME = "dream";
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -39,7 +43,14 @@ public class Dream {
 
     // 创建时间
     @CreationTimestamp
-    private Date createTime;
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
+    private Timestamp createTime;
+
+    /**
+     * 点赞数
+     */
+    private Integer likes = 0;
 
     public interface UserJsonView {}
+
 }

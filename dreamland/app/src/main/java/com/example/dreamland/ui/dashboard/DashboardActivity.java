@@ -64,7 +64,6 @@ public class DashboardActivity extends AppCompatActivity {
 
     private DreamService dreamService = DreamService.getInstance();
 
-
     //两次返回，返回到home界面（System.exit决定是否退出当前界面，重新加载程序）
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_DOWN) {
@@ -228,10 +227,17 @@ public class DashboardActivity extends AppCompatActivity {
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
         LinearLayoutManager layout = new LinearLayoutManager(this);
         this.dreamAdapter = new DreamAdapter(this.dreams, new ClickListener() {
-            @Override public void onPositionClicked(int position) {
-
+            @Override public void onPositionClicked(int position, View view) {
+                if(view.getId() == R.id.favorite) {
+                    userService.likeDream(new BaseHttpService.CallBack() {
+                        @Override
+                        public void onSuccess(BaseHttpService.CustomerResponse result) {
+                            dreams.set(position, (Dream) result.getData());
+                            dreamAdapter.notifyDataSetChanged();
+                        }
+                    }, dreams.get(position));
+                }
             }
-
         });
         recyclerView.setLayoutManager(layout);
         recyclerView.setAdapter(this.dreamAdapter);

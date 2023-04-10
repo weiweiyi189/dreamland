@@ -23,14 +23,34 @@ public class UserServiceImpl implements UserService {
 
   private final UserRepository userRepository;
 
+  private final DreamRepository dreamRepository;
+
   @Autowired
   HttpServletRequest request;
 
   @Autowired
   CommonService commonService;
 
-  public UserServiceImpl(UserRepository userRepository) {
+  public UserServiceImpl(UserRepository userRepository,
+                         DreamRepository dreamRepository) {
     this.userRepository = userRepository;
+    this.dreamRepository = dreamRepository;
+  }
+
+  @Override
+  public Dream likeDream(Dream dream) {
+    // 梦境点赞数+1
+    dream.setLikes(dream.getLikes() + 1);
+    this.dreamRepository.save(dream);
+    // 加入到用户收藏
+    // todo 测试hibernate 是否会去重
+    User currentUser = this.getCurrentUser();
+    List<Dream> collectDream = currentUser.getCollectDream();
+    collectDream.add(dream);
+
+    currentUser.setCollectDream(collectDream);
+    this.userRepository.save(currentUser);
+    return dream;
   }
 
   @Override

@@ -1,6 +1,7 @@
 package com.example.dreamland.service;
 
 import com.example.dreamland.entity.Dream;
+import com.example.dreamland.entity.User;
 import com.example.dreamland.repository.DreamRepository;
 import org.springframework.stereotype.Service;
 
@@ -21,8 +22,9 @@ public class DreamServiceImpl implements DreamService {
     }
 
     @Override
-    public List<Dream> getAllByUserId(Long userId) {
-        return this.dreamRepository.findAllByUserIdAndCreamTimeDesc(userId);
+    public List<Dream> getAllByCurrentUser() {
+        User user = this.userService.getCurrentUser();
+        return this.dreamRepository.findAllByUserIdAndCreamTimeDesc(user.getId());
     }
 
     @Override
