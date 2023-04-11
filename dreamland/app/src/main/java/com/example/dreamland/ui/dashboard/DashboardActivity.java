@@ -114,23 +114,13 @@ public class DashboardActivity extends AppCompatActivity {
 
                 //加载头像
                 CircleImageView headshot = findViewById(R.id.headshot);
-//                userService.getCurrentUser(new BaseHttpService.CallBack() {
-//                    @Override
-//                    public void onSuccess(BaseHttpService.CustomerResponse result) {
-//                        //获取当前登陆用户
-//                        User currentUser= (User) result.getData();
-//                        if (result.getResponse().code() >= 200 && result.getResponse().code() < 300) {
-//                            String urlString = BaseHttpService.BASE_URL + currentUser.getImageUrl();
-//                            new DownloadImageTask(headshott)
-//                                    .execute(urlString);
-//                        } else {
-//                            Toast.makeText(DashboardActivity.this, "头像加载失败", Toast.LENGTH_SHORT).show();
-//                        }
-//                    }
-//                });
-                String urlString = BaseHttpService.BASE_URL + userService.currentUser.getValue().getImageUrl();
-                new DownloadImageTask(headshot)
-                        .execute(urlString);
+                if(userService.currentUser.getValue().getImageUrl().length()!=0){
+                    Toast.makeText(DashboardActivity.this,userService.currentUser.getValue().getImageUrl().toString(), Toast.LENGTH_SHORT).show();
+                    String urlString = BaseHttpService.BASE_URL + userService.currentUser.getValue().getImageUrl();
+                    new DownloadImageTask(headshot)
+                            .execute(urlString);
+                }
+
             }
         });
 
@@ -149,7 +139,7 @@ public class DashboardActivity extends AppCompatActivity {
                         break;
                     case R.id.sleep:
                         drawerLayout.close();
-                        share();
+                        share("a");
                         break;
                     case R.id.dreams:
                         drawerLayout.close();
@@ -174,27 +164,13 @@ public class DashboardActivity extends AppCompatActivity {
         });
         this.initList();
         this.setRefresh();
-//        link = findViewById(R.id.share);
-//        link.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Toast.makeText(DashboardActivity.this, "点击了分享", Toast.LENGTH_SHORT).show();
-//            }
-//        });
-    }
-
-
-    public void test(){
-        Toast.makeText(DashboardActivity.this, "点击了分享", Toast.LENGTH_SHORT).show();
     }
 
     /**
      * 点击进行分享
      */
-    public void share() {
-        // 设置要分享的内容
-        String shareContent = "#神码工作室#博客地址：https://blog.csdn.net/qq15577969";
-        SharePopupWindow spw = new SharePopupWindow(this, shareContent);
+    public void share(String str) {
+        SharePopupWindow spw = new SharePopupWindow(this, str);
         // 显示窗口
         spw.showAtLocation(drawerLayout, Gravity.BOTTOM, 0, 0);
     }
@@ -229,6 +205,8 @@ public class DashboardActivity extends AppCompatActivity {
         this.dreamAdapter = new DreamAdapter(this.dreams, new ClickListener() {
             @Override public void onPositionClicked(int position, View view) {
                 if(view.getId() == R.id.favorite) {
+                    Toast.makeText(DashboardActivity.this, "点击了点赞", Toast.LENGTH_SHORT).show();
+
                     userService.likeDream(new BaseHttpService.CallBack() {
                         @Override
                         public void onSuccess(BaseHttpService.CustomerResponse result) {
@@ -236,6 +214,10 @@ public class DashboardActivity extends AppCompatActivity {
                             dreamAdapter.notifyDataSetChanged();
                         }
                     }, dreams.get(position));
+                }
+                else if(view.getId() == R.id.share) {
+                    Toast.makeText(DashboardActivity.this, dreams.get(position).getContent().toString(), Toast.LENGTH_SHORT).show();
+                    share("您的好友："+userService.currentUser.getValue().getUsername()+"\n给您分享了一个有趣的梦境：\n"+dreams.get(position).getContent().toString()+"\n\n来自伯奇·梦境分享");
                 }
             }
         });
