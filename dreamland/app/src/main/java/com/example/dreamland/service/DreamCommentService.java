@@ -5,6 +5,8 @@ import com.example.dreamland.entity.DreamComment;
 
 public class DreamCommentService {
 
+    private static final String LOCAL_URL = "api/";
+
     public static DreamCommentService dreamCommentService;
 
     public static DreamCommentService getInstance() {
@@ -17,10 +19,10 @@ public class DreamCommentService {
     BaseHttpService httpService = BaseHttpService.getInstance();
 
     public void getAll(BaseHttpService.CallBack callBack, Long dreamId) {
-        httpService.get("comment/getAll/"  + dreamId.toString() , callBack, DreamComment[].class);
+        httpService.get(LOCAL_URL + "comment/getAll/"  + dreamId.toString() , callBack, DreamComment[].class);
     }
 
     public void add(BaseHttpService.CallBack callBack, DreamComment dreamComment) {
-        httpService.post( "comment/add", dreamComment, callBack, DreamComment.class);
+        httpService.post( LOCAL_URL + "comment/add", dreamComment, callBack, DreamComment.class);
     }
 }

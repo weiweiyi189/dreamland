@@ -4,6 +4,8 @@ import com.example.dreamland.entity.Dream;
 
 public class DreamService {
 
+    private static final String LOCAL_URL = "api/";
+
     public static DreamService dreamService;
 
     public static DreamService getInstance() {
@@ -16,11 +18,11 @@ public class DreamService {
     BaseHttpService httpService = BaseHttpService.getInstance();
 
     public void getAll(BaseHttpService.CallBack callBack) {
-        httpService.get("api/dream/getAll", callBack, Dream[].class);
+        httpService.get(LOCAL_URL + "dream/getAll", callBack, Dream[].class);
     }
 
     public void add(BaseHttpService.CallBack callBack, Dream dream) {
-        httpService.post( "api/dream/add", dream, callBack, Dream.class);
+        httpService.post( LOCAL_URL + "api/dream/add", dream, callBack, Dream.class);
     }
 
 

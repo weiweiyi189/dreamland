@@ -29,5 +29,5 @@ public class User extends LitePalSupport implements Serializable {
 
     private String imageUrl;
 
-    private List<Dream> dreams = new ArrayList<>();
+    private List<Dream> collectDream;
 }
