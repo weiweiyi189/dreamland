@@ -15,7 +15,7 @@ api文件夹为后台。
 前后台交互时，手机和电脑连接同一局域网
 把com/example/dreamland/service/BaseHttpService.java 改为电脑的ip地址。
 
-登录功能已完成， 用户名密码在 api/dreamland/src/main/java/com/example/dreamland/startup/InitData.java 下查看。
+nginx.conf, 的resouces文件路径改成你的电脑的路径
 
 ## 克隆仓库代码步骤
 

@@ -32,7 +32,7 @@ public class BaseHttpService {
      * 个人开发时，手机和电脑连接同一局域网，填写电脑的ipv4地址
      * 后期上线后换成服务器的spring boot地址
      */
-    public static String BASE_URL = "http://192.168.43.215:9002/";
+    public static String BASE_URL = "http://192.168.224.237:9000/";
 
 
     public static BaseHttpService getInstance() {
@@ -56,6 +56,7 @@ public class BaseHttpService {
      * @param params   请求参数
      */
     public <T> void get(String url, CallBack callBack, Class<T> type, Pair<String, String>... params) {
+
         HttpUrl.Builder httpUrlBuilder = HttpUrl.parse(BASE_URL + url).newBuilder();
         if (params != null) {
             for (Pair<String, String> param :

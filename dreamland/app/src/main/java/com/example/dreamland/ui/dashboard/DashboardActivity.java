@@ -7,15 +7,18 @@ import android.os.Bundle;
 import android.view.*;
 import android.widget.Button;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
+import com.example.dreamland.MainApplication;
 import com.example.dreamland.R;
 import com.example.dreamland.databinding.ActivityDashboardBinding;
 import com.example.dreamland.entity.Dream;
@@ -209,7 +212,9 @@ public class DashboardActivity extends AppCompatActivity {
                     userService.likeDream(new BaseHttpService.CallBack() {
                         @Override
                         public void onSuccess(BaseHttpService.CustomerResponse result) {
-                            dreams.set(position, (Dream) result.getData());
+                            Dream resultDream = (Dream) result.getData();
+                            dreams.get(position).setLikes(resultDream.getLikes());
+                            setCollectDreamToCurrentUser(resultDream);
                             dreamAdapter.notifyDataSetChanged();
                         }
                     }, dreams.get(position));
@@ -222,6 +227,19 @@ public class DashboardActivity extends AppCompatActivity {
         });
         recyclerView.setLayoutManager(layout);
         recyclerView.setAdapter(this.dreamAdapter);
+    }
+
+    public void setCollectDreamToCurrentUser(Dream dream) {
+        User currentUser = userService.currentUser.getValue();
+        List<Dream> dreamList = currentUser.getCollectDream();
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            boolean deleteResult = dreamList.removeIf((dream1 -> dream1.getId().equals(dream.getId())));
+             if(!deleteResult) {
+                 dreamList.add(dream);
+             }
+        }
+        currentUser.setCollectDream(dreamList);
+        userService.currentUser.onNext(currentUser);
     }
 
 
