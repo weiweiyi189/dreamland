@@ -32,7 +32,7 @@ public class User {
 
     private String password = DEFAULT_PASSWORD;
 
-    @ManyToMany
+    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
     @JoinTable(name = User.TABLE_NAME + "_" + Dream.TABLE_NAME,
             joinColumns = @JoinColumn(name = User.TABLE_NAME + "_id"),
             inverseJoinColumns = @JoinColumn(name = Dream.TABLE_NAME + "_id"))

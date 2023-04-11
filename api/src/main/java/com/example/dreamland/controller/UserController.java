@@ -56,6 +56,7 @@ public class UserController {
   }
 
   @PostMapping("likeDream")
+  @JsonView(GetCurrentLoginUserJsonView.class)
   public Dream likeDream(@RequestBody Dream dream) {
     return this.userService.likeDream(dream);
   }
