@@ -70,7 +70,6 @@ public class LoginActivity extends AppCompatActivity {
         final EditText passwordEditText = findViewById(R.id.password);
         final Button loginButton = findViewById(R.id.login);
         final TextView enroll = findViewById(R.id.tv_register);
-        final TextView forgotPassword = findViewById(R.id.tv_forgotPassword);
 
         //登陆按键绑定事件
         loginButton.setOnClickListener(
@@ -116,14 +115,14 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-        //找回密码界面跳转
-        forgotPassword.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(LoginActivity.this, ForgetActivity.class);
-                startActivity(intent);
-            }
-        });
+//        //找回密码界面跳转
+//        forgotPassword.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Intent intent = new Intent(LoginActivity.this, ForgetActivity.class);
+//                startActivity(intent);
+//            }
+//        });
 
     }
 

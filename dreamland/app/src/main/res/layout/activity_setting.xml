@@ -49,12 +49,6 @@
             </LinearLayout>
             <!-- 分割线 -->
             <View style="@style/bg_line"/><!-- 无圆角-->
-            <LinearLayout style="@style/mid_layout" android:id="@+id/email" >
-                <TextView style="@style/usertext" android:text="邮箱"/>
-                <TextView android:id="@+id/emails" android:gravity="right" style="@style/usertexts" android:text=""/>
-                <ImageView style="@style/img_arrow"/>
-            </LinearLayout>
-            <View style="@style/bg_line"/><!-- 无圆角-->
             <LinearLayout style="@style/mid_layout" android:id="@+id/password">
                 <TextView  style="@style/usertext" android:text="密码"/>
                 <TextView android:id="@+id/passwords" android:gravity="right" style="@style/usertexts" android:text="* * * * * *"/>

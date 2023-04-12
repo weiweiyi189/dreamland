@@ -74,13 +74,11 @@ public class SettingActivity extends AppCompatActivity {
 
         LinearLayout avatar = findViewById(R.id.avatar);
         LinearLayout account = findViewById(R.id.account);
-        LinearLayout email = findViewById(R.id.email);
         LinearLayout password = findViewById(R.id.password);
         LinearLayout about = findViewById(R.id.about);
         LinearLayout exit = findViewById(R.id.exit);
 
         TextView accounts = findViewById(R.id.accounts);
-        TextView emails = findViewById(R.id.emails);
         CircleImageView touxiang = findViewById(R.id.touxiang);
 
 
@@ -95,7 +93,6 @@ public class SettingActivity extends AppCompatActivity {
                 if (result.getResponse().code() >= 200 && result.getResponse().code() < 300) {
                     System.out.println(currentUser.getImageUrl());
                     accounts.append("        "+currentUser.getUsername());
-                    emails.append("        "+currentUser.getUsername());
                     if(userService.currentUser.getValue().getImageUrl()!=""&&userService.currentUser.getValue().getImageUrl()!=null){
                         String urlString = BaseHttpService.BASE_URL + currentUser.getImageUrl();
                         new DownloadImageTask(touxiang)
@@ -121,14 +118,6 @@ public class SettingActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(SettingActivity.this, AccountActivity.class);
-                startActivity(intent);
-                finish();
-            }
-        });
-        email.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(SettingActivity.this, EmailActivity.class);
                 startActivity(intent);
                 finish();
             }

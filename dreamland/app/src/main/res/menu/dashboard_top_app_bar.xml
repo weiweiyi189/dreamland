@@ -3,12 +3,12 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
       xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <item
-            android:id="@+id/favorite"
-            android:icon="@drawable/circle_notification"
-            android:background= "?attr/colorOnPrimary"
-            android:title="消息"
-            android:contentDescription="消息"
-            app:showAsAction="ifRoom" />
+<!--    <item-->
+<!--            android:id="@+id/favorite"-->
+<!--            android:icon="@drawable/circle_notification"-->
+<!--            android:background= "?attr/colorOnPrimary"-->
+<!--            android:title="消息"-->
+<!--            android:contentDescription="消息"-->
+<!--            app:showAsAction="ifRoom" />-->
 
 </menu>
