@@ -7,17 +7,20 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
 import java.util.Date;
-
+import java.util.List;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper=false)
 @Entity
 public class Letter {
+    public static final String TABLE_NAME = "dream";
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -35,4 +38,5 @@ public class Letter {
     private Timestamp createTime;
 
     public interface UserJsonView {}
+
 }

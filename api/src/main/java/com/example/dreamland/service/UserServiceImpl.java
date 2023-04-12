@@ -1,6 +1,7 @@
 package com.example.dreamland.service;
 
 import com.example.dreamland.entity.Letter;
+
 import com.example.dreamland.entity.Dream;
 import com.example.dreamland.entity.User;
 import com.example.dreamland.exceptionHandler.NotAuthenticationException;
@@ -40,18 +41,25 @@ public class UserServiceImpl implements UserService {
 
   @Override
   public Dream likeDream(Dream dream) {
-    // 梦境点赞数+1
-    dream.setLikes(dream.getLikes() + 1);
-    this.dreamRepository.save(dream);
-    // 加入到用户收藏
-    // todo 测试hibernate 是否会去重
+    Dream myDream = this.dreamRepository.findById(dream.getId()).get();
+    // 判断当前用户是否已经点赞
     User currentUser = this.getCurrentUser();
     List<Dream> collectDream = currentUser.getCollectDream();
-    collectDream.add(dream);
-
+    // 若用户已经点赞过了，取消点赞
+    if (collectDream.stream().anyMatch((dream1 -> dream1.getId().equals(dream.getId())))) {
+      // 梦境点赞数 - 1
+      myDream.setLikes(myDream.getLikes() - 1);
+      collectDream.remove(myDream);
+    } else {
+      // 若用户未点赞，则点赞
+      // 梦境点赞数 + 1
+      myDream.setLikes(myDream.getLikes() + 1);
+      collectDream.add(myDream);
+    }
     currentUser.setCollectDream(collectDream);
+    this.dreamRepository.save(myDream);
     this.userRepository.save(currentUser);
-    return dream;
+    return myDream;
   }
 
   @Override

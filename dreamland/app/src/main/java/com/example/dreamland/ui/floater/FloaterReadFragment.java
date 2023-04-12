@@ -42,7 +42,6 @@ public class FloaterReadFragment extends Fragment {
         return view;
     }
     public void initList() {
-
         letterService.getAllshowed(new BaseHttpService.CallBack() {
             @Override
             public void onSuccess(BaseHttpService.CustomerResponse result) {
@@ -57,7 +56,6 @@ public class FloaterReadFragment extends Fragment {
         RecyclerView recyclerView= view.findViewById(R.id.floaterReadRecyclerView);
         LinearLayoutManager layout = new LinearLayoutManager(getContext());
         this.letterAdapter = new LetterAdapter(this.letters);
-
         recyclerView.setLayoutManager(layout);
         recyclerView.setAdapter(this.letterAdapter);
     }

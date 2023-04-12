@@ -1,8 +1,5 @@
 package com.example.dreamland.controller;
 
-
-import com.example.dreamland.entity.Letter;
-
 import com.example.dreamland.entity.Dream;
 
 import com.example.dreamland.entity.User;
@@ -60,6 +57,7 @@ public class UserController {
   }
 
   @PostMapping("likeDream")
+  @JsonView(GetCurrentLoginUserJsonView.class)
   public Dream likeDream(@RequestBody Dream dream) {
     return this.userService.likeDream(dream);
   }

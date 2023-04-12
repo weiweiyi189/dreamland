@@ -15,10 +15,10 @@ target/
 
 ### IntelliJ IDEA ###
 .idea
+resources
 *.iws
 *.iml
 *.ipr
-
 ### NetBeans ###
 /nbproject/private/
 /nbbuild/
@@ -31,3 +31,6 @@ build/
 
 ### VS Code ###
 .vscode/
+
+./resources
+./resources/image

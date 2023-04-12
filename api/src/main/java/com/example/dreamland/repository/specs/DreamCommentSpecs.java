@@ -15,5 +15,4 @@ public class DreamCommentSpecs {
             return Specification.where(null);
         }
     }
-
 }

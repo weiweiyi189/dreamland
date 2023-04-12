@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.ArrayList;
+
 import java.util.List;
 
 /**
@@ -34,7 +35,7 @@ public class User {
 
     private String password = DEFAULT_PASSWORD;
 
-    @ManyToMany
+    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
     @JoinTable(name = User.TABLE_NAME + "_" + Dream.TABLE_NAME,
             joinColumns = @JoinColumn(name = User.TABLE_NAME + "_id"),
             inverseJoinColumns = @JoinColumn(name = Dream.TABLE_NAME + "_id"))
@@ -46,7 +47,7 @@ public class User {
 
     @ManyToMany
     @JsonBackReference
-    private List<Letter> letters=new ArrayList<>();
+    private List<Letter> letters = new ArrayList<>();
 
     public void addLetter(Letter letter) {
         letters.add(letter);

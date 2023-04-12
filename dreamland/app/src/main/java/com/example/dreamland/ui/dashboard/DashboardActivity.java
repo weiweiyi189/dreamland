@@ -11,11 +11,13 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
+import com.example.dreamland.MainApplication;
 import com.example.dreamland.R;
 import com.example.dreamland.databinding.ActivityDashboardBinding;
 import com.example.dreamland.entity.Dream;
@@ -114,23 +116,11 @@ public class DashboardActivity extends AppCompatActivity {
 
                 //加载头像
                 CircleImageView headshot = findViewById(R.id.headshot);
-//                userService.getCurrentUser(new BaseHttpService.CallBack() {
-//                    @Override
-//                    public void onSuccess(BaseHttpService.CustomerResponse result) {
-//                        //获取当前登陆用户
-//                        User currentUser= (User) result.getData();
-//                        if (result.getResponse().code() >= 200 && result.getResponse().code() < 300) {
-//                            String urlString = BaseHttpService.BASE_URL + currentUser.getImageUrl();
-//                            new DownloadImageTask(headshott)
-//                                    .execute(urlString);
-//                        } else {
-//                            Toast.makeText(DashboardActivity.this, "头像加载失败", Toast.LENGTH_SHORT).show();
-//                        }
-//                    }
-//                });
-                String urlString = BaseHttpService.BASE_URL + userService.currentUser.getValue().getImageUrl();
-                new DownloadImageTask(headshot)
-                        .execute(urlString);
+                if(userService.currentUser.getValue().getImageUrl()!=""&&userService.currentUser.getValue().getImageUrl()!=null){
+                    String urlString = BaseHttpService.BASE_URL + userService.currentUser.getValue().getImageUrl();
+                    new DownloadImageTask(headshot)
+                            .execute(urlString);
+                }
             }
         });
 
@@ -149,7 +139,7 @@ public class DashboardActivity extends AppCompatActivity {
                         break;
                     case R.id.sleep:
                         drawerLayout.close();
-                        share();
+                        share("a");
                         break;
                     case R.id.dreams:
                         drawerLayout.close();
@@ -199,6 +189,15 @@ public class DashboardActivity extends AppCompatActivity {
         spw.showAtLocation(drawerLayout, Gravity.BOTTOM, 0, 0);
     }
 
+    /**
+     * 点击进行分享
+     */
+    public void share(String str) {
+        SharePopupWindow spw = new SharePopupWindow(this, str);
+        // 显示窗口
+        spw.showAtLocation(drawerLayout, Gravity.BOTTOM, 0, 0);
+    }
+
 
     public void OnItemClick(View view) {
         // 获取itemView的位置
@@ -229,18 +228,39 @@ public class DashboardActivity extends AppCompatActivity {
         this.dreamAdapter = new DreamAdapter(this.dreams, new ClickListener() {
             @Override public void onPositionClicked(int position, View view) {
                 if(view.getId() == R.id.favorite) {
+                    Toast.makeText(DashboardActivity.this, "点击了点赞", Toast.LENGTH_SHORT).show();
+
                     userService.likeDream(new BaseHttpService.CallBack() {
                         @Override
                         public void onSuccess(BaseHttpService.CustomerResponse result) {
-                            dreams.set(position, (Dream) result.getData());
+                            Dream resultDream = (Dream) result.getData();
+                            dreams.get(position).setLikes(resultDream.getLikes());
+                            setCollectDreamToCurrentUser(resultDream);
                             dreamAdapter.notifyDataSetChanged();
                         }
                     }, dreams.get(position));
+                }
+                else if(view.getId() == R.id.share) {
+                    Toast.makeText(DashboardActivity.this, dreams.get(position).getContent().toString(), Toast.LENGTH_SHORT).show();
+                    share("您的好友："+userService.currentUser.getValue().getUsername()+"\n给您分享了一个有趣的梦境：\n"+dreams.get(position).getContent().toString()+"\n\n来自伯奇·梦境分享");
                 }
             }
         });
         recyclerView.setLayoutManager(layout);
         recyclerView.setAdapter(this.dreamAdapter);
+    }
+
+    public void setCollectDreamToCurrentUser(Dream dream) {
+        User currentUser = userService.currentUser.getValue();
+        List<Dream> dreamList = currentUser.getCollectDream();
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            boolean deleteResult = dreamList.removeIf((dream1 -> dream1.getId().equals(dream.getId())));
+             if(!deleteResult) {
+                 dreamList.add(dream);
+             }
+        }
+        currentUser.setCollectDream(dreamList);
+        userService.currentUser.onNext(currentUser);
     }
 
 

@@ -110,9 +110,11 @@ public class PersonalActivity extends AppCompatActivity {
 
                 //加载头像
                 CircleImageView headshot =  findViewById(R.id.headshot);
-                String urlString = BaseHttpService.BASE_URL + userService.currentUser.getValue().getImageUrl();
-                new DownloadImageTask(headshot)
-                        .execute(urlString);
+                if(userService.currentUser.getValue().getImageUrl()!=""&&userService.currentUser.getValue().getImageUrl()!=null){
+                    String urlString = BaseHttpService.BASE_URL + userService.currentUser.getValue().getImageUrl();
+                    new DownloadImageTask(headshot)
+                            .execute(urlString);
+                }
             }
         });
 

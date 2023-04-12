@@ -101,6 +101,7 @@ public class InitData {
               "几个主角都被抓。而我被委托以重要使命，跳井穿越时空拿到重要宝物压制反派.结果时间乱流寄了。");
       dream.setCreateTime(new Timestamp(new Date().getTime()));
       dream.setCreateUser(user1);
+      dream.setLikes(0);
       this.dreamRepository.save(dream);
     }
   }

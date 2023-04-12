@@ -11,13 +11,13 @@ import com.example.dreamland.R;
 import com.example.dreamland.entity.Dream;
 import com.example.dreamland.entity.Letter;
 import com.example.dreamland.entity.User;
-
 import com.example.dreamland.service.BaseHttpService;
 import com.example.dreamland.service.LetterService;
 import com.example.dreamland.service.UserService;
 
 import com.example.dreamland.ui.adapter.ClickListener;
 
+import com.example.dreamland.ui.adapter.ClickListener;
 import com.example.dreamland.ui.adapter.DreamAdapter;
 import com.example.dreamland.ui.adapter.LetterAdapter;
 
@@ -43,7 +43,6 @@ public class FloaterWriteFragment extends Fragment {
     }
     public void initList() {
 
-
         letterService.getAllByCreateUserId(new BaseHttpService.CallBack() {
             @Override
             public void onSuccess(BaseHttpService.CustomerResponse result) {
@@ -57,7 +56,6 @@ public class FloaterWriteFragment extends Fragment {
         RecyclerView recyclerView= view.findViewById(R.id.floaterWriteRecyclerView);
         LinearLayoutManager layout = new LinearLayoutManager(getContext());
         this.letterAdapter = new LetterAdapter(this.letters);
-
         recyclerView.setLayoutManager(layout);
         recyclerView.setAdapter(this.letterAdapter);
     }

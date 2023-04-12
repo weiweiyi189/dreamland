@@ -33,7 +33,7 @@ public class BaseHttpService {
      * 后期上线后换成服务器的spring boot地址
      */
 
-    public static String BASE_URL = "http://192.168.43.234:9002/";
+    public static String BASE_URL = "http://192.168.43.234:9000/";
 
 
     public static BaseHttpService getInstance() {
@@ -57,6 +57,7 @@ public class BaseHttpService {
      * @param params   请求参数
      */
     public <T> void get(String url, CallBack callBack, Class<T> type, Pair<String, String>... params) {
+
         HttpUrl.Builder httpUrlBuilder = HttpUrl.parse(BASE_URL + url).newBuilder();
         if (params != null) {
             for (Pair<String, String> param :
