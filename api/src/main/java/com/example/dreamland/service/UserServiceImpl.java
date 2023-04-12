@@ -51,7 +51,7 @@ public class UserServiceImpl implements UserService {
     } else {
       // 若用户未点赞，则点赞
       // 梦境点赞数 + 1
-      myDream.setLikes(myDream.getLikes() + 1);
+      myDream.setLikes(myDream.getLikes() == null ? 1 : myDream.getLikes()  +1 );
       collectDream.add(myDream);
     }
     currentUser.setCollectDream(collectDream);
