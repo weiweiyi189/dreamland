@@ -32,6 +32,7 @@ import com.example.dreamland.ui.adapter.DreamAdapter;
 import com.example.dreamland.ui.chat.MessageListActivity;
 import com.example.dreamland.ui.dreams.DreamsActivity;
 import com.example.dreamland.ui.dreamtest.DreamTestActivity;
+import com.example.dreamland.ui.music.MainActivity;
 import com.example.dreamland.ui.setting.SettingActivity;
 import com.example.dreamland.ui.floater.FloaterActivity;
 import com.google.android.material.color.DynamicColors;
@@ -149,7 +150,9 @@ public class DashboardActivity extends AppCompatActivity {
                         break;
                     case R.id.sleep:
                         drawerLayout.close();
-                        share("a");
+                        Intent intent5 = new Intent(DashboardActivity.this, MainActivity.class);
+                        startActivity(intent5, null);
+                        overridePendingTransition(0, 0);
                         break;
                     case R.id.dreams:
                         drawerLayout.close();
