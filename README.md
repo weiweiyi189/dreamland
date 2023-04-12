@@ -1,7 +1,6 @@
 # dreamland
 安卓梦境app
 
-
 ## dreamland 
 
 环境: jdk11
@@ -33,7 +32,6 @@ api文件夹为后台。
 然后进行代码开发
 
 ## 提交代码步骤
-
 在 idea 的terminal终端中，进入到 dreamland 下
 
 1.`git status` 查看目前自己修改的文件

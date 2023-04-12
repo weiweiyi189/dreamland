@@ -6,6 +6,7 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import org.litepal.crud.LitePalSupport;
 
+import java.sql.Timestamp;
 import java.util.Date;
 
 @Data
@@ -17,5 +18,5 @@ public class Letter extends LitePalSupport{
     private User createUser;
     private String title;
     private String content;
-    private Date createTime;
+    private Timestamp createTime;
 }

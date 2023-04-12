@@ -4,9 +4,9 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
-import android.view.KeyEvent;
-import android.view.MenuItem;
-import android.view.View;
+import android.view.*;
+import android.widget.Button;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
@@ -19,8 +19,12 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import com.example.dreamland.R;
 import com.example.dreamland.databinding.ActivityDashboardBinding;
 import com.example.dreamland.entity.Dream;
+import com.example.dreamland.entity.User;
 import com.example.dreamland.service.BaseHttpService;
+import com.example.dreamland.service.DownloadImageTask;
 import com.example.dreamland.service.DreamService;
+import com.example.dreamland.service.UserService;
+import com.example.dreamland.ui.adapter.ClickListener;
 import com.example.dreamland.ui.adapter.DreamAdapter;
 import com.example.dreamland.ui.chat.MessageListActivity;
 import com.example.dreamland.ui.dreams.DreamsActivity;
@@ -29,6 +33,7 @@ import com.example.dreamland.ui.floater.FloaterActivity;
 import com.google.android.material.color.DynamicColors;
 import com.google.android.material.navigation.NavigationBarView;
 import com.google.android.material.navigation.NavigationView;
+import de.hdodenhof.circleimageview.CircleImageView;
 import org.jetbrains.annotations.NotNull;
 import org.litepal.LitePal;
 
@@ -39,6 +44,8 @@ import java.util.*;
  */
 public class DashboardActivity extends AppCompatActivity {
 
+    private final UserService userService = UserService.getInstance();
+
     private DrawerLayout drawerLayout;
 
     private DreamAdapter dreamAdapter;
@@ -47,14 +54,15 @@ public class DashboardActivity extends AppCompatActivity {
 
     private List<Dream> dreams = new LinkedList<>();
 
-
     NavigationBarView navigationView;
 
     private long exitTime = 0;
 
     private SwipeRefreshLayout swipe_refresh;
 
-    private DreamService dreamService = DreamService.getInstance();;
+    RecyclerView recyclerView;
+
+    private DreamService dreamService = DreamService.getInstance();
 
     //两次返回，返回到home界面（System.exit决定是否退出当前界面，重新加载程序）
     public boolean onKeyDown(int keyCode, KeyEvent event) {
@@ -103,8 +111,29 @@ public class DashboardActivity extends AppCompatActivity {
             public void onClick(View v) {
                 drawerLayout = (DrawerLayout) findViewById(R.id.drawerLayout);
                 drawerLayout.openDrawer(GravityCompat.START);
+
+                //加载头像
+                CircleImageView headshot = findViewById(R.id.headshot);
+//                userService.getCurrentUser(new BaseHttpService.CallBack() {
+//                    @Override
+//                    public void onSuccess(BaseHttpService.CustomerResponse result) {
+//                        //获取当前登陆用户
+//                        User currentUser= (User) result.getData();
+//                        if (result.getResponse().code() >= 200 && result.getResponse().code() < 300) {
+//                            String urlString = BaseHttpService.BASE_URL + currentUser.getImageUrl();
+//                            new DownloadImageTask(headshott)
+//                                    .execute(urlString);
+//                        } else {
+//                            Toast.makeText(DashboardActivity.this, "头像加载失败", Toast.LENGTH_SHORT).show();
+//                        }
+//                    }
+//                });
+                String urlString = BaseHttpService.BASE_URL + userService.currentUser.getValue().getImageUrl();
+                new DownloadImageTask(headshot)
+                        .execute(urlString);
             }
         });
+
 
         NavigationView navigationView = binding.NavigationView;
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
@@ -116,19 +145,23 @@ public class DashboardActivity extends AppCompatActivity {
                         drawerLayout.close();
                         Intent intent1 = new Intent(DashboardActivity.this, MessageListActivity.class);
                         startActivity(intent1, null);
-                        overridePendingTransition(0,0);
+                        overridePendingTransition(0, 0);
+                        break;
+                    case R.id.sleep:
+                        drawerLayout.close();
+                        share();
                         break;
                     case R.id.dreams:
                         drawerLayout.close();
                         Intent intent2 = new Intent(DashboardActivity.this, DreamsActivity.class);
                         startActivity(intent2, null);
-                        overridePendingTransition(0,0);
+                        overridePendingTransition(0, 0);
                         break;
                     case R.id.setting:
                         drawerLayout.close();
                         Intent intent3 = new Intent(DashboardActivity.this, SettingActivity.class);
                         startActivity(intent3, null);
-                        overridePendingTransition(0,0);
+                        overridePendingTransition(0, 0);
                         break;
                     case R.id.floater:
                         drawerLayout.close();
@@ -141,6 +174,40 @@ public class DashboardActivity extends AppCompatActivity {
         });
         this.initList();
         this.setRefresh();
+//        link = findViewById(R.id.share);
+//        link.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Toast.makeText(DashboardActivity.this, "点击了分享", Toast.LENGTH_SHORT).show();
+//            }
+//        });
+    }
+
+
+    public void test(){
+        Toast.makeText(DashboardActivity.this, "点击了分享", Toast.LENGTH_SHORT).show();
+    }
+
+    /**
+     * 点击进行分享
+     */
+    public void share() {
+        // 设置要分享的内容
+        String shareContent = "#神码工作室#博客地址：https://blog.csdn.net/qq15577969";
+        SharePopupWindow spw = new SharePopupWindow(this, shareContent);
+        // 显示窗口
+        spw.showAtLocation(drawerLayout, Gravity.BOTTOM, 0, 0);
+    }
+
+
+    public void OnItemClick(View view) {
+        // 获取itemView的位置
+        int position = recyclerView.getChildAdapterPosition(view);
+        Intent intent = new Intent(DashboardActivity.this, DetailActivity.class);
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("dream", dreams.get(position));
+        intent.putExtras(bundle);
+        startActivity(intent, null);
     }
 
     @Override
@@ -157,9 +224,21 @@ public class DashboardActivity extends AppCompatActivity {
     }
 
     public void initList() {
-        RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
+        recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
         LinearLayoutManager layout = new LinearLayoutManager(this);
-        this.dreamAdapter = new DreamAdapter(this.dreams);
+        this.dreamAdapter = new DreamAdapter(this.dreams, new ClickListener() {
+            @Override public void onPositionClicked(int position, View view) {
+                if(view.getId() == R.id.favorite) {
+                    userService.likeDream(new BaseHttpService.CallBack() {
+                        @Override
+                        public void onSuccess(BaseHttpService.CustomerResponse result) {
+                            dreams.set(position, (Dream) result.getData());
+                            dreamAdapter.notifyDataSetChanged();
+                        }
+                    }, dreams.get(position));
+                }
+            }
+        });
         recyclerView.setLayoutManager(layout);
         recyclerView.setAdapter(this.dreamAdapter);
     }
@@ -167,6 +246,7 @@ public class DashboardActivity extends AppCompatActivity {
 
     private void initDataAndSort() {
         dreamService.getAll(new BaseHttpService.CallBack() {
+            @SuppressLint("NotifyDataSetChanged")
             @Override
             public void onSuccess(BaseHttpService.CustomerResponse result) {
                 List<Dream> dreamList = new ArrayList<>(Arrays.asList((Dream[]) result.getData()));

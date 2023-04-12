@@ -49,7 +49,6 @@
                 app:endIconMode="custom"
                 app:endIconDrawable="@drawable/send"
                 android:hint="请输入.."
-
                 android:textColorHint="@color/grey_more"
                 app:hintTextColor="@color/grey_more">
 

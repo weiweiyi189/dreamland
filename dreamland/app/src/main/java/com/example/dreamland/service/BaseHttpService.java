@@ -9,8 +9,12 @@ import okhttp3.*;
 
 import java.io.IOException;
 import java.lang.reflect.Type;
+import java.sql.Timestamp;
+import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Locale;
 import java.util.TimeZone;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -28,7 +32,8 @@ public class BaseHttpService {
      * 个人开发时，手机和电脑连接同一局域网，填写电脑的ipv4地址
      * 后期上线后换成服务器的spring boot地址
      */
-    public static String BASE_URL = "http://192.168.43.234:8002/";
+
+    public static String BASE_URL = "http://192.168.43.234:9002/";
 
 
     public static BaseHttpService getInstance() {
@@ -74,7 +79,9 @@ public class BaseHttpService {
      * @param <T>
      */
     public <T> void post(String url, Object data, CallBack callback, Class<T> type) {
-        Gson gson = new Gson();
+        Gson gson = new GsonBuilder()
+                .setDateFormat("yyyy-MM-dd hh:mm:ss").create();
+        String data1 = gson.toJson(data);
         RequestBody body = RequestBody.create(MediaType.parse("application/json; charset=utf-8"), gson.toJson(data));
         Request request = new Request.Builder()
                 .url(BASE_URL + url)
@@ -199,9 +206,16 @@ public class BaseHttpService {
         GsonBuilder builder = new GsonBuilder();
 
         // Register an adapter to manage the date types as long values
-        builder.registerTypeAdapter(Date.class, new JsonDeserializer<Date>() {
-            public Date deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
-                return new Date(json.getAsJsonPrimitive().getAsLong());
+        builder.registerTypeAdapter(Timestamp.class, new JsonDeserializer<Timestamp>() {
+            @Override
+            public Timestamp deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
+                try {
+                    Date date = sdf.parse(json.getAsString());
+                    return new Timestamp(date.getTime());
+                } catch (ParseException e) {
+                    throw new JsonParseException(e);
+                }
             }
         });
         return builder.create();

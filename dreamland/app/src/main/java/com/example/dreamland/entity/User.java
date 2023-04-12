@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import org.litepal.annotation.Column;
 import org.litepal.crud.LitePalSupport;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,7 +18,7 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class User extends LitePalSupport {
+public class User extends LitePalSupport implements Serializable {
 
     private int id;
 
