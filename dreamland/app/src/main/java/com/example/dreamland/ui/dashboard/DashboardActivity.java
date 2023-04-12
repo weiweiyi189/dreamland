@@ -114,11 +114,9 @@ public class DashboardActivity extends AppCompatActivity {
             public void onClick(View v) {
                 drawerLayout = (DrawerLayout) findViewById(R.id.drawerLayout);
                 drawerLayout.openDrawer(GravityCompat.START);
-
                 //加载头像
                 CircleImageView headshot = findViewById(R.id.headshot);
                 if(userService.currentUser.getValue().getImageUrl().length()!=0){
-                    Toast.makeText(DashboardActivity.this,userService.currentUser.getValue().getImageUrl().toString(), Toast.LENGTH_SHORT).show();
                     String urlString = BaseHttpService.BASE_URL + userService.currentUser.getValue().getImageUrl();
                     new DownloadImageTask(headshot)
                             .execute(urlString);
@@ -208,8 +206,6 @@ public class DashboardActivity extends AppCompatActivity {
         this.dreamAdapter = new DreamAdapter(this.dreams, new ClickListener() {
             @Override public void onPositionClicked(int position, View view) {
                 if(view.getId() == R.id.favorite) {
-                    Toast.makeText(DashboardActivity.this, "点击了点赞", Toast.LENGTH_SHORT).show();
-
                     userService.likeDream(new BaseHttpService.CallBack() {
                         @Override
                         public void onSuccess(BaseHttpService.CustomerResponse result) {

@@ -22,7 +22,7 @@ public class DreamService {
     }
 
     public void add(BaseHttpService.CallBack callBack, Dream dream) {
-        httpService.post( LOCAL_URL + "api/dream/add", dream, callBack, Dream.class);
+        httpService.post( LOCAL_URL + "dream/add", dream, callBack, Dream.class);
     }
 
 
