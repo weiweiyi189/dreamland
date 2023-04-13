@@ -10,7 +10,10 @@ import android.widget.*;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.view.menu.ActionMenuItemView;
 import com.example.dreamland.R;
-import com.example.dreamland.ui.auth.LoginActivity;
+import com.example.dreamland.entity.Letter;
+import com.example.dreamland.service.BaseHttpService;
+import com.example.dreamland.service.LetterService;
+import com.example.dreamland.service.UserService;
 import com.google.android.material.appbar.MaterialToolbar;
 
 public class FloaterActivity extends AppCompatActivity {
@@ -19,10 +22,13 @@ public class FloaterActivity extends AppCompatActivity {
     ImageView capture;
     ImageView floaterColored;
     RelativeLayout readLetter;
-    TextView readContent;
+    TextView readLetterContent;
+    TextView readLetterTitle;
     Button stopRead;
     ImageView arrow;
     RelativeLayout writeLetter;
+    EditText writeLetterTitle;
+    EditText writeLetterContent;
     Button stopWrite;
     Button sendWrite;
 
@@ -42,6 +48,9 @@ public class FloaterActivity extends AppCompatActivity {
     private Animation floaterRotate2;
     private Animation floaterHide;
     private Animation arrowShake2;
+
+    private LetterService letterService=LetterService.getInstance();
+    private UserService userService=UserService.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,17 +85,32 @@ public class FloaterActivity extends AppCompatActivity {
         writeLetter.startAnimation(hide);
 
         read.setOnClickListener(new View.OnClickListener() {
+            Letter letter;
             @Override
             public void onClick(View v) {
                 //捞网show&&按钮hide->捞网hide&&漂流瓶show->漂流瓶rotate->漂流瓶hide->信show
+                letterService.getTopNotShowed(new BaseHttpService.CallBack() {
+                    @Override
+                    public void onSuccess(BaseHttpService.CustomerResponse result) {
+                        letter=(Letter)result.getData();
+                        readLetterTitle.setText(letter.getTitle());
+                        readLetterContent.setText(letter.getContent());
+                    }
+                },new Long(userService.currentUser.getValue().getId()));
+
+
                 capture.startAnimation(captureShow);
             }
         });
         write.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View v) {
+                writeLetterTitle.setText("");
+                writeLetterContent.setText("");
                 //信show&&按钮hide
                 writeLetter.startAnimation(writeLetterShow);
+
             }
         });
         stopRead.setOnClickListener(new View.OnClickListener() {
@@ -107,6 +131,22 @@ public class FloaterActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //信hide&&按钮show->漂流瓶show->漂流瓶rotate->漂流瓶hide&&箭头show->箭头hide
+                Letter letter=new Letter();
+                letter.setTitle(writeLetterTitle.getText().toString());
+                letter.setContent(writeLetterContent.getText().toString());
+
+                letterService.add(new BaseHttpService.CallBack() {
+                    @Override
+                    public void onSuccess(BaseHttpService.CustomerResponse result) {
+                        // 登陆成功
+                        if (result.getResponse().code() >= 200 && result.getResponse().code() < 300) {
+                            Toast.makeText(FloaterActivity.this, "发布成功", Toast.LENGTH_SHORT).show();
+                        } else {
+                            // 登陆失败 提示错误
+                            Toast.makeText(FloaterActivity.this, "发布失败", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                }, letter);
                 writeLetter.startAnimation(writeLetterHide2);
             }
         });
@@ -126,8 +166,10 @@ public class FloaterActivity extends AppCompatActivity {
             readLetter.getChildAt(i).setEnabled(false);
         }
 
-        readContent=findViewById(R.id.floaterReadContent);
-        readContent.setMovementMethod(ScrollingMovementMethod.getInstance());
+        readLetterContent =findViewById(R.id.floaterReadContent);
+        readLetterContent.setMovementMethod(ScrollingMovementMethod.getInstance());
+
+        readLetterTitle=findViewById(R.id.floaterReadTitle);
 
         stopRead=findViewById(R.id.floaterStopRead);
 
@@ -137,6 +179,10 @@ public class FloaterActivity extends AppCompatActivity {
         for(int i=0;i<writeLetter.getChildCount();i++){
             writeLetter.getChildAt(i).setEnabled(false);
         }
+
+        writeLetterTitle=findViewById(R.id.floaterWriteTitle);
+
+        writeLetterContent=findViewById(R.id.floaterWriteContent);
 
         stopWrite=findViewById(R.id.floaterStopWrite);
 
@@ -447,7 +493,7 @@ public class FloaterActivity extends AppCompatActivity {
             @Override
             public void onAnimationEnd(Animation animation) {
                 arrow.startAnimation(arrowShake2);
-                Toast.makeText(FloaterActivity.this, "漂流成功", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(FloaterActivity.this, "漂流成功", Toast.LENGTH_SHORT).show();
             }
 
             @Override

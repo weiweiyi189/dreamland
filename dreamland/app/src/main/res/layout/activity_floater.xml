@@ -113,7 +113,7 @@
             </ImageView>
             <TextView
                     android:id="@+id/floaterReadContent"
-                    android:layout_width="wrap_content"
+                    android:layout_width="300dp"
                     android:layout_height="250dp"
                     android:layout_below="@id/floaterReadTitle"
                     android:layout_marginLeft="50dp"
@@ -128,8 +128,11 @@
                     android:id="@+id/floaterReadTitle"
                     android:text="TextView"
                     android:layout_centerHorizontal="true"
-                    android:layout_width="wrap_content"
+                    android:gravity="center"
+                    android:layout_width="300dp"
                     android:layout_height="wrap_content"
+                    android:minHeight="48dp"
+                    android:maxHeight="64dp"
                     android:layout_alignParentTop="true"
                     android:layout_marginTop="150dp"
                     android:textSize="24sp"
@@ -152,7 +155,7 @@
                 android:id="@+id/floaterWriteLetterLayout"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                tools:visibility="gone" android:layout_centerInParent="true">
+                tools:visibility="visible" android:layout_centerInParent="true">
             <ImageView
                     android:id="@+id/floaterWriteLetter"
                     android:layout_width="match_parent"
@@ -165,7 +168,7 @@
                     android:background="@color/float_transparent"
                     android:textColorHint="#85857B"
                     android:hint="请输入内容"
-                    android:layout_width="wrap_content"
+                    android:layout_width="300dp"
                     android:layout_height="250dp"
                     android:layout_below="@id/floaterWriteTitle"
                     android:layout_marginLeft="50dp"
@@ -182,13 +185,14 @@
                     android:background="@color/float_transparent"
                     android:layout_centerHorizontal="true"
                     android:gravity="center"
-                    android:layout_width="wrap_content"
+                    android:layout_width="300dp"
                     android:layout_height="wrap_content"
+                    android:minHeight="48dp"
+                    android:maxHeight="64dp"
                     android:layout_alignParentTop="true"
                     android:layout_marginTop="150dp"
                     android:textSize="24sp"
-                    android:textStyle="bold"
-            />
+                    android:textStyle="bold"/>
             <Button
                     android:id="@+id/floaterStopWrite"
                     android:text="关闭"

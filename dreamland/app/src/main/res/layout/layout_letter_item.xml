@@ -9,8 +9,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:strokeColor="@color/white"
         app:strokeWidth="1dp"
-        android:onClick="OnItemClick"
-        android:layout_margin="2dp" tools:ignore="UsingOnClickInXml">
+        android:layout_margin="2dp">
 
     <LinearLayout
             android:layout_width="match_parent"
@@ -24,7 +23,6 @@
                 android:orientation="horizontal">
             <!-- Media -->
             <de.hdodenhof.circleimageview.CircleImageView
-                    android:id="@+id/pro_file"
                     android:layout_width="0dp"
                     android:layout_weight="1"
                     android:layout_height="match_parent"
@@ -38,7 +36,7 @@
                     android:orientation="vertical">
 
                 <TextView
-                        android:id="@+id/dream_user"
+                        android:id="@+id/letter_user"
                         android:layout_width="wrap_content"
                         android:text="用户15654526"
                         android:enabled="false"
@@ -46,7 +44,7 @@
                 </TextView>
 
                 <TextView
-                        android:id="@+id/dream_time"
+                        android:id="@+id/letter_time"
                         android:layout_width="wrap_content"
                         android:text="6分钟前"
                         android:textSize="12dp"
@@ -63,9 +61,20 @@
                 android:orientation="vertical"
                 android:padding="10dp">
 
+            <TextView
+                    android:id="@+id/letter_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:text="标题"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:textAppearance="?attr/textAppearanceBodyMedium"
+                    android:textColor="?android:attr/textColorPrimary">
+            </TextView>
 
             <TextView
-                    android:id="@+id/dream_content"
+                    android:id="@+id/letter_content"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
@@ -87,51 +96,34 @@
                 android:layout_width="wrap_content"
                 android:layout_gravity="right"
                 android:layout_height="wrap_content"
+                android:gravity="right"
                 tools:ignore="RtlHardcoded">
 
             <Button
                     style="?attr/materialIconButtonStyle"
-                    android:id="@+id/commentButton"
+                    android:id="@+id/textButton"
                     app:icon="@drawable/comment"
                     android:layout_width="wrap_content"
-                    android:layout_height="25dp">
+                    android:layout_height="25dp"
+            />
 
-            </Button>
-            <RelativeLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
-                <Button
-                        style="?attr/materialIconButtonStyle"
-                        app:icon="@drawable/favorite"
-                        android:id="@+id/favorite"
-                        android:layout_alignParentLeft="true"
-                        android:layout_width="wrap_content"
-                        android:layout_height="25dp"
-                />
-                <TextView
-                        android:id="@+id/likeNumber"
-                        android:textColor="@color/md_theme_light_primary"
-                        android:layout_marginTop="2dp"
-                        android:textSize="12dp"
-                        android:layout_marginStart="-13dp"
-                        android:layout_toRightOf="@+id/favorite"
-                        android:layout_width="wrap_content"
-                        android:text="6"
-                        android:layout_height="wrap_content">
-
-                </TextView>
-            </RelativeLayout>
             <Button
-                    android:id="@+id/share"
+                    style="?attr/materialIconButtonStyle"
+                    app:icon="@drawable/favorite"
+                    android:layout_width="wrap_content"
+                    android:layout_height="25dp"
+            />
+
+            <Button
                     style="?attr/materialIconButtonStyle"
                     app:icon="@drawable/ic_share"
                     android:layout_width="wrap_content"
-                    android:layout_height="25dp"/>
+                    android:layout_height="25dp"
+            />
 
             <Button
                     style="?attr/materialIconButtonStyle"
                     app:icon="@drawable/ic_more_vert"
-                    android:id="@+id/more"
                     android:layout_width="wrap_content"
                     android:layout_height="25dp"
             />

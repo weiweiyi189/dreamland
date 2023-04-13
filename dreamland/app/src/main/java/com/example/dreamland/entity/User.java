@@ -14,7 +14,7 @@ import java.util.List;
 /**
  * 系统用户
  */
-@EqualsAndHashCode(callSuper=false)
+@EqualsAndHashCode(callSuper = false)
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -29,5 +29,6 @@ public class User extends LitePalSupport implements Serializable {
 
     private String imageUrl;
 
+    private List<Letter> letters = new ArrayList<>();
     private List<Dream> collectDream;
 }

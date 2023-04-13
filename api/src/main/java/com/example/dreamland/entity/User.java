@@ -1,5 +1,6 @@
 package com.example.dreamland.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonView;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -7,6 +8,8 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+
 import java.util.List;
 
 /**
@@ -42,6 +45,13 @@ public class User {
     // 头像
     private String imageUrl;
 
+    @ManyToMany
+    @JsonBackReference
+    private List<Letter> letters = new ArrayList<>();
+
+    public void addLetter(Letter letter) {
+        letters.add(letter);
+    }
     public interface CollectDreamJsonView {
     }
 }
