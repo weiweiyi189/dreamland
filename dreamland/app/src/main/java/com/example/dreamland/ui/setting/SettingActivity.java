@@ -300,6 +300,8 @@ public class SettingActivity extends AppCompatActivity {
                         public void onSuccess(BaseHttpService.CustomerResponse result) {
                             if (result.getResponse().code() >= 200 && result.getResponse().code() < 300) {
                                 Toast.makeText(SettingActivity.this, "上传成功", Toast.LENGTH_SHORT).show();
+                                Intent intent = new Intent(SettingActivity.this,SettingActivity.class);
+                                 startActivity(intent);
                             } else {
                                 // 登陆失败 提示错误
                                 Toast.makeText(SettingActivity.this, "上传失败，请重试", Toast.LENGTH_SHORT).show();
@@ -358,7 +360,6 @@ public class SettingActivity extends AppCompatActivity {
             rxPermissions.request(Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE)
                     .subscribe(granted -> {
                         if (granted) {//申请成功
-//                            showMsg("已获取权限");
                             hasPermissions = true;
                         } else {//申请失败
                             showMsg("权限未开启");

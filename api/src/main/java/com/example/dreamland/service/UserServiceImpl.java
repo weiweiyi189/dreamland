@@ -1,5 +1,7 @@
 package com.example.dreamland.service;
 
+import com.example.dreamland.entity.Letter;
+
 import com.example.dreamland.entity.Dream;
 import com.example.dreamland.entity.User;
 import com.example.dreamland.exceptionHandler.NotAuthenticationException;
@@ -51,7 +53,7 @@ public class UserServiceImpl implements UserService {
     } else {
       // 若用户未点赞，则点赞
       // 梦境点赞数 + 1
-      myDream.setLikes(myDream.getLikes() + 1);
+      myDream.setLikes(myDream.getLikes() == null ? 1 : myDream.getLikes()  +1 );
       collectDream.add(myDream);
     }
     currentUser.setCollectDream(collectDream);
@@ -129,5 +131,12 @@ public class UserServiceImpl implements UserService {
     String token = CommonService.createJwtToken(user.getId());
     response.setHeader(tokenHeader, token);
     return user;
+  }
+
+  @Override
+  public User addUserLetter(Letter letter) {
+    User user=this.getCurrentUser();
+    user.addLetter(letter);
+    return this.userRepository.save(user);
   }
 }

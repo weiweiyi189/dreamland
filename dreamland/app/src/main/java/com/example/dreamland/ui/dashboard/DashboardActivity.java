@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.view.*;
 import android.widget.Button;
 import android.widget.RelativeLayout;
-import android.widget.TextView;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
@@ -32,6 +31,7 @@ import com.example.dreamland.ui.adapter.DreamAdapter;
 import com.example.dreamland.ui.chat.MessageListActivity;
 import com.example.dreamland.ui.dreams.DreamsActivity;
 import com.example.dreamland.ui.dreamtest.DreamTestActivity;
+import com.example.dreamland.ui.music.MainActivity;
 import com.example.dreamland.ui.setting.SettingActivity;
 import com.example.dreamland.ui.floater.FloaterActivity;
 import com.google.android.material.color.DynamicColors;
@@ -130,7 +130,6 @@ public class DashboardActivity extends AppCompatActivity {
                     new DownloadImageTask(headshot)
                             .execute(urlString);
                 }
-
             }
         });
 
@@ -149,6 +148,9 @@ public class DashboardActivity extends AppCompatActivity {
                         break;
                     case R.id.sleep:
                         drawerLayout.close();
+                        Intent intent5 = new Intent(DashboardActivity.this, MainActivity.class);
+                        startActivity(intent5, null);
+                        overridePendingTransition(0, 0);
                         break;
                     case R.id.dreams:
                         drawerLayout.close();
@@ -177,6 +179,29 @@ public class DashboardActivity extends AppCompatActivity {
         });
         this.initList();
         this.setRefresh();
+//        link = findViewById(R.id.share);
+//        link.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Toast.makeText(DashboardActivity.this, "点击了分享", Toast.LENGTH_SHORT).show();
+//            }
+//        });
+    }
+
+
+    public void test(){
+        Toast.makeText(DashboardActivity.this, "点击了分享", Toast.LENGTH_SHORT).show();
+    }
+
+    /**
+     * 点击进行分享
+     */
+    public void share() {
+        // 设置要分享的内容
+        String shareContent = "#神码工作室#博客地址：https://blog.csdn.net/qq15577969";
+        SharePopupWindow spw = new SharePopupWindow(this, shareContent);
+        // 显示窗口
+        spw.showAtLocation(drawerLayout, Gravity.BOTTOM, 0, 0);
     }
 
     /**
