@@ -22,9 +22,8 @@ public class DreamServiceImpl implements DreamService {
     }
 
     @Override
-    public List<Dream> getAllByCurrentUser() {
-        User user = this.userService.getCurrentUser();
-        return this.dreamRepository.findAllByUserIdAndCreamTimeDesc(user.getId());
+    public List<Dream> getAll() {
+        return this.dreamRepository.findAllByOrderByCreateTimeDesc();
     }
 
     @Override

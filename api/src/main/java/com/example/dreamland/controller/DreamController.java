@@ -18,7 +18,7 @@ public class DreamController {
     @GetMapping("getAll")
     @JsonView(GetAllJsonView.class)
     public List<Dream> getAll() {
-        return this.dreamService.getAllByCurrentUser();
+        return this.dreamService.getAll();
     }
 
     @PostMapping("add")

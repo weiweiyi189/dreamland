@@ -30,6 +30,7 @@ import com.example.dreamland.ui.dreams.DreamsActivity;
 import com.example.dreamland.ui.util.BitmapUtils;
 import com.example.dreamland.ui.util.CameraUtils;
 import com.example.dreamland.ui.util.SPUtils;
+import com.example.dreamland.ui.writeDream.WriteDreamActivity;
 import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.imageview.ShapeableImageView;
@@ -47,6 +48,11 @@ public class SettingActivity extends AppCompatActivity {
 
     private final UserService userService = UserService.getInstance();
 
+    //android 捕获返回（后退）按钮事件
+    public void onBackPressed() {
+        finish();
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,20 +66,17 @@ public class SettingActivity extends AppCompatActivity {
         topAppBar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(SettingActivity.this, DashboardActivity.class);
-                startActivity(intent, null);
+                finish();
             }
         });
 
         LinearLayout avatar = findViewById(R.id.avatar);
         LinearLayout account = findViewById(R.id.account);
-        LinearLayout email = findViewById(R.id.email);
         LinearLayout password = findViewById(R.id.password);
         LinearLayout about = findViewById(R.id.about);
         LinearLayout exit = findViewById(R.id.exit);
 
         TextView accounts = findViewById(R.id.accounts);
-        TextView emails = findViewById(R.id.emails);
         CircleImageView touxiang = findViewById(R.id.touxiang);
 
 
@@ -88,11 +91,11 @@ public class SettingActivity extends AppCompatActivity {
                 if (result.getResponse().code() >= 200 && result.getResponse().code() < 300) {
                     System.out.println(currentUser.getImageUrl());
                     accounts.append("        "+currentUser.getUsername());
-                    emails.append("        "+currentUser.getUsername());
-                    String urlString = BaseHttpService.BASE_URL + currentUser.getImageUrl();
-                    new DownloadImageTask(touxiang)
-                            .execute(urlString);
-//                    touxiang.setImageURI(Uri.parse(urlString));
+                    if(userService.currentUser.getValue().getImageUrl()!=""&&userService.currentUser.getValue().getImageUrl()!=null){
+                        String urlString = BaseHttpService.BASE_URL + currentUser.getImageUrl();
+                        new DownloadImageTask(touxiang)
+                                .execute(urlString);
+                    }
                 } else {
                     // 登陆失败 提示错误
                     Toast.makeText(SettingActivity.this, "信息预加载失败", Toast.LENGTH_SHORT).show();
@@ -113,14 +116,6 @@ public class SettingActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(SettingActivity.this, AccountActivity.class);
-                startActivity(intent);
-                finish();
-            }
-        });
-        email.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(SettingActivity.this, EmailActivity.class);
                 startActivity(intent);
                 finish();
             }
@@ -270,6 +265,16 @@ public class SettingActivity extends AppCompatActivity {
                         public void onSuccess(BaseHttpService.CustomerResponse result) {
                             if (result.getResponse().code() >= 200 && result.getResponse().code() < 300) {
                                 Toast.makeText(SettingActivity.this, "上传成功", Toast.LENGTH_SHORT).show();
+                                userService.getCurrentUser(new BaseHttpService.CallBack() {
+                                    @Override
+                                    public void onSuccess(BaseHttpService.CustomerResponse result) {
+                                        if (result.getResponse().code() >= 200 && result.getResponse().code() < 300) {
+                                            userService.currentUser.onNext((User) result.getData());
+                                        } else {
+                                            Toast.makeText(SettingActivity.this, "更新头像失败", Toast.LENGTH_SHORT).show();
+                                        }
+                                    }
+                                });
                                 Intent intent = new Intent(SettingActivity.this,SettingActivity.class);
                                 startActivity(intent);
                             } else {
@@ -295,8 +300,6 @@ public class SettingActivity extends AppCompatActivity {
                         public void onSuccess(BaseHttpService.CustomerResponse result) {
                             if (result.getResponse().code() >= 200 && result.getResponse().code() < 300) {
                                 Toast.makeText(SettingActivity.this, "上传成功", Toast.LENGTH_SHORT).show();
-                                Intent intent = new Intent(SettingActivity.this,SettingActivity.class);
-                                startActivity(intent);
                             } else {
                                 // 登陆失败 提示错误
                                 Toast.makeText(SettingActivity.this, "上传失败，请重试", Toast.LENGTH_SHORT).show();
@@ -355,7 +358,7 @@ public class SettingActivity extends AppCompatActivity {
             rxPermissions.request(Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE)
                     .subscribe(granted -> {
                         if (granted) {//申请成功
-                            showMsg("已获取权限");
+//                            showMsg("已获取权限");
                             hasPermissions = true;
                         } else {//申请失败
                             showMsg("权限未开启");

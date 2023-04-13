@@ -31,6 +31,7 @@ import com.example.dreamland.ui.adapter.ClickListener;
 import com.example.dreamland.ui.adapter.DreamAdapter;
 import com.example.dreamland.ui.chat.MessageListActivity;
 import com.example.dreamland.ui.dreams.DreamsActivity;
+import com.example.dreamland.ui.dreamtest.DreamTestActivity;
 import com.example.dreamland.ui.setting.SettingActivity;
 import com.example.dreamland.ui.floater.FloaterActivity;
 import com.google.android.material.color.DynamicColors;
@@ -106,6 +107,13 @@ public class DashboardActivity extends AppCompatActivity {
         //设置不可再次点击
         findViewById(R.id.item_1).setClickable(false);
 
+
+        //解决分享bug
+        drawerLayout = (DrawerLayout) findViewById(R.id.drawerLayout);
+        drawerLayout.openDrawer(GravityCompat.START);
+        drawerLayout.close();
+
+
         // 设置侧边栏
         binding.topAppBar.setNavigationIcon(R.drawable.menu);
         // 设置navigation button 点击事件
@@ -116,7 +124,8 @@ public class DashboardActivity extends AppCompatActivity {
                 drawerLayout.openDrawer(GravityCompat.START);
                 //加载头像
                 CircleImageView headshot = findViewById(R.id.headshot);
-                if(userService.currentUser.getValue().getImageUrl().length()!=0){
+                if(userService.currentUser.getValue().getImageUrl()!=""&&userService.currentUser.getValue().getImageUrl()!=null){
+
                     String urlString = BaseHttpService.BASE_URL + userService.currentUser.getValue().getImageUrl();
                     new DownloadImageTask(headshot)
                             .execute(urlString);
@@ -140,7 +149,6 @@ public class DashboardActivity extends AppCompatActivity {
                         break;
                     case R.id.sleep:
                         drawerLayout.close();
-                        share("a");
                         break;
                     case R.id.dreams:
                         drawerLayout.close();
@@ -158,6 +166,10 @@ public class DashboardActivity extends AppCompatActivity {
                         drawerLayout.close();
                         Intent intent4 = new Intent(DashboardActivity.this, FloaterActivity.class);
                         startActivity(intent4, null);
+                        break;
+                    case R.id.dream_test:
+                        drawerLayout.close();
+                        startActivity(new Intent(DashboardActivity.this, DreamTestActivity.class), null);
                         break;
                 }
                 return true;
@@ -217,7 +229,6 @@ public class DashboardActivity extends AppCompatActivity {
                     }, dreams.get(position));
                 }
                 else if(view.getId() == R.id.share) {
-                    Toast.makeText(DashboardActivity.this, dreams.get(position).getContent().toString(), Toast.LENGTH_SHORT).show();
                     share("您的好友："+userService.currentUser.getValue().getUsername()+"\n给您分享了一个有趣的梦境：\n"+dreams.get(position).getContent().toString()+"\n\n来自伯奇·梦境分享");
                 }
             }

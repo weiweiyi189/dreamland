@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- 首页 -->
-
 <androidx.drawerlayout.widget.DrawerLayout
         android:id="@+id/drawerLayout"
         xmlns:android="http://schemas.android.com/apk/res/android"
@@ -8,9 +7,7 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.dashboard.DashboardActivity"
-        tools:openDrawer="start">
-
+        tools:context=".ui.dashboard.DashboardActivity">
     <androidx.coordinatorlayout.widget.CoordinatorLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -91,5 +88,4 @@
             app:headerLayout="@layout/header_navigation_drawer"
             android:layout_gravity="start"
             android:background="#FFFFFF"/>
-
 </androidx.drawerlayout.widget.DrawerLayout>

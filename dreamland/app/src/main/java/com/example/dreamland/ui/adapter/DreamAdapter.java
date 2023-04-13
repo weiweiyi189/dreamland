@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
@@ -19,10 +20,12 @@ import com.example.dreamland.R;
 import com.example.dreamland.entity.Dream;
 import com.example.dreamland.entity.User;
 import com.example.dreamland.service.BaseHttpService;
+import com.example.dreamland.service.DownloadImageTask;
 import com.example.dreamland.service.UserService;
 import com.example.dreamland.ui.auth.EnrollActivity;
 import com.example.dreamland.ui.auth.LoginActivity;
 import com.example.dreamland.ui.util.dateUtil;
+import de.hdodenhof.circleimageview.CircleImageView;
 import com.google.android.material.button.MaterialButton;
 import org.jetbrains.annotations.NotNull;
 
@@ -37,7 +40,7 @@ public class DreamAdapter extends RecyclerView.Adapter<DreamAdapter.ViewHolder> 
 
     private final ClickListener listener;
 
-    private final UserService userService = UserService.getInstance();
+    private static final UserService userService = UserService.getInstance();
 
     public static class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         TextView username;
@@ -49,6 +52,8 @@ public class DreamAdapter extends RecyclerView.Adapter<DreamAdapter.ViewHolder> 
         Button comment;
         Button share;
         Button more;
+
+        CircleImageView proFile;
 
         private WeakReference<ClickListener> listenerRef;
 
@@ -67,6 +72,10 @@ public class DreamAdapter extends RecyclerView.Adapter<DreamAdapter.ViewHolder> 
             share.setOnClickListener(this);
             more = (Button) view.findViewById(R.id.more);
             more.setOnClickListener(this);
+            proFile = (CircleImageView) view.findViewById(R.id.pro_file);
+            String urlString = BaseHttpService.BASE_URL + userService.currentUser.getValue().getImageUrl();
+            new DownloadImageTask(proFile)
+                    .execute(urlString);
         }
 
         @Override
