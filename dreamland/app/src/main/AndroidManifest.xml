@@ -43,9 +43,6 @@
                 android:name=".ui.dreamtest.DreamTestActivity"
                 android:exported="false" />
         <activity
-                android:name=".ui.setting.PicActivity"
-                android:exported="false"/>
-        <activity
                 android:name=".ui.setting.AboutActivity"
                 android:exported="false"/>
         <activity
