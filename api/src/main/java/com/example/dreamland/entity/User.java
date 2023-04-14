@@ -45,6 +45,9 @@ public class User {
     // 头像
     private String imageUrl;
 
+    @Transient
+    private byte[] image;
+
     @ManyToMany
     @JsonBackReference
     private List<Letter> letters = new ArrayList<>();

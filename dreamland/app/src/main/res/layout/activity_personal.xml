@@ -46,19 +46,23 @@
             <com.google.android.material.tabs.TabLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:id="@+id/tabLayout" app:layout_constraintTop_toBottomOf="@+id/topAppBar"
-                    android:layout_marginBottom="1dp" app:layout_constraintEnd_toEndOf="parent"
+                    android:id="@+id/tabLayout"
+                    app:layout_constraintTop_toBottomOf="@+id/topAppBar"
+                    android:layout_marginBottom="1dp"
+                    app:layout_constraintEnd_toEndOf="parent"
                     android:layout_marginStart="211dp"
                     app:layout_constraintBottom_toTopOf="@+id/swipe_refresh"
                     app:layout_constraintStart_toStartOf="parent"
                     android:background="#FBFAFA">
                 <com.google.android.material.tabs.TabItem
+                        android:contentDescription="my"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/yuanchuang"
                 />
 
                 <com.google.android.material.tabs.TabItem
+                        android:contentDescription="collect"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/shoucang"

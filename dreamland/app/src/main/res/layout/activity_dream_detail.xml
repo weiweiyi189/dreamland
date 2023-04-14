@@ -51,6 +51,7 @@
                     android:orientation="horizontal">
                 <!-- Media -->
                 <de.hdodenhof.circleimageview.CircleImageView
+                        android:id="@+id/user_detail_image"
                         android:layout_width="0dp"
                         android:layout_weight="1"
                         android:layout_height="match_parent"

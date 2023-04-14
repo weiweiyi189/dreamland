@@ -1,10 +1,13 @@
 package com.example.dreamland.service;
 
+import android.os.Build;
 import com.example.dreamland.entity.Dream;
 import com.example.dreamland.entity.User;
 import com.example.dreamland.entity.VoUser;
 import io.reactivex.rxjava3.subjects.BehaviorSubject;
 import okhttp3.RequestBody;
+
+import java.util.List;
 
 public class UserService {
     // 若启用nginx 则为后台的转发url
@@ -78,6 +81,19 @@ public class UserService {
      */
     public void updatePassword(BaseHttpService.CallBack callBack,VoUser user) {
         httpService.put(LOCAL_URL + "user/updatePassword", user, callBack, VoUser.class);
+    }
+
+    static public void setCollectDreamToCurrentUser(Dream dream) {
+        User currentUser = userService.currentUser.getValue();
+        List<Dream> dreamList = currentUser.getCollectDream();
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            boolean deleteResult = dreamList.removeIf((dream1 -> dream1.getId().equals(dream.getId())));
+            if (!deleteResult) {
+                dreamList.add(dream);
+            }
+        }
+        currentUser.setCollectDream(dreamList);
+        userService.currentUser.onNext(currentUser);
     }
 
 }

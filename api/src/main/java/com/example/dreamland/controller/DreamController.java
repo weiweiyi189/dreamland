@@ -21,6 +21,19 @@ public class DreamController {
         return this.dreamService.getAll();
     }
 
+    @GetMapping("getAllByCurrentUser")
+    @JsonView(GetAllJsonView.class)
+    public List<Dream> getAllByCurrentUser() {
+        return this.dreamService.getAllByCurrentUser();
+    }
+
+    @GetMapping("getCollectDream")
+    @JsonView(GetAllJsonView.class)
+    public List<Dream> getCollectDream() {
+        return this.dreamService.getCollectDreamByCurrentUser();
+    }
+
+
     @PostMapping("add")
     @JsonView(GetByIdJsonView.class)
     public Dream add(@RequestBody Dream dream) {

@@ -7,6 +7,7 @@ import com.example.dreamland.entity.User;
 import com.example.dreamland.exceptionHandler.NotAuthenticationException;
 import com.example.dreamland.repository.DreamRepository;
 import com.example.dreamland.repository.UserRepository;
+import org.apache.commons.compress.utils.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.multipart.MultipartFile;
 import com.mengyunzhi.core.exception.ObjectNotFoundException;
@@ -17,6 +18,11 @@ import org.springframework.stereotype.Service;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.xml.bind.ValidationException;
+import java.io.IOException;
+import java.io.InputStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 
 @Service
@@ -106,7 +112,7 @@ public class UserServiceImpl implements UserService {
   }
 
   @Override
-  public User getCurrentUser(HttpServletRequest request) {
+  public User getCurrentUser(HttpServletRequest request){
     String token = request.getHeader(UserServiceImpl.tokenHeader);
     Long id = Long.valueOf(CommonService.parseJWT(token).getId());
 
@@ -117,8 +123,9 @@ public class UserServiceImpl implements UserService {
     return user;
   }
 
+
   @Override
-  public User getCurrentUser() {
+  public User getCurrentUser(){
     return getCurrentUser(request);
   }
 
@@ -134,7 +141,7 @@ public class UserServiceImpl implements UserService {
   }
 
   @Override
-  public User addUserLetter(Letter letter) {
+  public User addUserLetter(Letter letter){
     User user=this.getCurrentUser();
     user.addLetter(letter);
     return this.userRepository.save(user);
