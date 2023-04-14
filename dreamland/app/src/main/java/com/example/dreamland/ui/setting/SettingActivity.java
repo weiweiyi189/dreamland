@@ -88,7 +88,6 @@ public class SettingActivity extends AppCompatActivity {
             public void onSuccess(BaseHttpService.CustomerResponse result) {
                 //获取当前登陆用户
                 User currentUser= (User) result.getData();
-                System.out.println(currentUser.getUsername());
                 // 加载个人信息成功
                 if (result.getResponse().code() >= 200 && result.getResponse().code() < 300) {
                     System.out.println(currentUser.getImageUrl());
