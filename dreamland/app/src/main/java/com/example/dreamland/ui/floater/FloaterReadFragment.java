@@ -1,26 +1,38 @@
 package com.example.dreamland.ui.floater;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.dreamland.R;
+
+import com.example.dreamland.entity.Letter;
+import com.example.dreamland.service.BaseHttpService;
+import com.example.dreamland.service.DreamService;
+import com.example.dreamland.service.LetterService;
+import com.example.dreamland.service.UserService;
+import com.example.dreamland.ui.adapter.LetterAdapter;
+
 import com.example.dreamland.entity.Dream;
 import com.example.dreamland.entity.User;
 import com.example.dreamland.ui.adapter.ClickListener;
 import com.example.dreamland.ui.adapter.DreamAdapter;
 
-import java.sql.Timestamp;
+
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 
 public class FloaterReadFragment extends Fragment {
-    private DreamAdapter dreamAdapter;
-    private List<Dream> dreams = new LinkedList<>();
+    private LetterAdapter letterAdapter;
+    private List<Letter> letters=new LinkedList<>();
+    private LetterService letterService = LetterService.getInstance();
+    private UserService userService = UserService.getInstance();
     private View view;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -30,28 +42,21 @@ public class FloaterReadFragment extends Fragment {
         return view;
     }
     public void initList() {
-        User user = new User();
-        user.setUsername("用户快斗斗丶");
+        letterService.getAllshowed(new BaseHttpService.CallBack() {
+            @Override
+            public void onSuccess(BaseHttpService.CustomerResponse result) {
+                List<Letter> letterList = new ArrayList<>(Arrays.asList((Letter[]) result.getData()));
+                letters.clear();
+                letters.addAll(letterList);
+                letterAdapter.notifyDataSetChanged();
+            }
+        },new Long(userService.currentUser.getValue().getId()));
 
-        Dream dream = new Dream();
-        dream.setContent("  是载满星云的玄霄, 亦是播洒清梦的红壤.\n  漂出你的思绪, 捞起我的奇遇.\n  这里, 皆你我的天地.\n");
-        dream.setCreateTime(new Timestamp(1679383693000L));
-        dream.setId(1L);
-        dream.setCreateUser(user);
-
-        for (int i = 0; i < 10; i++) {
-            this.dreams.add(dream);
-        }
 
         RecyclerView recyclerView= view.findViewById(R.id.floaterReadRecyclerView);
         LinearLayoutManager layout = new LinearLayoutManager(getContext());
-        this.dreamAdapter = new DreamAdapter(this.dreams, new ClickListener() {
-            @Override public void onPositionClicked(int position, View view) {
-                // callback performed on click
-            }
-
-        });
+        this.letterAdapter = new LetterAdapter(this.letters);
         recyclerView.setLayoutManager(layout);
-        recyclerView.setAdapter(this.dreamAdapter);
+        recyclerView.setAdapter(this.letterAdapter);
     }
 }

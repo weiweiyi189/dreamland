@@ -4,6 +4,7 @@
           package="com.example.dreamland">
 
     <uses-permission android:name="android.permission.INTERNET"/> <!-- 网络权限 -->
+    <uses-permission android:name="android.permission.INTERNET"/> <!-- 相机权限 -->
     <uses-permission android:name="android.permission.CAMERA"/> <!-- 读写文件权限 -->
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
@@ -41,6 +42,9 @@
         <activity
                 android:name=".ui.dreamtest.DreamTestActivity"
                 android:exported="false" />
+        <activity
+                android:name=".ui.setting.PicActivity"
+                android:exported="false"/>
         <activity
                 android:name=".ui.setting.AboutActivity"
                 android:exported="false"/>

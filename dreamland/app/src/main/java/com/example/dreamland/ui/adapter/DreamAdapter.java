@@ -8,7 +8,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
@@ -18,6 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.dreamland.MainApplication;
 import com.example.dreamland.R;
 import com.example.dreamland.entity.Dream;
+import com.example.dreamland.service.BaseHttpService;
 import com.example.dreamland.entity.User;
 import com.example.dreamland.service.BaseHttpService;
 import com.example.dreamland.service.DownloadImageTask;
@@ -54,7 +54,6 @@ public class DreamAdapter extends RecyclerView.Adapter<DreamAdapter.ViewHolder> 
         Button more;
 
         CircleImageView proFile;
-
         private WeakReference<ClickListener> listenerRef;
 
         public ViewHolder(View view, ClickListener listener) {
@@ -90,6 +89,7 @@ public class DreamAdapter extends RecyclerView.Adapter<DreamAdapter.ViewHolder> 
      * @param dataSet String[] containing the data to populate views to be used
      *                by RecyclerView.
      */
+
     public DreamAdapter(List<Dream> dataSet, ClickListener listener) {
         dreams = dataSet;
         this.listener = listener;

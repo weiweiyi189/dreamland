@@ -115,7 +115,6 @@ public class PersonalActivity extends AppCompatActivity {
                     new DownloadImageTask(headshot)
                             .execute(urlString);
                 }
-
             }
         });
 

@@ -79,4 +79,5 @@ public class UserService {
     public void updatePassword(BaseHttpService.CallBack callBack,VoUser user) {
         httpService.put(LOCAL_URL + "user/updatePassword", user, callBack, VoUser.class);
     }
+
 }

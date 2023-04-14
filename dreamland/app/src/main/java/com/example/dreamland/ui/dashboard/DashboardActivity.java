@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.view.*;
 import android.widget.Button;
 import android.widget.RelativeLayout;
-import android.widget.TextView;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
@@ -131,7 +130,6 @@ public class DashboardActivity extends AppCompatActivity {
                     new DownloadImageTask(headshot)
                             .execute(urlString);
                 }
-
             }
         });
 
@@ -181,6 +179,29 @@ public class DashboardActivity extends AppCompatActivity {
         });
         this.initList();
         this.setRefresh();
+//        link = findViewById(R.id.share);
+//        link.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Toast.makeText(DashboardActivity.this, "点击了分享", Toast.LENGTH_SHORT).show();
+//            }
+//        });
+    }
+
+
+    public void test(){
+        Toast.makeText(DashboardActivity.this, "点击了分享", Toast.LENGTH_SHORT).show();
+    }
+
+    /**
+     * 点击进行分享
+     */
+    public void share() {
+        // 设置要分享的内容
+        String shareContent = "#神码工作室#博客地址：https://blog.csdn.net/qq15577969";
+        SharePopupWindow spw = new SharePopupWindow(this, shareContent);
+        // 显示窗口
+        spw.showAtLocation(drawerLayout, Gravity.BOTTOM, 0, 0);
     }
 
     /**
