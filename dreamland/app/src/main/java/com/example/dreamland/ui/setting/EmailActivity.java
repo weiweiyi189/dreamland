@@ -28,7 +28,7 @@ public class EmailActivity extends AppCompatActivity {
         topAppBar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(EmailActivity.this,SettingActivity.class);
+                Intent intent = new Intent(EmailActivity.this, SettingActivity.class);
                 startActivity(intent);
                 finish();
             }

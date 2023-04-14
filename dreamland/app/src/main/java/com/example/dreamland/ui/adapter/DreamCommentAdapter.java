@@ -11,6 +11,7 @@ import com.example.dreamland.R;
 
 import com.example.dreamland.entity.DreamComment;
 import com.example.dreamland.ui.util.dateUtil;
+import de.hdodenhof.circleimageview.CircleImageView;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Date;
@@ -25,11 +26,14 @@ public class DreamCommentAdapter extends RecyclerView.Adapter<DreamCommentAdapte
         Button createTime;
         TextView content;
 
+        CircleImageView proFile;
+
         public ViewHolder(View view) {
             super(view);
             username = (TextView) view.findViewById(R.id.dream_detail_user);
             createTime = (Button) view.findViewById(R.id.outlinedButton);
             content = (TextView) view.findViewById(R.id.dream_comment_content);
+            proFile = (CircleImageView) view.findViewById(R.id.user_image);
         }
     }
 
@@ -62,6 +66,7 @@ public class DreamCommentAdapter extends RecyclerView.Adapter<DreamCommentAdapte
         String creatTimeText = dateUtil.getTimeBeforeAccurate(new Date(comment.getCreateTime().getTime()));
         viewHolder.createTime.setText(creatTimeText);
         viewHolder.username.setText(comment.getCreateUser().getUsername());
+        viewHolder.proFile.setImageBitmap(comment.getCreateUser().getImage());
     }
 
     // Return the size of your dataset (invoked by the layout manager)

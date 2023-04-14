@@ -53,8 +53,7 @@ public class DreamsActivity extends AppCompatActivity  implements View.OnClickLi
         topAppBar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(DreamsActivity.this, DashboardActivity.class);
-                startActivity(intent, null);
+                finish();
             }
         });
 

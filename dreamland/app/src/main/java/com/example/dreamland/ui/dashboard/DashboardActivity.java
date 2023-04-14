@@ -5,27 +5,21 @@ import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.*;
-import android.widget.Button;
-import android.widget.RelativeLayout;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.ContextCompat;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
-import com.example.dreamland.MainApplication;
 import com.example.dreamland.R;
 import com.example.dreamland.databinding.ActivityDashboardBinding;
 import com.example.dreamland.entity.Dream;
+import com.example.dreamland.entity.DreamComment;
 import com.example.dreamland.entity.User;
-import com.example.dreamland.service.BaseHttpService;
-import com.example.dreamland.service.DownloadImageTask;
-import com.example.dreamland.service.DreamService;
-import com.example.dreamland.service.UserService;
+import com.example.dreamland.service.*;
 import com.example.dreamland.ui.adapter.ClickListener;
 import com.example.dreamland.ui.adapter.DreamAdapter;
 import com.example.dreamland.ui.chat.MessageListActivity;
@@ -39,9 +33,11 @@ import com.google.android.material.navigation.NavigationBarView;
 import com.google.android.material.navigation.NavigationView;
 import de.hdodenhof.circleimageview.CircleImageView;
 import org.jetbrains.annotations.NotNull;
-import org.litepal.LitePal;
 
 import java.util.*;
+
+import static com.example.dreamland.service.DreamCommentService.UIHandler;
+import static com.example.dreamland.service.UserService.setCollectDreamToCurrentUser;
 
 /**
  * 首页
@@ -120,19 +116,10 @@ public class DashboardActivity extends AppCompatActivity {
         binding.topAppBar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                drawerLayout = (DrawerLayout) findViewById(R.id.drawerLayout);
                 drawerLayout.openDrawer(GravityCompat.START);
-
-                //加载头像
-                CircleImageView headshot = findViewById(R.id.headshot);
-                if(userService.currentUser.getValue().getImageUrl()!=""&&userService.currentUser.getValue().getImageUrl()!=null){
-                    String urlString = BaseHttpService.BASE_URL + userService.currentUser.getValue().getImageUrl();
-                    new DownloadImageTask(headshot)
-                            .execute(urlString);
-                }
+                loadCurrentUserImage();
             }
         });
-
 
         NavigationView navigationView = binding.NavigationView;
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
@@ -179,29 +166,13 @@ public class DashboardActivity extends AppCompatActivity {
         });
         this.initList();
         this.setRefresh();
-//        link = findViewById(R.id.share);
-//        link.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Toast.makeText(DashboardActivity.this, "点击了分享", Toast.LENGTH_SHORT).show();
-//            }
-//        });
     }
 
-
-    public void test(){
-        Toast.makeText(DashboardActivity.this, "点击了分享", Toast.LENGTH_SHORT).show();
-    }
-
-    /**
-     * 点击进行分享
-     */
-    public void share() {
-        // 设置要分享的内容
-        String shareContent = "#神码工作室#博客地址：https://blog.csdn.net/qq15577969";
-        SharePopupWindow spw = new SharePopupWindow(this, shareContent);
-        // 显示窗口
-        spw.showAtLocation(drawerLayout, Gravity.BOTTOM, 0, 0);
+    private void loadCurrentUserImage() {
+        CircleImageView headshot = findViewById(R.id.headshot);
+        User newUser = new NewDownloadTask(userService.currentUser.getValue()).download();
+        headshot.setImageBitmap(newUser.getImage());
+        userService.currentUser.onNext(newUser);
     }
 
     /**
@@ -213,10 +184,12 @@ public class DashboardActivity extends AppCompatActivity {
         spw.showAtLocation(drawerLayout, Gravity.BOTTOM, 0, 0);
     }
 
-
-    public void OnItemClick(View view) {
-        // 获取itemView的位置
-        int position = recyclerView.getChildAdapterPosition(view);
+    /**
+     * 跳转详细页面
+     *
+     * @param position
+     */
+    public void onItemClick(int position) {
         Intent intent = new Intent(DashboardActivity.this, DetailActivity.class);
         Bundle bundle = new Bundle();
         bundle.putSerializable("dream", dreams.get(position));
@@ -224,26 +197,20 @@ public class DashboardActivity extends AppCompatActivity {
         startActivity(intent, null);
     }
 
+
     @Override
     protected void onResume() {
         super.onResume();
         navigationView.getMenu().findItem(R.id.item_1).setChecked(true);
-        swipe_refresh.post(new Runnable() {
-            @Override
-            public void run() {
-                swipe_refresh.setRefreshing(true);
-            }
-        });
-        this.refreshData();
     }
 
     public void initList() {
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
         LinearLayoutManager layout = new LinearLayoutManager(this);
         this.dreamAdapter = new DreamAdapter(this.dreams, new ClickListener() {
-            @Override public void onPositionClicked(int position, View view) {
-                if(view.getId() == R.id.favorite) {
-
+            @Override
+            public void onPositionClicked(int position, View view) {
+                if (view.getId() == R.id.favorite) {
                     userService.likeDream(new BaseHttpService.CallBack() {
                         @Override
                         public void onSuccess(BaseHttpService.CustomerResponse result) {
@@ -253,27 +220,17 @@ public class DashboardActivity extends AppCompatActivity {
                             dreamAdapter.notifyDataSetChanged();
                         }
                     }, dreams.get(position));
-                }
-                else if(view.getId() == R.id.share) {
-                    share("您的好友："+userService.currentUser.getValue().getUsername()+"\n给您分享了一个有趣的梦境：\n"+dreams.get(position).getContent().toString()+"\n\n来自伯奇·梦境分享");
+                } else if (view.getId() == R.id.share) {
+                    share("您的好友：" + userService.currentUser.getValue().getUsername() + "\n给您分享了一个有趣的梦境：\n" + dreams.get(position).getContent().toString() + "\n\n来自伯奇·梦境分享");
+                } else if (view.getId() == R.id.more) {
+
+                } else {
+                    onItemClick(position);
                 }
             }
         });
         recyclerView.setLayoutManager(layout);
         recyclerView.setAdapter(this.dreamAdapter);
-    }
-
-    public void setCollectDreamToCurrentUser(Dream dream) {
-        User currentUser = userService.currentUser.getValue();
-        List<Dream> dreamList = currentUser.getCollectDream();
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-            boolean deleteResult = dreamList.removeIf((dream1 -> dream1.getId().equals(dream.getId())));
-             if(!deleteResult) {
-                 dreamList.add(dream);
-             }
-        }
-        currentUser.setCollectDream(dreamList);
-        userService.currentUser.onNext(currentUser);
     }
 
 
@@ -282,12 +239,21 @@ public class DashboardActivity extends AppCompatActivity {
             @SuppressLint("NotifyDataSetChanged")
             @Override
             public void onSuccess(BaseHttpService.CustomerResponse result) {
-                List<Dream> dreamList = new ArrayList<>(Arrays.asList((Dream[]) result.getData()));
-                dreams.clear();
-                dreams.addAll(dreamList);
-                dreamAdapter.notifyDataSetChanged();
+                updateItem(result, dreams, dreamAdapter);
+                swipe_refresh.setRefreshing(false);
             }
         });
+    }
+
+    public static void updateItem(BaseHttpService.CustomerResponse result, List<Dream> dreams, DreamAdapter dreamAdapter) {
+        List<Dream> dreamList = new ArrayList<>(Arrays.asList((Dream[]) result.getData()));
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+//            dreamList.forEach(dream -> new NewDownloadTask(dream.getCreateUser()).download());
+//        }
+        downloadFun(dreamList, dreamAdapter);
+        dreams.clear();
+        dreams.addAll(dreamList);
+        dreamAdapter.notifyDataSetChanged();
     }
 
     private void setRefresh() {
@@ -305,27 +271,64 @@ public class DashboardActivity extends AppCompatActivity {
                 swipe_refresh.setRefreshing(true);
             }
         });
+        refreshData();
     }
 
     private void refreshData() {
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    Thread.sleep(1000);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
+        new Thread(() -> {
+//            try {
+//                Thread.sleep(1000);
+//            } catch (InterruptedException e) {
+//                throw new RuntimeException(e);
+//            }
+            runOnUiThread(new Runnable() {
+                @SuppressLint("NotifyDataSetChanged")
+                @Override
+                public void run() {
+                    initDataAndSort();
                 }
-                runOnUiThread(new Runnable() {
-                    @SuppressLint("NotifyDataSetChanged")
+            });
+        }).start();
+    }
+
+    /**
+     * 先加载7个头像，剩余慢慢加载
+     * @param dreams
+     */
+    private static void downloadFun(List<Dream> dreams, DreamAdapter dreamAdapter) {
+        List<Dream> toDownload = dreams.subList(0, Math.min(dreams.size(), 7));
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            toDownload.forEach(dream -> new NewDownloadTask(dream.getCreateUser()).download());
+        }
+
+        if (dreams.size() > 7) {
+            new Thread(() -> {
+                for (int i = 7; i < dreams.size(); i++) {
+                    Dream dream = dreams.get(i);
+                    new NewDownloadTask(dream.getCreateUser()).download();
+                }
+                Timer timer = new Timer(true);
+                TimerTask timerTask = new TimerTask() {
                     @Override
                     public void run() {
-                        initDataAndSort();
-                        swipe_refresh.setRefreshing(false);
+                        UIHandler.post(new Runnable() {
+                            @Override
+                            public void run() {
+                                dreamAdapter.notifyDataSetChanged();
+                            }
+                        });
                     }
-                });
-            }
-        }).start();
+                };
+                timer.schedule(timerTask, 0, 500);
+            }).start();
+        } else {
+            UIHandler.post(new Runnable() {
+                @Override
+                public void run() {
+                    dreamAdapter.notifyDataSetChanged();
+                }
+            });
+        }
     }
 
 }

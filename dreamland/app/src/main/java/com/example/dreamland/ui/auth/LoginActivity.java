@@ -16,10 +16,12 @@ import android.widget.EditText;
 import com.example.dreamland.R;
 import com.example.dreamland.entity.User;
 import com.example.dreamland.service.BaseHttpService;
+import com.example.dreamland.service.NewDownloadTask;
 import com.example.dreamland.service.UserService;
 import com.example.dreamland.ui.dashboard.DashboardActivity;
 import com.google.android.material.color.DynamicColors;
 import com.google.android.material.snackbar.Snackbar;
+import de.hdodenhof.circleimageview.CircleImageView;
 
 /**
  * 登录界面
@@ -95,6 +97,7 @@ public class LoginActivity extends AppCompatActivity {
                                     Intent intent = new Intent(LoginActivity.this, DashboardActivity.class);
                                     startActivity(intent);
                                     Toast.makeText(LoginActivity.this, "登陆成功", Toast.LENGTH_SHORT).show();
+                                    loadCurrentUserImage();
                                 } else {
                                     // 登陆失败 提示错误
                                     Toast.makeText(LoginActivity.this, "用户名或密码错误", Toast.LENGTH_SHORT).show();
@@ -114,16 +117,12 @@ public class LoginActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
-//        //找回密码界面跳转
-//        forgotPassword.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Intent intent = new Intent(LoginActivity.this, ForgetActivity.class);
-//                startActivity(intent);
-//            }
-//        });
-
     }
+
+    private void loadCurrentUserImage() {
+        User newUser = new NewDownloadTask(userService.currentUser.getValue()).download();
+        userService.currentUser.onNext(newUser);
+    }
+
 
 }

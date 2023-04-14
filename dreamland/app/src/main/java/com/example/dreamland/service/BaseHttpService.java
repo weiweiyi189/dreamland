@@ -32,8 +32,7 @@ public class BaseHttpService {
      * 个人开发时，手机和电脑连接同一局域网，填写电脑的ipv4地址
      * 后期上线后换成服务器的spring boot地址
      */
-
-    public static String BASE_URL = "http://192.168.43.234:9000/";
+    public static String BASE_URL = "http://192.168.224.237:9000/";
 
 
     public static BaseHttpService getInstance() {

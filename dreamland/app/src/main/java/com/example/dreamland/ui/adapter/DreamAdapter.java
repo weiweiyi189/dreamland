@@ -1,10 +1,12 @@
 package com.example.dreamland.ui.adapter;
 
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Build;
 import android.text.format.DateUtils;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -56,6 +58,7 @@ public class DreamAdapter extends RecyclerView.Adapter<DreamAdapter.ViewHolder> 
         CircleImageView proFile;
         private WeakReference<ClickListener> listenerRef;
 
+        @SuppressLint("WrongViewCast")
         public ViewHolder(View view, ClickListener listener) {
             super(view);
             listenerRef = new WeakReference<>(listener);
@@ -72,9 +75,6 @@ public class DreamAdapter extends RecyclerView.Adapter<DreamAdapter.ViewHolder> 
             more = (Button) view.findViewById(R.id.more);
             more.setOnClickListener(this);
             proFile = (CircleImageView) view.findViewById(R.id.pro_file);
-            String urlString = BaseHttpService.BASE_URL + userService.currentUser.getValue().getImageUrl();
-            new DownloadImageTask(proFile)
-                    .execute(urlString);
         }
 
         @Override
@@ -114,9 +114,8 @@ public class DreamAdapter extends RecyclerView.Adapter<DreamAdapter.ViewHolder> 
         String creatTimeText = dateUtil.getTimeBeforeAccurate(new Date(dream.getCreateTime().getTime()));
         viewHolder.createTime.setText(creatTimeText);
         viewHolder.username.setText(dream.getCreateUser().getUsername());
-
-
         viewHolder.like.setText(dream.getLikes() != null ? dream.getLikes().toString() : "0");
+        viewHolder.proFile.setImageBitmap(dream.getCreateUser().getImage());
         //  若已点赞，改为实心
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
             User currentUser = userService.currentUser.getValue();

@@ -41,8 +41,7 @@ public class WriteDreamActivity extends AppCompatActivity {
 
     //android 捕获返回（后退）按钮事件
     public void onBackPressed() {
-        Intent intent = new Intent(WriteDreamActivity.this, DashboardActivity.class);
-        startActivity(intent, null);
+        finish();
     }
 
     @SuppressLint("RestrictedApi")

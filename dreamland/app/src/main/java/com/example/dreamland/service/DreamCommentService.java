@@ -1,9 +1,17 @@
 package com.example.dreamland.service;
 
+import android.os.Handler;
+import android.os.Looper;
 import com.example.dreamland.entity.Dream;
 import com.example.dreamland.entity.DreamComment;
 
 public class DreamCommentService {
+
+    /**
+     * 解决 runOnUIThead 不能在 static 方法中使用的问题
+     */
+    public static Handler UIHandler = new Handler(Looper.getMainLooper());
+
 
     private static final String LOCAL_URL = "api/";
 

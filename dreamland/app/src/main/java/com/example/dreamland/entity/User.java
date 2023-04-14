@@ -1,5 +1,6 @@
 package com.example.dreamland.entity;
 
+import android.graphics.Bitmap;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -31,4 +32,6 @@ public class User extends LitePalSupport implements Serializable {
 
     private List<Letter> letters = new ArrayList<>();
     private List<Dream> collectDream;
+
+    private transient Bitmap image;
 }

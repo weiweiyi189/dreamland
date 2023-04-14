@@ -50,8 +50,7 @@ public class SettingActivity extends AppCompatActivity {
 
     //android 捕获返回（后退）按钮事件
     public void onBackPressed() {
-        Intent intent = new Intent(SettingActivity.this, DashboardActivity.class);
-        startActivity(intent, null);
+        finish();
     }
 
     @Override
@@ -67,8 +66,7 @@ public class SettingActivity extends AppCompatActivity {
         topAppBar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(SettingActivity.this, DashboardActivity.class);
-                startActivity(intent, null);
+                finish();
             }
         });
 
