@@ -1,13 +1,11 @@
 spring:
   profiles:
     active: ${active:pro}
-  # hibernate ??? ????
   jpa:
     hibernate:
       ddl-auto: update
     show-sql: ${show-sql:false}
 
-  # ????????
   servlet:
     multipart:
       enabled: true
@@ -15,7 +13,6 @@ spring:
       max-request-size: 20MB
 
 server:
-  # ????
   port: ${port:8002}
   servlet:
     session:
@@ -27,7 +24,6 @@ spring:
   config:
     activate:
       on-profile: pro
-  # ?????
   datasource:
     url: jdbc:mysql://${datasource.url:127.0.0.1}:${datasource.port:3306}/${datasource.dbname:dreamland}?createDatabaseIfNotExist=true&useUnicode=true&characterEncoding=utf-8&allowPublicKeyRetrieval=true&useSSL=false&serverTimezone=Asia/Shanghai
     username: ${datasource.username:root}
