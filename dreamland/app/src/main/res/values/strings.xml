@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">dreamland</string>
+    <string name="app_name">伯奇</string>
     <!-- Strings related to log in -->
     <string name="prompt_email">Email</string>
     <string name="prompt_password">Password</string>

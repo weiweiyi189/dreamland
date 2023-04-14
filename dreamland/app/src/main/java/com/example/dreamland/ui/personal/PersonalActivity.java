@@ -116,6 +116,11 @@ public class PersonalActivity extends AppCompatActivity {
         //设置不可再次点击
         menuItem.setClickable(false);
 
+        //解决分享bug
+        drawerLayout = (DrawerLayout) findViewById(R.id.drawerLayout2);
+        drawerLayout.openDrawer(GravityCompat.START);
+        drawerLayout.close();
+
         // 隐藏系统自带的标题栏
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
@@ -127,16 +132,10 @@ public class PersonalActivity extends AppCompatActivity {
         binding.topAppBar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                drawerLayout = (DrawerLayout) findViewById(R.id.drawerLayout);
+                drawerLayout = (DrawerLayout) findViewById(R.id.drawerLayout2);
                 drawerLayout.openDrawer(GravityCompat.START);
-
-                //加载头像
                 CircleImageView headshot = findViewById(R.id.headshot);
-                if (userService.currentUser.getValue().getImageUrl() != "" && userService.currentUser.getValue().getImageUrl() != null) {
-                    String urlString = BaseHttpService.BASE_URL + userService.currentUser.getValue().getImageUrl();
-                    new DownloadImageTask(headshot)
-                            .execute(urlString);
-                }
+                userService.loadCurrentUserImage(headshot);
             }
         });
 

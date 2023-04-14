@@ -88,12 +88,8 @@ public class SettingActivity extends AppCompatActivity {
                 User currentUser= (User) result.getData();
                 // 加载个人信息成功
                 if (result.getResponse().code() >= 200 && result.getResponse().code() < 300) {
-                    System.out.println(currentUser.getImageUrl());
                     accounts.append("        "+currentUser.getUsername());
-                    Toast.makeText(SettingActivity.this, userService.currentUser.getValue().getImageUrl(), Toast.LENGTH_SHORT).show();
-                        String urlString = BaseHttpService.BASE_URL + currentUser.getImageUrl();
-                        new DownloadImageTask(touxiang)
-                                .execute(urlString);
+                    userService.loadCurrentUserImage(touxiang);
                 } else {
                     // 登陆失败 提示错误
                     Toast.makeText(SettingActivity.this, "信息预加载失败", Toast.LENGTH_SHORT).show();
@@ -273,6 +269,7 @@ public class SettingActivity extends AppCompatActivity {
                                         }
                                     }
                                 });
+                                finish();
                                 Intent intent = new Intent(SettingActivity.this,SettingActivity.class);
                                 startActivity(intent);
                             } else {
