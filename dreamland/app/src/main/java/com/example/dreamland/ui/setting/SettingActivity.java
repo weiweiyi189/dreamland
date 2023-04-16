@@ -86,16 +86,10 @@ public class SettingActivity extends AppCompatActivity {
             public void onSuccess(BaseHttpService.CustomerResponse result) {
                 //获取当前登陆用户
                 User currentUser= (User) result.getData();
-                System.out.println(currentUser.getUsername());
                 // 加载个人信息成功
                 if (result.getResponse().code() >= 200 && result.getResponse().code() < 300) {
-                    System.out.println(currentUser.getImageUrl());
                     accounts.append("        "+currentUser.getUsername());
-                    if(userService.currentUser.getValue().getImageUrl()!=""&&userService.currentUser.getValue().getImageUrl()!=null){
-                        String urlString = BaseHttpService.BASE_URL + currentUser.getImageUrl();
-                        new DownloadImageTask(touxiang)
-                                .execute(urlString);
-                    }
+                    userService.loadCurrentUserImage(touxiang);
                 } else {
                     // 登陆失败 提示错误
                     Toast.makeText(SettingActivity.this, "信息预加载失败", Toast.LENGTH_SHORT).show();
@@ -200,7 +194,7 @@ public class SettingActivity extends AppCompatActivity {
         //打开相册
         tvOpenAlbum.setOnClickListener(v -> {
             openAlbum();
-            showMsg("打开相册");
+//            showMsg("打开相册");
             bottomSheetDialog.cancel();
         });
         //取消
@@ -259,7 +253,7 @@ public class SettingActivity extends AppCompatActivity {
                     MediaType MEDIA_TYPE_PNG = MediaType.parse("image/*");
                     RequestBody req = new MultipartBody.Builder().setType(MultipartBody.FORM).addFormDataPart("file", file.getName(), RequestBody.create(MEDIA_TYPE_PNG, file))
                             .build();
-                    // 加载个人信息
+                    // 更新头像
                     userService.uploadImage(req,new BaseHttpService.CallBack() {
                         @Override
                         public void onSuccess(BaseHttpService.CustomerResponse result) {
@@ -275,10 +269,11 @@ public class SettingActivity extends AppCompatActivity {
                                         }
                                     }
                                 });
+                                finish();
                                 Intent intent = new Intent(SettingActivity.this,SettingActivity.class);
                                 startActivity(intent);
                             } else {
-                                // 登陆失败 提示错误
+                                // 更新失败 提示错误
                                 Toast.makeText(SettingActivity.this, "上传失败，请重试", Toast.LENGTH_SHORT).show();
                             }
                         }
@@ -294,7 +289,7 @@ public class SettingActivity extends AppCompatActivity {
                     MediaType MEDIA_TYPE_PNG = MediaType.parse("image/*");
                     RequestBody req = new MultipartBody.Builder().setType(MultipartBody.FORM).addFormDataPart("file", file.getName(), RequestBody.create(MEDIA_TYPE_PNG, file))
                             .build();
-                    // 加载个人信息
+                    // 更新头像
                     userService.uploadImage(req,new BaseHttpService.CallBack() {
                         @Override
                         public void onSuccess(BaseHttpService.CustomerResponse result) {
@@ -303,7 +298,7 @@ public class SettingActivity extends AppCompatActivity {
                                 Intent intent = new Intent(SettingActivity.this,SettingActivity.class);
                                  startActivity(intent);
                             } else {
-                                // 登陆失败 提示错误
+                                // 更新失败，提示错误
                                 Toast.makeText(SettingActivity.this, "上传失败，请重试", Toast.LENGTH_SHORT).show();
                             }
                         }

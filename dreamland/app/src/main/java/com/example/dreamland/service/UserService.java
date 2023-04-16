@@ -1,9 +1,11 @@
 package com.example.dreamland.service;
 
 import android.os.Build;
+import com.example.dreamland.R;
 import com.example.dreamland.entity.Dream;
 import com.example.dreamland.entity.User;
 import com.example.dreamland.entity.VoUser;
+import de.hdodenhof.circleimageview.CircleImageView;
 import io.reactivex.rxjava3.subjects.BehaviorSubject;
 import okhttp3.RequestBody;
 
@@ -94,6 +96,12 @@ public class UserService {
         }
         currentUser.setCollectDream(dreamList);
         userService.currentUser.onNext(currentUser);
+    }
+
+    public static void loadCurrentUserImage(CircleImageView headshot) {
+        User newUser = new NewDownloadTask(userService.currentUser.getValue()).download();
+        headshot.setImageBitmap(newUser.getImage());
+        userService.currentUser.onNext(newUser);
     }
 
 }

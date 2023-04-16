@@ -51,7 +51,7 @@
             <View style="@style/bg_line"/><!-- 无圆角-->
             <LinearLayout style="@style/mid_layout" android:id="@+id/password">
                 <TextView  style="@style/usertext" android:text="密码"/>
-                <TextView android:id="@+id/passwords" android:gravity="right" style="@style/usertexts" android:text="* * * * * *"/>
+                <TextView android:id="@+id/passwords" android:gravity="right" style="@style/usertexts"/>
                 <ImageView style="@style/img_arrow"/>
             </LinearLayout>
             <View style="@style/bg_line"/>

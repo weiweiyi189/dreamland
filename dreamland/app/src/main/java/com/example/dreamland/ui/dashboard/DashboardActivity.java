@@ -117,7 +117,8 @@ public class DashboardActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 drawerLayout.openDrawer(GravityCompat.START);
-                loadCurrentUserImage();
+                CircleImageView headshot = findViewById(R.id.headshot);
+                userService.loadCurrentUserImage(headshot);
             }
         });
 
@@ -168,12 +169,6 @@ public class DashboardActivity extends AppCompatActivity {
         this.setRefresh();
     }
 
-    private void loadCurrentUserImage() {
-        CircleImageView headshot = findViewById(R.id.headshot);
-        User newUser = new NewDownloadTask(userService.currentUser.getValue()).download();
-        headshot.setImageBitmap(newUser.getImage());
-        userService.currentUser.onNext(newUser);
-    }
 
     /**
      * 点击进行分享
