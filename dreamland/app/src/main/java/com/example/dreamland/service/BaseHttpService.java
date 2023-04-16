@@ -1,6 +1,5 @@
 package com.example.dreamland.service;
 
-import android.os.AsyncTask;
 import android.os.Handler;
 import android.os.Looper;
 import android.util.Pair;
@@ -10,7 +9,6 @@ import okhttp3.*;
 import java.io.IOException;
 import java.lang.reflect.Type;
 import java.sql.Timestamp;
-import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -32,7 +30,7 @@ public class BaseHttpService {
      * 个人开发时，手机和电脑连接同一局域网，填写电脑的ipv4地址
      * 后期上线后换成服务器的spring boot地址
      */
-    public static String BASE_URL = "http://192.168.43.215:9000/";
+    public static String BASE_URL = "http://192.168.224.237:9000/";
 
 
     public static BaseHttpService getInstance() {

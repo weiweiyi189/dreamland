@@ -21,7 +21,7 @@ import java.util.List;
 @NoArgsConstructor
 public class User extends LitePalSupport implements Serializable {
 
-    private int id;
+    private Long id;
 
     @Column(unique = true, defaultValue = "unknown")
     private String username;

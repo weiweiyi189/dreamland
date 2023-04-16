@@ -9,6 +9,8 @@ public interface DreamService {
 
     List<Dream> getAllByCurrentUser();
 
+    List<Dream> getAllByUserId(Long id);
+
     List<Dream> getCollectDreamByCurrentUser();
 
     Dream add(Dream dream);

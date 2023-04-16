@@ -25,16 +25,19 @@ public class DreamService {
         httpService.get(LOCAL_URL + "dream/getAllByCurrentUser", callBack, Dream[].class);
     }
 
+    public void getAllByUserId(BaseHttpService.CallBack callBack, Long id) {
+        httpService.get(LOCAL_URL + "dream/getAllByUserId/" + id.toString(), callBack, Dream[].class);
+    }
+
+
     public void getCollectDream(BaseHttpService.CallBack callBack) {
         httpService.get(LOCAL_URL + "dream/getCollectDream", callBack, Dream[].class);
     }
 
 
-
     public void add(BaseHttpService.CallBack callBack, Dream dream) {
-        httpService.post( LOCAL_URL + "dream/add", dream, callBack, Dream.class);
+        httpService.post(LOCAL_URL + "dream/add", dream, callBack, Dream.class);
     }
-
 
 
 }
