@@ -217,8 +217,8 @@ public class DashboardActivity extends AppCompatActivity {
                     }, dreams.get(position));
                 } else if (view.getId() == R.id.share) {
                     share("您的好友：" + userService.currentUser.getValue().getUsername() + "\n给您分享了一个有趣的梦境：\n" + dreams.get(position).getContent().toString() + "\n\n来自伯奇·梦境分享");
-                } else if (view.getId() == R.id.more) {
-
+                } else if (view.getId() == R.id.pro_file) {
+                    onImageClick(position);
                 } else {
                     onItemClick(position);
                 }
@@ -226,6 +226,17 @@ public class DashboardActivity extends AppCompatActivity {
         });
         recyclerView.setLayoutManager(layout);
         recyclerView.setAdapter(this.dreamAdapter);
+    }
+    private void onImageClick(int position) {
+        if (dreams.get(position).getCreateUser().getUsername().equals("匿名用户")) {
+            return;
+        }
+
+        Intent intent = new Intent(DashboardActivity.this, PersonalDreamsActivity.class);
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("user", dreams.get(position).getCreateUser());
+        intent.putExtras(bundle);
+        startActivity(intent, null);
     }
 
 

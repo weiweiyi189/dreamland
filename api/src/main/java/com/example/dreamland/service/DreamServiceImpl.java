@@ -38,6 +38,12 @@ public class DreamServiceImpl implements DreamService {
     }
 
     @Override
+    public List<Dream> getAllByUserId(Long id) {
+        User user = this.userRepository.findById(id).get();
+        return this.dreamRepository.findAllByUserIdAndCreamTimeDesc(user.getId());
+    }
+
+    @Override
     public List<Dream> getCollectDreamByCurrentUser() {
         User user = this.userService.getCurrentUser();
         return user.getCollectDream();

@@ -6,6 +6,7 @@ import android.os.Bundle;
 
 import android.view.Gravity;
 import android.view.View;
+import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -88,7 +89,7 @@ public class PersonalDreamsActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(layout);
         recyclerView.setAdapter(this.dreamAdapter);
 
-        MaterialToolbar topAppBar = findViewById(R.id.Dream_detail_topAppBar);
+        MaterialToolbar topAppBar = findViewById(R.id.topAppBar);
         topAppBar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -117,13 +118,13 @@ public class PersonalDreamsActivity extends AppCompatActivity {
     }
 
     private void setDate(User user) {
-        dreamService.getAll(new BaseHttpService.CallBack() {
+        dreamService.getAllByUserId(new BaseHttpService.CallBack() {
             @SuppressLint({"SetTextI18n", "NotifyDataSetChanged"})
             @Override
             public void onSuccess(BaseHttpService.CustomerResponse result) {
                 DashboardActivity.updateItem(result, dreams, dreamAdapter);
             }
-        });
+        }, user.getId());
     }
 
 }

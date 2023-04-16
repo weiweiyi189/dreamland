@@ -70,9 +70,6 @@ public class DreamsActivity extends AppCompatActivity  implements View.OnClickLi
     }
     @Override
     public void onClick(View view){
-        System.out.println("chengong ");
-        System.out.println(mail.getText().toString());
-        System.out.println(context.getText().toString());
                 try {
                     if(context.getText().toString().length()==0||context.getText().toString()==""){
                         SweetAlertDialog pDialog = new SweetAlertDialog(DreamsActivity.this,SweetAlertDialog.ERROR_TYPE);
