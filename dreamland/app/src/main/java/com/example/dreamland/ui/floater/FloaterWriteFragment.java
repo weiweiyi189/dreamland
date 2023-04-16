@@ -1,9 +1,15 @@
 package com.example.dreamland.ui.floater;
 
+import android.app.Activity;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.RelativeLayout;
+import android.widget.Toast;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -20,6 +26,7 @@ import com.example.dreamland.ui.adapter.ClickListener;
 import com.example.dreamland.ui.adapter.ClickListener;
 import com.example.dreamland.ui.adapter.DreamAdapter;
 import com.example.dreamland.ui.adapter.LetterAdapter;
+import com.example.dreamland.ui.util.SystemUtil;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
@@ -33,12 +40,42 @@ public class FloaterWriteFragment extends Fragment {
     private List<Letter> letters=new LinkedList<>();
     private LetterService letterService = LetterService.getInstance();
     private UserService userService=UserService.getInstance();
+    RelativeLayout relativeLayout;
+    EditText editText;
+    Button send;
     private View view;
+    private Letter clickedLetter;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         view=inflater.inflate(R.layout.fragment_floater_write, container, false);
+        relativeLayout=view.findViewById(R.id.relativeLayout);
+        editText=view.findViewById(R.id.EditText);
+        send=view.findViewById(R.id.send);
         initList();
+
+        send.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                clickedLetter.addComment(userService.currentUser.getValue().getUsername()+": "+editText.getText().toString());
+                letterService.modifyLetter(new BaseHttpService.CallBack() {
+                    @Override
+                    public void onSuccess(BaseHttpService.CustomerResponse result) {
+                        if (result.getResponse().code() >= 200 && result.getResponse().code() < 300) {
+                            Toast.makeText(getContext(), "评论成功", Toast.LENGTH_SHORT).show();
+                            relativeLayout.setVisibility(View.GONE);
+                            editText.setText("");
+                        } else {
+                            // 登陆失败 提示错误
+                            Toast.makeText(getContext(), "评论失败", Toast.LENGTH_SHORT).show();
+                        }
+                        SystemUtil.hideKeyboard((Activity)getContext());
+                        initList();
+                    }
+                },clickedLetter);
+            }
+        });
+
         return view;
     }
     public void initList() {
@@ -55,7 +92,15 @@ public class FloaterWriteFragment extends Fragment {
 
         RecyclerView recyclerView= view.findViewById(R.id.floaterWriteRecyclerView);
         LinearLayoutManager layout = new LinearLayoutManager(getContext());
-        this.letterAdapter = new LetterAdapter(this.letters);
+        this.letterAdapter = new LetterAdapter(this.letters, new ClickListener() {
+            @Override
+            public void onPositionClicked(int position, View view) {
+                if(view.getId()==R.id.textButton){
+                    relativeLayout.setVisibility(View.VISIBLE);
+                    clickedLetter=letters.get(position);
+                }
+            }
+        });
         recyclerView.setLayoutManager(layout);
         recyclerView.setAdapter(this.letterAdapter);
     }

@@ -33,6 +33,12 @@ public class LetterController {
         return this.letterService.add(letter);
     }
 
+    @PostMapping("modifyLetter")
+    @JsonView(AddJsonView.class)
+    public Letter modifyLetter(@RequestBody Letter letter) {
+        return this.letterService.modifyLetter(letter);
+    }
+
     @GetMapping("getById/{id}")
     @JsonView(GetByIdJsonView.class)
     public Letter getById(@PathVariable Long id) {

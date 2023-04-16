@@ -36,6 +36,10 @@ public class LetterService {
         httpService.post( LOCAL_URL +"letter/add", letter, callBack, Letter.class);
     }
 
+    public void modifyLetter(BaseHttpService.CallBack callBack, Letter letter){
+        httpService.post(LOCAL_URL +"letter/modifyLetter", letter, callBack, Letter.class);
+    }
+
     public void getAllByCreateUserId(BaseHttpService.CallBack callBack, Long id){
         httpService.get(LOCAL_URL +"letter/getAllByCreateUserId/"+id.toString(), callBack, Letter[].class);
     }
