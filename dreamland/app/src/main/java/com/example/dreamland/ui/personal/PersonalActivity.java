@@ -27,6 +27,7 @@ import com.example.dreamland.ui.adapter.DreamAdapter;
 import com.example.dreamland.ui.chat.MessageListActivity;
 import com.example.dreamland.ui.dashboard.DashboardActivity;
 import com.example.dreamland.ui.dashboard.DetailActivity;
+import com.example.dreamland.ui.dashboard.PersonalDreamsActivity;
 import com.example.dreamland.ui.dashboard.SharePopupWindow;
 import com.example.dreamland.ui.dreams.DreamsActivity;
 import com.example.dreamland.ui.dreamtest.DreamTestActivity;
@@ -239,6 +240,8 @@ public class PersonalActivity extends AppCompatActivity {
                     }, dreams.get(position));
                 } else if (view.getId() == R.id.more) {
 
+                } else if (view.getId() == R.id.more) {
+                    onImageClick(position);
                 } else {
                     onItemClick(position);
                 }
@@ -257,6 +260,14 @@ public class PersonalActivity extends AppCompatActivity {
                 this.getCollectDream();
                 break;
         }
+    }
+
+    private void onImageClick(int position) {
+        Intent intent = new Intent(PersonalActivity.this, PersonalDreamsActivity.class);
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("user", dreams.get(position).getCreateUser());
+        intent.putExtras(bundle);
+        startActivity(intent, null);
     }
 
     void getAllByCurrentUser() {

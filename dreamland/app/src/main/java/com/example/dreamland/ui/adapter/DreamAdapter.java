@@ -75,6 +75,7 @@ public class DreamAdapter extends RecyclerView.Adapter<DreamAdapter.ViewHolder> 
             more = (Button) view.findViewById(R.id.more);
             more.setOnClickListener(this);
             proFile = (CircleImageView) view.findViewById(R.id.pro_file);
+            proFile.setOnClickListener(this);
         }
 
         @Override

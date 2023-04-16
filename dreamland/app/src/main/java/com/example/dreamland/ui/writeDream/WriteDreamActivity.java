@@ -14,6 +14,7 @@ import com.example.dreamland.R;
 import com.example.dreamland.databinding.ActivityWritedreamBinding;
 import com.example.dreamland.db.initDataBase;
 import com.example.dreamland.entity.Dream;
+import com.example.dreamland.entity.User;
 import com.example.dreamland.service.BaseHttpService;
 import com.example.dreamland.service.DreamService;
 import com.example.dreamland.ui.dashboard.DashboardActivity;
@@ -36,7 +37,9 @@ public class WriteDreamActivity extends AppCompatActivity {
 
     private long exitTime = 0;
 
-    private int flag = 1;
+    private int mode = OPEN;
+    static final int OPEN = 0;
+    static final int ANONYMOUYS = 1;
 
 
     //android 捕获返回（后退）按钮事件
@@ -69,20 +72,23 @@ public class WriteDreamActivity extends AppCompatActivity {
                 int id = item.getItemId();
                 switch (id) {
                     case R.id.duolaameng:
-                        if(flag%2==1){
+                        if (mode == OPEN) {
+                            mode = ANONYMOUYS;
                             menu.getItem(0).setIcon(ContextCompat.getDrawable(WriteDreamActivity.this, R.drawable.paidaxing));
                             Toast.makeText(WriteDreamActivity.this, "匿名发布", Toast.LENGTH_SHORT).show();
-                        }
-                        else{
+                        } else {
+                            mode = OPEN;
                             menu.getItem(0).setIcon(ContextCompat.getDrawable(WriteDreamActivity.this, R.drawable.haimianbaobao));
                             Toast.makeText(WriteDreamActivity.this, "公开发布", Toast.LENGTH_SHORT).show();
                         }
-                        flag=flag+1;
                         break;
                     case R.id.send:
                         final EditText context = binding.context;
                         Dream dream = new Dream();
                         dream.setContent(context.getText().toString());
+                        User user = new User();
+                        user.setUsername("匿名用户");
+                        dream.setCreateUser(user);
                         dreamService.add(new BaseHttpService.CallBack() {
                             @Override
                             public void onSuccess(BaseHttpService.CustomerResponse result) {
