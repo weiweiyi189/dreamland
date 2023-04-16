@@ -52,6 +52,13 @@ public class LetterServiceImpl implements LetterService{
     }
 
     @Override
+    public Letter modifyLetter(Letter letter) {
+        Letter oldLetter=this.letterRepository.findById(letter.getId()).get();
+        oldLetter.setComment(letter.getComment());
+        return this.letterRepository.save(oldLetter);
+    }
+
+    @Override
     public Letter getById(Long id) {
         return this.letterRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("找不到相关商品"));
     }
@@ -65,6 +72,8 @@ public class LetterServiceImpl implements LetterService{
     public List<Letter> getAllshowed(Long id) {
         return this.letterRepository.findAllShowed(id);
     }
+
+
 
 
 }

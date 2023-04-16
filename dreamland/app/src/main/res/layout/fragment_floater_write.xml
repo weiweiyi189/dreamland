@@ -5,11 +5,40 @@
              android:layout_height="match_parent"
              tools:context=".ui.floater.FloaterWriteFragment">
 
-    <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/floaterWriteRecyclerView"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+    <RelativeLayout android:layout_width="match_parent" android:layout_height="match_parent">
+        <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/floaterWriteRecyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
 
-    </androidx.recyclerview.widget.RecyclerView>
+        </androidx.recyclerview.widget.RecyclerView>
+
+        <RelativeLayout
+                android:id="@+id/relativeLayout"
+                android:visibility="gone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/material_blue_grey_80"
+                android:layout_alignParentBottom="true">
+            <EditText
+                    android:layout_toLeftOf="@id/send"
+                    android:layout_marginLeft="5dp"
+                    android:textColor="@color/white"
+                    android:hint="请输入评论                                                                          "
+                    android:textColorHint="#85857B"
+                    android:id="@+id/EditText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+            </EditText>
+            <Button
+                    android:id="@+id/send"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="发送"
+                    android:layout_alignParentRight="true" android:layout_centerVertical="true">
+
+            </Button>
+        </RelativeLayout>
+    </RelativeLayout>
 
 </FrameLayout>

@@ -20,4 +20,6 @@ public interface LetterService {
     List<Letter> getAllByCreateUserId(Long id);
 
     List<Letter> getAllshowed(Long id);
+
+    Letter modifyLetter(Letter letter);
 }
