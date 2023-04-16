@@ -80,9 +80,9 @@ public class DreamTestActivity extends AppCompatActivity {
         rv.setAdapter(adapter);
 
         List<String> list1 = new ArrayList<>();
-        list1.add("张明明");
-        list1.add("赵天");
-        list1.add("王萌萌");
+//        list1.add("张明明");
+//        list1.add("赵天");
+//        list1.add("王萌萌");
         DreamTestMemberAdapter adapter1 = new DreamTestMemberAdapter(this,list1);
         rv_member.setAdapter(adapter1);
 

@@ -33,6 +33,29 @@
 
         <!-- 全圆角-->
 
+        <ImageView
+                android:layout_width="80dp"
+                android:layout_height="66dp"
+                app:srcCompat="@drawable/boqi"
+                android:id="@+id/imageView"
+                android:layout_gravity="center"
+                android:layout_marginTop="28dp"/>
+
+        <TextView
+                android:inputType="textMultiLine"
+                android:layout_width="51dp"
+                android:layout_height="21dp"
+                android:textSize="18sp"
+                android:textColor="#716C6C"
+                android:ems="10"
+                android:background="@null"
+                android:textColorHint="#a2a4b5"
+                android:layout_gravity="center_horizontal"
+                android:gravity="center"
+                android:text="V1.0.0"
+                app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
+
+
         <TextView
                 android:inputType="textMultiLine"
                 android:layout_width="match_parent"
