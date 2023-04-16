@@ -3,6 +3,7 @@ package com.example.dreamland.service;
 import com.example.dreamland.entity.Dream;
 import com.example.dreamland.entity.User;
 import com.example.dreamland.repository.DreamRepository;
+import com.example.dreamland.repository.UserRepository;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
@@ -13,12 +14,16 @@ public class DreamServiceImpl implements DreamService {
 
     private final DreamRepository dreamRepository;
 
+    private final UserRepository userRepository;
+
     private final UserService userService;
 
     DreamServiceImpl(DreamRepository dreamRepository,
-                     UserService userService) {
+                     UserService userService,
+                     UserRepository userRepository) {
         this.dreamRepository = dreamRepository;
         this.userService = userService;
+        this.userRepository = userRepository;
     }
 
     @Override
@@ -40,7 +45,13 @@ public class DreamServiceImpl implements DreamService {
 
     @Override
     public Dream add(Dream dream) {
-        dream.setCreateUser(this.userService.getCurrentUser());
+        User user = null;
+        if (dream.getCreateUser() != null && dream.getCreateUser().getUsername().equals("匿名用户")) {
+            user = this.userRepository.findByUsername("匿名用户");
+        } else {
+            user = this.userService.getCurrentUser();
+        }
+        dream.setCreateUser(user);
         return this.dreamRepository.save(dream);
     }
 

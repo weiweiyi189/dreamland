@@ -21,88 +21,97 @@ import java.util.Random;
  */
 @Component
 public class InitData {
-  private static final Logger logger = LoggerFactory.getLogger(InitData.class);
+    private static final Logger logger = LoggerFactory.getLogger(InitData.class);
 
-  private UserRepository userRepository;
+    private UserRepository userRepository;
 
-  private DreamRepository dreamRepository;
-  private LetterRepository letterRepository;
+    private DreamRepository dreamRepository;
+    private LetterRepository letterRepository;
 
-  private String Username = "admin";
-  private String Password = "admin";
+    private String Username = "admin";
+    private String Password = "admin";
 
 
-  public InitData(UserRepository userRepository,
-                  DreamRepository dreamRepository,
-                  LetterRepository letterRepository) {
-    this.letterRepository=letterRepository;
-    this.dreamRepository = dreamRepository;
-    this.userRepository = userRepository;
-  }
-
-  @PostConstruct
-  public void postConstruct() {
-
-    List<User> users = this.userRepository.findAll();
-
-    if (!users.isEmpty()) {
-      this.initDream(users.get(0));
-      return;
+    public InitData(UserRepository userRepository,
+                    DreamRepository dreamRepository,
+                    LetterRepository letterRepository) {
+        this.letterRepository = letterRepository;
+        this.dreamRepository = dreamRepository;
+        this.userRepository = userRepository;
     }
 
-    User user1 = new User();
-    user1.setUsername(this.Username);
-    user1.setPassword(this.Password);
-    users.add(user1);
-    User user2 = new User();
-    user2.setUsername("13900000000");
-    user2.setPassword(this.Password);
-    users.add(user2);
-    User user3=new User();
-    user3.setUsername("快斗斗丶");
-    user3.setPassword(this.Password);
-    users.add(user3);
-    this.userRepository.saveAll(users);
-    this.initDream(users.get(0));
-    this.initLetter(user3);
-  }
+    @PostConstruct
+    public void postConstruct() {
+        this.saveAnonymousUser();
+        List<User> users = this.userRepository.findAll();
 
-  private void initLetter(User user) {
-    List<Letter> letters=this.letterRepository.findAll();
-    if(!letters.isEmpty()){
-      return;
+        if (!users.isEmpty()) {
+            this.initDream(users.get(0));
+            return;
+        }
+
+        User user1 = new User();
+        user1.setUsername(this.Username);
+        user1.setPassword(this.Password);
+        users.add(user1);
+        User user2 = new User();
+        user2.setUsername("13900000000");
+        user2.setPassword(this.Password);
+        users.add(user2);
+        User user3 = new User();
+        user3.setUsername("快斗斗丶");
+        user3.setPassword(this.Password);
+        users.add(user3);
+        this.userRepository.saveAll(users);
+        this.initDream(users.get(0));
+        this.initLetter(user3);
     }
 
-    Letter letter1=new Letter();
-    letter1.setTitle("一方天地, 一方奇遇");
-    letter1.setContent("  是载满星云的玄霄, 亦是播洒清梦的红壤.\n  漂出你的思绪, 捞起我的奇遇.\n  这里, 皆你我的天地.\n");
-    letter1.setCreateTime(new Timestamp(new Date().getTime()+1));
-    letter1.setCreateUser(user);
-    this.letterRepository.save(letter1);
+    private void initLetter(User user) {
+        List<Letter> letters = this.letterRepository.findAll();
+        if (!letters.isEmpty()) {
+            return;
+        }
 
-    Letter letter2=new Letter();
-    letter2.setTitle("发病时间");
-    letter2.setContent("    If not for Scaramouche, who would be working?\n");
-    letter2.setCreateTime(new Timestamp(new Date().getTime()));
-    letter2.setCreateUser(user);
-    this.letterRepository.save(letter2);
-  }
+        Letter letter1 = new Letter();
+        letter1.setTitle("一方天地, 一方奇遇");
+        letter1.setContent("  是载满星云的玄霄, 亦是播洒清梦的红壤.\n  漂出你的思绪, 捞起我的奇遇.\n  这里, 皆你我的天地.\n");
+        letter1.setCreateTime(new Timestamp(new Date().getTime() + 1));
+        letter1.setCreateUser(user);
+        this.letterRepository.save(letter1);
 
-  private void initDream(User user1) {
-    List<Dream> dreams = this.dreamRepository.findAll();
-
-    if (!dreams.isEmpty()) {
-      return;
+        Letter letter2 = new Letter();
+        letter2.setTitle("发病时间");
+        letter2.setContent("    If not for Scaramouche, who would be working?\n");
+        letter2.setCreateTime(new Timestamp(new Date().getTime()));
+        letter2.setCreateUser(user);
+        this.letterRepository.save(letter2);
     }
 
-    for(int i = 0; i< 10; i++) {
-      Dream dream = new Dream();
-      dream.setContent("梦到世界大危机，反派与正派对峙，正派死伤惨重，\n" +
-              "几个主角都被抓。而我被委托以重要使命，跳井穿越时空拿到重要宝物压制反派.结果时间乱流寄了。");
-      dream.setCreateTime(new Timestamp(new Date().getTime()));
-      dream.setCreateUser(user1);
-      dream.setLikes(0);
-      this.dreamRepository.save(dream);
+    private void initDream(User user1) {
+        List<Dream> dreams = this.dreamRepository.findAll();
+
+        if (!dreams.isEmpty()) {
+            return;
+        }
+
+        for (int i = 0; i < 10; i++) {
+            Dream dream = new Dream();
+            dream.setContent("梦到世界大危机，反派与正派对峙，正派死伤惨重，\n" +
+                    "几个主角都被抓。而我被委托以重要使命，跳井穿越时空拿到重要宝物压制反派.结果时间乱流寄了。");
+            dream.setCreateTime(new Timestamp(new Date().getTime()));
+            dream.setCreateUser(user1);
+            dream.setLikes(0);
+            this.dreamRepository.save(dream);
+        }
     }
-  }
+
+    private void saveAnonymousUser() {
+        if (this.userRepository.findByUsername("匿名用户") == null) {
+            User user = new User();
+            user.setUsername("匿名用户");
+            this.userRepository.save(user);
+        }
+    }
+
 }
