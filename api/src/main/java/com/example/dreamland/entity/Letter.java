@@ -37,6 +37,8 @@ public class Letter {
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private Timestamp createTime;
 
+    @ElementCollection
+    private List<String> comment;
     public interface UserJsonView {}
 
 }
