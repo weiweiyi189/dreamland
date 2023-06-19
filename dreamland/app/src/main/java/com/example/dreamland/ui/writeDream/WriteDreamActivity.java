@@ -87,8 +87,10 @@ public class WriteDreamActivity extends AppCompatActivity {
                         Dream dream = new Dream();
                         dream.setContent(context.getText().toString());
                         User user = new User();
-                        user.setUsername("匿名用户");
-                        dream.setCreateUser(user);
+                        if(mode == ANONYMOUYS){
+                            user.setUsername("匿名用户");
+                            dream.setCreateUser(user);
+                        }
                         dreamService.add(new BaseHttpService.CallBack() {
                             @Override
                             public void onSuccess(BaseHttpService.CustomerResponse result) {

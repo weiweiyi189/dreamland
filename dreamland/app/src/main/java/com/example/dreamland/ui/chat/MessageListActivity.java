@@ -162,7 +162,7 @@ public class MessageListActivity extends AppCompatActivity {
                 public Map<String, String> getHeaders() throws AuthFailureError {
                     Map<String, String> params = new HashMap<String, String>();
                     params.put("Content-Type", "application/json");
-                    params.put("Authorization", "Bearer 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");
+                    params.put("Authorization", "Bearer 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");
                     return params;
                 }
 
